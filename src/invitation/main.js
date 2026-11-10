@@ -170,7 +170,7 @@ export function initInvitation(W, hooks) {
   // ============ 5b. Section 1: Ayat + Save The Date (disusun ulang seperti referensi) ============
   // Isi Canva asli section ini disembunyikan, diganti bingkai scallop marun (SVG), teks ayat, mutiara, bunga,
   // piringan hitam "play the music!", dan pita hijau Save The Date. Ukuran dalam px desain 430.
-  const INTRO_H = 549;
+  const INTRO_H = 932; // satu layar HP penuh (430 x 932)
   let introEls = [];
 
   // tinggi section Canva: ubah semua elemen yang tingginya sama dengan section
@@ -186,7 +186,7 @@ export function initInvitation(W, hooks) {
 
   // bingkai: superelips dengan tepi bergelombang (scallop), cincin marun di atas, bawah, dan kedua sisi
   function scallopFrameSvg(w, h) {
-    const cx = w / 2, cy = h / 2, a = w / 2 - 16, b = h / 2 - 16, n = 2.6, A = 13, m = 7, N = 420;
+    const cx = w / 2, cy = h / 2, a = w / 2 - 17, b = h / 2 - 17, n = 2.6, A = 14, m = h > 500 ? 9 : 7, N = 520;
     const pts = [];
     for (let i = 0; i < N; i++) {
       const t = (i / N) * Math.PI * 2, c = Math.cos(t), s = Math.sin(t);
@@ -227,22 +227,26 @@ export function initInvitation(W, hooks) {
     // bunga boleh menjuntai melewati batas section (pembungkus Canva memotong dengan overflow: hidden)
     Object.assign(section.parentElement.style, { overflow: "visible", position: "relative", zIndex: "2" });
 
-    const add = (html) => {
+    const add = (html, parent) => {
       const wrap = document.createElement("div");
       wrap.innerHTML = html;
       const el = wrap.firstElementChild;
-      box.appendChild(el);
+      (parent || box).appendChild(el);
       introEls.push(el);
       return el;
     };
+    // Section 1b: Save The Date jadi section sendiri tepat setelah section ayat
+    const std = document.createElement("section");
+    std.className = "std-section";
+    section.after(std);
     add('<div class="intro intro-band"><p class="intro-band__title">SAVE <i>THE</i> DATE!</p>' +
       '<div class="intro-cd">' +
       ["Days", "Hours", "Minutes", "Seconds"].map((l, i) =>
         (i ? '<span class="intro-cd__sep">:</span>' : "") +
         '<div class="intro-cd__u' + (i === 3 ? " is-sec" : "") + '"><b data-cd="' + i + '">00</b><small>' + l + "</small></div>").join("") +
-      "</div></div>");
+      "</div></div>", std);
     add('<img class="intro intro-pearls" src="' + TPL + '6bdbbb03529f3e7d294c0ab232845faa.png" alt="">');
-    add('<div class="intro intro-frame">' + scallopFrameSvg(314, 408) +
+    add('<div class="intro intro-frame">' + scallopFrameSvg(366, 680) +
       '<p class="intro-bismillah" lang="ar">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>' +
       '<p class="intro-ayat" lang="ar">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا<br>لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ<br>ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>' +
       '<p class="intro-arti">Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.</p>' +
