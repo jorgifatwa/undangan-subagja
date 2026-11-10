@@ -275,7 +275,7 @@ html body.locked { overflow: hidden !important; }
 .cc-flower { position: absolute; z-index: 5; pointer-events: none; height: auto; }
 .cc-flower--tr { left: 300px; top: -36px; width: 136px; transform: scaleX(-1) rotate(-8deg); }
 .cc-flower--l { left: -8px; top: 448px; width: 146px; }
-.cc-lily { left: 330px; top: 790px; width: 112px; rotate: -14deg; }
+.cc-lily { left: 330px; top: 790px; width: 112px; transform: rotate(-14deg); }
 
 /* ========== Floating ========== */
 .music {
@@ -353,8 +353,8 @@ body.locked .music { display: none; }
 .intro-pearls { transform-origin: 50% 0; }
 .intro-enter .intro-pearls { animation: introPearlsIn 1.1s cubic-bezier(.3, .8, .3, 1) .5s both, introSwayLeft 4.5s ease-in-out 1.6s infinite alternate; }
 .intro-bouquet, .intro-anthurium { transform-origin: 50% 0; }
-.intro-enter .intro-bouquet { animation: introFromRight 1s cubic-bezier(.25, .8, .3, 1) .9s both, introSwayLeft 5s ease-in-out 1.9s infinite alternate; }
-.intro-enter .intro-anthurium { animation: introFromLeft 1s cubic-bezier(.25, .8, .3, 1) 1s both, introSwayLeft 5.5s ease-in-out 2s infinite alternate-reverse; }
+.intro-enter .intro-bouquet { animation: introFromRight 1s cubic-bezier(.25, .8, .3, 1) .9s both, flowerSway 5s ease-in-out 1.9s infinite alternate; }
+.intro-enter .intro-anthurium { animation: introFromLeft 1s cubic-bezier(.25, .8, .3, 1) 1s both, flowerSway 5.5s ease-in-out 2s infinite alternate-reverse; }
 .intro-enter .intro-vinyl { animation: introRollIn 1.1s cubic-bezier(.2, .8, .25, 1) 1.15s both; }
 .intro-enter .intro-playtext { animation: introSoftIn .7s ease 1.9s both; }
 .intro-sparkle { transform-origin: 50% 50%; }
@@ -395,4 +395,44 @@ body.locked .music { display: none; }
   30% { translate: var(--bx) var(--by); }
   70% { opacity: .95; }
   100% { translate: calc(var(--bx) * 1.4) calc(var(--by) + var(--drop)); rotate: var(--spin); opacity: 0; }
+}
+
+/* ========== Bunga bergoyang + ikut angin scroll ========== */
+@keyframes flowerSway {
+  from { rotate: calc(var(--fwind, 0deg) * var(--fk, 1) - var(--famp, 1.8deg)); }
+  to { rotate: calc(var(--fwind, 0deg) * var(--fk, 1) + var(--famp, 1.8deg)); }
+}
+.flower-sway { animation: flowerSway var(--fdur, 5s) ease-in-out var(--fdly, 0s) infinite alternate; will-change: rotate; }
+.flower-hang { transform-origin: 50% 0; --fk: 1; }
+.flower-stand { transform-origin: 50% 100%; --fk: -0.6; --famp: 1.4deg; }
+.intro-bouquet, .intro-anthurium { --fk: 1; }
+
+/* ========== Section 2: animasi masuk berurutan ========== */
+@keyframes ccUnfold { from { opacity: 0; scale: 1 .25; filter: blur(5px) drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
+  to { opacity: 1; scale: 1 1; filter: blur(0) drop-shadow(0 6px 14px rgba(0,0,0,.35)); } }
+@keyframes ccWrite { from { clip-path: inset(-20% 100% -20% 0); } to { clip-path: inset(-20% -5% -20% 0); } }
+@keyframes ccPop { 0% { opacity: 0; scale: .2; } 70% { opacity: 1; scale: 1.15; } 100% { opacity: 1; scale: 1; } }
+@keyframes ccDrop { 0% { opacity: 0; translate: 30px -160px; rotate: 32deg; }
+  60% { opacity: 1; translate: 0 6px; rotate: 9deg; } 80% { translate: 0 -3px; rotate: 12deg; } 100% { opacity: 1; translate: 0 0; rotate: 11deg; } }
+@keyframes ccBloom { from { opacity: 0; scale: .15; } to { opacity: 1; scale: 1; } }
+
+.couple-section:not(.cc-enter) :is(.cc-card, .photo-strip, .cc-flower) { opacity: 0; }
+.cc-card { transform-origin: 50% 0; }
+.cc-enter .cc-card { animation: ccUnfold 1s cubic-bezier(.2, .7, .2, 1) both; }
+.cc-enter .cc-salam { animation: introFadeUp .6s ease-out .55s both; }
+.cc-enter .cc-intro { animation: introFadeUp .6s ease-out .75s both; }
+.cc-enter .cc-name span { animation: ccWrite 1.1s cubic-bezier(.45, .05, .35, 1) both; }
+.cc-enter .cc-name:first-of-type span { animation-delay: .95s; }
+.cc-enter .cc-parents, .cc-enter .cc-ig { animation: introFadeUp .6s ease-out 1.5s both; }
+.cc-enter .cc-amp { animation: ccPop .6s ease-out 1.55s both; }
+.cc-enter .cc-name:last-of-type span { animation-delay: 1.75s; }
+.cc-enter .cc-name ~ .cc-parents, .cc-enter .cc-name ~ .cc-ig { animation-delay: 2.3s; }
+.cc-enter .cc-name:first-of-type + .cc-parents, .cc-enter .cc-name:first-of-type + .cc-parents + .cc-ig { animation-delay: 1.5s; }
+.cc-enter .photo-strip { animation: ccDrop 1s cubic-bezier(.3, .7, .3, 1) 1.2s both; }
+.cc-enter .cc-flower--tr, .cc-enter .cc-flower--l { animation: introSoftIn .9s ease .3s both, flowerSway var(--fdur, 5s) ease-in-out var(--fdly, 0s) infinite alternate; }
+.cc-enter .cc-lily { animation: ccBloom .9s cubic-bezier(.2, .8, .3, 1.2) 1.9s both, flowerSway var(--fdur, 5s) ease-in-out var(--fdly, 0s) infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flower-sway, .cc-enter * { animation: none !important; }
+  .couple-section:not(.cc-enter) :is(.cc-card, .photo-strip, .cc-flower) { opacity: 1; }
 }

@@ -543,8 +543,19 @@ export function initInvitation(W, hooks) {
     const introSection = $(".intro-section");
     const firstScreen = introEls.filter((el) => introSection && introSection.contains(el));
     firstScreen.forEach((el) => el.classList.remove("reveal"));
-    introEls.filter((el) => !firstScreen.includes(el)).concat(coupleEls)
+    introEls.filter((el) => !firstScreen.includes(el))
       .forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
+    // Section 2: animasi masuk berurutan saat kartu mempelai terlihat
+    const coupleSec = $(".couple-section");
+    if (coupleSec) {
+      if ("IntersectionObserver" in window) {
+        const co = new IntersectionObserver((es) => es.forEach((e) => {
+          if (e.isIntersecting) { coupleSec.classList.add("cc-enter"); co.disconnect(); }
+        }), { threshold: 0.25 });
+        co.observe(coupleSec);
+      } else coupleSec.classList.add("cc-enter");
+    }
+    swayFlowers();
     return introSection;
   }
 
@@ -557,6 +568,36 @@ export function initInvitation(W, hooks) {
     if (sec === all[all.length - 1]) return 12;
     return 9;
   });
+
+  // Semua bunga bergoyang pelan terus-menerus (tempo berbeda) dan ikut miring terbawa angin scroll (--fwind).
+  // Bunga menggantung berporos di atas, bunga berdiri (lili, calla, buket lantai) berporos di bawah.
+  const HANGING = ["d447a34c", "df6a476e", "db0864fe", "1d3be2d6"];
+  const STANDING = ["021c7d4f", "e3bde292", "cd433c50", "69693328", "ae62a4e0"];
+  function swayFlowers() {
+    let n = 0;
+    const mark = (el, hanging) => {
+      if (!el || el.classList.contains("flower-sway")) return;
+      el.classList.add("flower-sway");
+      // poros atas/bawah hanya untuk elemen yang tidak diputar (agar posisinya tidak bergeser)
+      if (!el.classList.contains("flower-keep-origin")) el.classList.add(hanging ? "flower-hang" : "flower-stand");
+      else el.style.setProperty("--fk", hanging ? "1" : "-0.6");
+      el.style.setProperty("--fdur", (4.2 + (n * 0.73) % 2.4).toFixed(2) + "s");
+      el.style.setProperty("--fdly", (-(n * 1.37) % 4).toFixed(2) + "s");
+      n++;
+    };
+    // elemen template Canva: poros hanya diubah bila elemen tidak diputar (agar posisinya tidak bergeser)
+    HANGING.concat(STANDING).forEach((key) => {
+      $$('#details img[src*="' + key + '"]').forEach((img) => {
+        const el = img.closest(".DF_utQ");
+        if (!el || el.closest(".intro, .cc-flower") || getComputedStyle(el).display === "none") return;
+        const m = new DOMMatrix(getComputedStyle(el).transform);
+        if (Math.abs(m.b) > 0.01 || m.a < 0) el.classList.add("flower-keep-origin");
+        mark(el, HANGING.includes(key));
+      });
+    });
+    $$(".intro-bouquet, .intro-anthurium, .cc-flower--tr, .cc-flower--l").forEach((el) => mark(el, true));
+    $$(".cc-lily").forEach((el) => mark(el, false));
+  }
 
   let opened = false;
   const open = (instant) => {

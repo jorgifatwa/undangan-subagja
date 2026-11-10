@@ -111,8 +111,9 @@ export function createSakura(phone, densityOf) {
     wind += (target - wind) * WIND_EASE;
     target *= 0.85;
     layer.style.setProperty("--wind", wind.toFixed(2));
+    document.documentElement.style.setProperty("--fwind", (wind * 0.05).toFixed(2) + "deg");
     frame = Math.abs(wind) > 0.2 || Math.abs(target) > 0.2 ? requestAnimationFrame(tick) : 0;
-    if (!frame) layer.style.setProperty("--wind", "0");
+    if (!frame) { layer.style.setProperty("--wind", "0"); document.documentElement.style.setProperty("--fwind", "0deg"); }
   };
   document.addEventListener("scroll", () => {
     if (!raining) return;
