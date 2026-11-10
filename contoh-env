@@ -1,0 +1,9 @@
+# Akun admin (/admin). Dengan database, akun ini dibuat otomatis pada request pertama.
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=XOsb058qL7RGC5R8
+
+# Teks acak panjang untuk menandatangani sesi login admin
+ADMIN_SESSION_SECRET=b48d7cf099728348697c1c18cf5221b228e3cbc007458d4abab48151f8d7811b
+
+# Opsional: isi hanya jika memakai domain sendiri, mis. https://annisa-rizki.com
+# NEXT_PUBLIC_SITE_URL=

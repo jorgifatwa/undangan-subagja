@@ -106,7 +106,7 @@ export function initInvitation(W, hooks) {
     document.fonts.ready.then(fitCoverWords);
     document.fonts.addEventListener("loadingdone", () => {
       fitCoverWords();
-      if (opened) fitNames();
+      if (opened) fitCoupleNames();
     });
   }
 
@@ -162,87 +162,94 @@ export function initInvitation(W, hooks) {
     "9abeae4dd1ec6197e7e5e73bc351e9ee.jpg", "d366f0402762a99a6c2cc9a8ec154ffd.jpg", "5b4dddd417f7af8511d70cdc8ab653be.jpg"]
     .forEach((f, i) => swapPhoto(f, W.photos.gallery[i]));
 
-  // ============ 6. Kartu mempelai: Instagram + photo strip ============
+  // ============ 6. Kartu mempelai ============
+  // Disusun ulang seperti contoh: kartu renda portrait (aset renda template via border-image), nama + orang tua +
+  // Instagram, photo strip miring di kanan bawah, dan bunga anthurium/lili pink. Kartu asli template disembunyikan,
+  // kartu acara (marun) di bawahnya digeser turun.
   const coupleBox = (marked["The Bride"] || $("p")).closest("._mXnjA");
-  // handle Instagram: baris baru di teks orang tua (ikut skala teks Canva)
-  const addHandle = (p, handle) => {
-    if (!p || !handle) return;
-    const tpl = $("span", p);
-    const a = document.createElement("a");
-    a.className = "ig-handle " + tpl.className;
-    a.style.cssText = tpl.style.cssText;
-    a.href = "https://instagram.com/" + handle;
-    a.target = "_blank"; a.rel = "noopener";
-    a.textContent = "@" + handle;
-    p.appendChild(a);
-  };
-  addHandle(marked["Putri dari Bapak & Ibu"], W.bride.instagram);
-  addHandle(marked["Putra dari Bapak & Ibu"], W.groom.instagram);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  // "Putri dari Bapak X & Ibu Y" -> dua baris, dipecah setelah "&"
+  const parentsHtml = (s) => esc(s).replace(/ &amp; /, " &amp;<br>");
+  const personHtml = (p) =>
+    '<h3 class="cc-name"><span>' + esc(p.name) + "</span></h3>" +
+    '<p class="cc-parents">' + parentsHtml(p.parents) + "</p>" +
+    (p.instagram ? '<a class="cc-ig" href="https://instagram.com/' + encodeURIComponent(p.instagram) + '" target="_blank" rel="noopener">@' + esc(p.instagram) + "</a>" : "");
 
-  let strip = null;
-  if (coupleBox && W.photos.strip && W.photos.strip.length) {
-    strip = document.createElement("div");
-    strip.className = "photo-strip";
-    strip.innerHTML = W.photos.strip.map((src) => '<div class="photo-strip__img"><img src="' + src + '" alt="" loading="lazy"></div>').join("");
-  }
+  // Posisi dalam px desain 430 (relatif terhadap section)
+  const CC = { card: { l: 44, t: 30, w: 300, h: 452 }, eventTop: 548 };
+  const TPL = "/assets/template/";
+  let coupleEls = [];
 
-  // Kartu renda diperkecil & digeser ke kiri supaya photo strip muat di kanan (seperti contoh)
-  const CARD_SCALE = 0.8, CARD_LEFT = 14;
-  function arrangeCoupleCard() {
-    if (!coupleBox || !strip || coupleBox.querySelector(".couple-card")) return;
+  function buildCoupleCard() {
+    if (!coupleBox || coupleBox.querySelector(".cc-card")) return;
     const z = zoomOf();
+    const section = coupleBox.closest("section");
     const base = coupleBox.getBoundingClientRect();
-    const local = (el) => { const r = el.getBoundingClientRect(); return { l: (r.left - base.left) / z, t: (r.top - base.top) / z, r: (r.right - base.left) / z, b: (r.bottom - base.top) / z, a: r.width * r.height }; };
-    const items = $$(":scope > .DF_utQ", coupleBox).map((el) => ({ el, box: local(el) }));
-    const card = marked["The Bride"].closest("._mXnjA > .DF_utQ");
-    // bingkai renda = elemen terbesar di bagian atas section
-    const lace = items.filter((i) => i.box.t < 120).sort((a, b) => b.box.a - a.box.a)[0];
-    if (!lace || !card) return;
-    const L = lace.box;
-    const group = document.createElement("div");
-    group.className = "couple-card";
-    items.forEach(({ el, box }) => {
-      if (box.t >= L.t - 4 && box.b <= L.b + 4 && box.a > 0) group.appendChild(el);
+    const H = section.getBoundingClientRect().height / z;
+    const items = $$(":scope > .DF_utQ", coupleBox).map((el) => {
+      const r = el.getBoundingClientRect();
+      return { el, t: (r.top - base.top) / z, b: (r.bottom - base.top) / z, h: r.height / z, a: r.width * r.height };
     });
-    // kartu yang lebih kecil diletakkan di tengah tinggi aslinya
-    const dy = ((L.b - L.t) * (1 - CARD_SCALE)) / 2;
-    group.style.transformOrigin = L.l + "px " + L.t + "px";
-    group.style.transform = "translate(" + (CARD_LEFT - L.l) + "px, " + dy + "px) scale(" + CARD_SCALE + ")";
-    coupleBox.insertBefore(group, coupleBox.firstChild.nextSibling);
-    // strip di kanan kartu, menempel sedikit di tepi renda dan menjuntai ke bawah
-    const cardRight = CARD_LEFT + (L.r - L.l) * CARD_SCALE;
-    const cardBottom = L.t + dy + (L.b - L.t) * CARD_SCALE;
-    strip.style.left = cardRight - 22 + "px";
-    strip.style.top = cardBottom - 205 + "px";
-    coupleBox.appendChild(strip);
+    // bingkai renda asli = elemen terbesar di bagian atas section
+    const lace = items.filter((i) => i.t < 120 && i.h < H * 0.8).sort((a, b) => b.a - a.a)[0];
+    if (!lace) return;
+    const isAnthurium = (i) => !!i.el.querySelector('img[src*="1d3be2d6"]');
+    const eventItems = items.filter((i) => i.t >= lace.b - 4 && i.h < H * 0.8 && !isAnthurium(i));
+    const oldEventTop = Math.min.apply(null, eventItems.map((i) => i.t));
+    const shift = CC.eventTop - oldEventTop;
+
+    // sembunyikan kartu asli + buket anthurium merah
+    items.forEach((i) => {
+      if ((i.t >= lace.t - 4 && i.b <= lace.b + 4 && i.h < H * 0.8) || isAnthurium(i)) i.el.style.display = "none";
+    });
+    // geser kartu acara ke bawah & tambah tinggi section
+    eventItems.forEach((i) => { i.el.style.marginTop = shift + "px"; });
+    $$('[style*="height"]', section).concat([section]).forEach((el) => {
+      const h = parseFloat(el.style.height);
+      if (Math.abs(h - H) < 1.5) el.style.height = H + shift + "px";
+    });
+
+    const add = (html) => {
+      const wrap = document.createElement("div");
+      wrap.innerHTML = html;
+      const el = wrap.firstElementChild;
+      coupleBox.appendChild(el);
+      coupleEls.push(el);
+      return el;
+    };
+    const c = CC.card;
+    add(
+      '<div class="cc-card" style="left:' + c.l + "px;top:" + c.t + "px;width:" + c.w + "px;height:" + c.h + 'px">' +
+        '<p class="cc-salam" lang="ar">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>' +
+        '<p class="cc-intro">Dengan memohon rahmat dan ridho Allah SWT,<br>kami mengundang Bapak/Ibu/Saudara/i<br>untuk hadir di hari bahagia kami.</p>' +
+        personHtml(W.bride) +
+        '<p class="cc-amp">&amp;</p>' +
+        personHtml(W.groom) +
+      "</div>"
+    );
+    if (W.photos.strip && W.photos.strip.length) {
+      add('<div class="photo-strip" style="left:282px;top:292px">' +
+        W.photos.strip.map((src) => '<div class="photo-strip__img"><img src="' + src + '" alt="" loading="lazy"></div>').join("") +
+        "</div>");
+    }
+    // bunga: buket anthurium pink kanan atas & kiri, lili pink di bawah strip
+    add('<img class="cc-flower cc-flower--tr" src="' + TPL + 'd447a34c0d6c0bbc285b0528ebd8d52f.png" alt="">');
+    add('<img class="cc-flower cc-flower--l" src="' + TPL + 'd447a34c0d6c0bbc285b0528ebd8d52f.png" alt="">');
+    add('<img class="cc-flower cc-lily" src="' + TPL + '021c7d4f4f83e191f99f39b52e279810.png" alt="">');
+    fitCoupleNames();
+    // ukur ulang setelah font script selesai dimuat
+    if (document.fonts) document.fonts.ready.then(fitCoupleNames);
+    setTimeout(fitCoupleNames, 800);
+    setTimeout(fitCoupleNames, 2000);
   }
 
-  // nama panjang dikecilkan sampai muat satu baris; teks orang tua dipecah sebelum "&" bila terlalu lebar
-  function fitNames() {
-    const intro = $$(".stage p").find((p) => /Dengan memohon rahmat/.test(p.textContent));
-    const maxW = intro ? intro.getBoundingClientRect().width * 1.02 : 0;
-    ["The Bride", "The Groom"].forEach((k) => {
-      const p = marked[k];
-      if (!p) return;
-      const span = $("span", p);
-      span.style.fontSize = "1em";
-      p.style.whiteSpace = "nowrap";
-      const box = Math.max(p.parentElement.getBoundingClientRect().width, maxW * 0.9);
-      const need = span.getBoundingClientRect().width;
-      if (need > box && box > 0) span.style.fontSize = (box / need) * 0.97 + "em";
-    });
-    ["Putri dari Bapak & Ibu", "Putra dari Bapak & Ibu"].forEach((k) => {
-      const p = marked[k];
-      if (!p || !maxW) return;
-      const span = $("span:not(.ig-handle)", p);
-      if (!span || span.dataset.split) return;
-      if (span.getBoundingClientRect().width > maxW && / & /.test(span.textContent)) {
-        span.dataset.split = "1";
-        const [a, b] = span.textContent.split(/ (?=& )/);
-        span.textContent = a;
-        span.appendChild(document.createElement("br"));
-        span.appendChild(document.createTextNode(b));
-      }
+  // nama panjang dikecilkan sampai muat satu baris di dalam kartu
+  function fitCoupleNames() {
+    $$(".cc-name").forEach((h) => {
+      const span = $("span", h);
+      span.style.fontSize = "";
+      const box = h.clientWidth, need = span.scrollWidth;
+      if (box && need > box) span.style.fontSize = (box / need) * 0.96 + "em";
     });
   }
 
@@ -388,13 +395,12 @@ export function initInvitation(W, hooks) {
       window.scrollTo(0, 0);
       layout();
       moveHighlight();
-      fitNames();
-      arrangeCoupleCard();
+      buildCoupleCard();
       hideUnusedBanks();
       fitWidgets();
       if (io) revealEls.forEach((el) => io.observe(el));
       else revealEls.forEach((el) => el.classList.add("in"));
-      if (strip && strip.isConnected) { strip.classList.add("reveal"); if (io) io.observe(strip); else strip.classList.add("in"); }
+      coupleEls.forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
     }, 700);
   };
   $$('#cover a[href^="#page"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); open(); }));
