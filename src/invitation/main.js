@@ -309,6 +309,47 @@ export function initInvitation(W, hooks) {
   const TPL = "/assets/template/";
   let coupleEls = [];
 
+  // ============ 6b. Kartu acara: kalender + Akad/Resepsi + lokasi (dirapikan, rata tengah) ============
+  const EV = { bandTop: 850, card: { l: 38, t: 900, w: 354, h: 336 }, sectionH: 1282 };
+  function buildEventCard(texture) {
+    if (!coupleBox || coupleBox.querySelector(".ev-card")) return;
+    const HARI = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+    const mon = new Date(main.getFullYear(), main.getMonth(), main.getDate());
+    mon.setDate(mon.getDate() - ((mon.getDay() + 6) % 7));
+    const active = (main.getDay() + 6) % 7;
+    const week = HARI.map((h, i) => {
+      const d = new Date(mon); d.setDate(mon.getDate() + i);
+      return '<div class="ev-day' + (i === active ? " is-on" : "") + '"><span>' + h + "</span><b>" + d.getDate() + "</b></div>";
+    }).join("");
+    const time = (t) => esc(t.replace(/^Pukul\s*/i, "").replace(/\s*-\s*/, " – "));
+    const places = W.events.map((e) => e.place).filter((v, i, a) => a.indexOf(v) === i);
+    const names = ["Akad", "Resepsi"];
+    const ORN = '<p class="ev-orn" aria-hidden="true"><span></span>❦<span></span></p>';
+    const PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>';
+    const MAP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m20.5 3-.16.03L15 5.1 9 3 3.36 4.9a.5.5 0 0 0-.36.48V20.5a.5.5 0 0 0 .5.5l.16-.03L9 18.9l6 2.1 5.64-1.9a.5.5 0 0 0 .36-.48V3.5a.5.5 0 0 0-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>';
+    const band = document.createElement("div");
+    band.className = "ev-band";
+    band.style.top = EV.bandTop + "px";
+    band.style.height = EV.sectionH - EV.bandTop + "px";
+    coupleBox.appendChild(band);
+    const c = EV.card;
+    const card = document.createElement("div");
+    card.className = "ev-card reveal";
+    card.style.cssText = "left:" + c.l + "px;top:" + c.t + "px;width:" + c.w + "px;height:" + c.h + "px;" +
+      (texture ? 'background-image:url("' + texture + '")' : "");
+    card.innerHTML =
+      '<h2 class="ev-month">' + BULAN[main.getMonth()] + "</h2>" +
+      '<div class="ev-week">' + week + "</div>" +
+      ORN +
+      '<div class="ev-times">' + W.events.slice(0, 2).map((e, i) =>
+        '<div class="ev-time"><h3>' + names[i] + "</h3><p>" + time(e.time) + "</p></div>").join('<span class="ev-vr"></span>') + "</div>" +
+      ORN +
+      places.map((pl) => '<p class="ev-place">' + PIN + esc(pl) + "</p>").join("") +
+      (W.events[0].maps ? '<a class="ev-map" href="' + esc(W.events[0].maps) + '" target="_blank" rel="noopener">' + MAP + "Petunjuk Lokasi</a>" : "");
+    coupleBox.appendChild(card);
+    if (typeof io !== "undefined" && io) io.observe(card); else card.classList.add("in");
+  }
+
   function buildCoupleCard() {
     if (!coupleBox || coupleBox.querySelector(".cc-card")) return;
     const z = zoomOf();
@@ -334,11 +375,15 @@ export function initInvitation(W, hooks) {
     items.forEach((i) => {
       if (!eventItems.includes(i) && i.h < H * 0.8) i.el.style.display = "none";
     });
-    // geser kartu acara ke bawah & tambah tinggi section
-    eventItems.forEach((i) => { i.el.style.marginTop = shift + "px"; });
+    // kartu acara template diganti kartu baru (buildEventCard); tekstur marunnya dipakai ulang
+    const texImg = eventItems.map((i) => i.el.querySelector("img")).filter(Boolean)
+      .sort((a, b) => b.getBoundingClientRect().width * b.getBoundingClientRect().height - a.getBoundingClientRect().width * a.getBoundingClientRect().height)[0];
+    const evTexture = texImg ? texImg.getAttribute("src") : "";
+    eventItems.forEach((i) => { i.el.style.display = "none"; });
+    void shift;
     $$('[style*="height"]', section).concat([section]).forEach((el) => {
       const h = parseFloat(el.style.height);
-      if (Math.abs(h - H) < 1.5) el.style.height = H + shift + "px";
+      if (Math.abs(h - H) < 1.5) el.style.height = EV.sectionH + "px";
     });
 
     const add = (html) => {
@@ -368,6 +413,7 @@ export function initInvitation(W, hooks) {
     add('<img class="cc-flower cc-flower--tr" src="' + TPL + 'd447a34c0d6c0bbc285b0528ebd8d52f.png" alt="">');
     add('<img class="cc-flower cc-flower--l" src="' + TPL + 'd447a34c0d6c0bbc285b0528ebd8d52f.png" alt="">');
     add('<img class="cc-flower cc-lily" src="' + TPL + '021c7d4f4f83e191f99f39b52e279810.png" alt="">');
+    buildEventCard(evTexture);
     fitCoupleNames();
     // ukur ulang setelah font script selesai dimuat
     if (document.fonts) document.fonts.ready.then(fitCoupleNames);
@@ -576,7 +622,8 @@ export function initInvitation(W, hooks) {
   // kelopak sakura putih: jumlah per section (section padat teks lebih sedikit)
   const sakura = createSakura(phone, (sec) => {
     if (sec.querySelector('[data-widget="rsvp"]')) return 5;
-    if (sec.querySelector('[data-widget="copy"]') || sec.classList.contains("couple-section")) return 6;
+    if (sec.classList.contains("couple-section")) return 5;
+    if (sec.querySelector('[data-widget="copy"]')) return 6;
     if (sec.classList.contains("intro-section")) return 7;
     const all = $$("#details section");
     if (sec === all[all.length - 1]) return 12;
