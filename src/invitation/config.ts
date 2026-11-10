@@ -40,7 +40,7 @@ export const WEDDING = {
     strip: ["/assets/img/strip-1.jpg", "/assets/img/strip-2.jpg", "/assets/img/strip-3.jpg"], // photo strip di kartu mempelai
   },
 
-  music: "", // contoh "/assets/music.mp3"
+  music: "/assets/audio/amin-paling-serius.m4a", // Sal Priadi & Nadin Amizah - Amin Paling Serius
 
   gift: {
     // Template punya 2 kartu rekening; kartu yang tidak terisi disembunyikan

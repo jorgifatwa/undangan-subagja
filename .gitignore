@@ -55,3 +55,6 @@ contoh-env
 /public/assets/fonts/*/
 !/public/assets/fonts/free/
 !/public/assets/fonts/fallback/
+
+# file musik asli (yang dipakai versi m4a hasil konversi)
+/public/assets/audio/*.mp3
