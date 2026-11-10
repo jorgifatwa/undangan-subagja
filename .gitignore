@@ -50,3 +50,8 @@ next-env.d.ts
 # contoh/salinan env berisi rahasia
 contoh-env
 *-env
+
+# folder hasil download font (hanya file yang dipakai yang di-commit)
+/public/assets/fonts/*/
+!/public/assets/fonts/free/
+!/public/assets/fonts/fallback/

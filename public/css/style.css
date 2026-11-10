@@ -215,7 +215,7 @@ html body.locked { overflow: hidden !important; }
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .35));
 }
 .cc-card p, .cc-card h3 { margin: 0; }
-.cc-salam { font: 400 15px/1.5 'Amiri', YAFdJg8m-kQ_0, serif; color: #4d2e09; direction: rtl; }
+.cc-salam { font: 400 15px/1.5 YAFdJg8m-kQ_0, Amiri, serif; color: #4d2e09; direction: rtl; }
 .cc-intro { margin: 6px 0 16px !important; font: 400 7.8px/1.55 YACgEXvxf8Q_0, Lora, Georgia, serif; color: #3a2814; }
 .cc-name { width: 100%; white-space: nowrap; font: 400 24px/1.2 YAGL3qRU9qw_0, 'Great Vibes', cursive; color: #2b1d12; }
 .cc-name span { display: inline-block; }
