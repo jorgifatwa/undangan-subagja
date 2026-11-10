@@ -162,6 +162,98 @@ export function initInvitation(W, hooks) {
     "9abeae4dd1ec6197e7e5e73bc351e9ee.jpg", "d366f0402762a99a6c2cc9a8ec154ffd.jpg", "5b4dddd417f7af8511d70cdc8ab653be.jpg"]
     .forEach((f, i) => swapPhoto(f, W.photos.gallery[i]));
 
+  // ============ 5b. Section 1: Ayat + Save The Date (disusun ulang seperti referensi) ============
+  // Isi Canva asli section ini disembunyikan, diganti bingkai scallop marun (SVG), teks ayat, mutiara, bunga,
+  // piringan hitam "play the music!", dan pita hijau Save The Date. Ukuran dalam px desain 430.
+  const INTRO_H = 549;
+  let introEls = [];
+
+  // tinggi section Canva: ubah semua elemen yang tingginya sama dengan section
+  function setSectionHeight(section, newH) {
+    const z = zoomOf();
+    const H = section.getBoundingClientRect().height / z;
+    $$('[style*="height"]', section).concat([section]).forEach((el) => {
+      const h = parseFloat(el.style.height);
+      if (Math.abs(h - H) < 1.5) el.style.height = newH + "px";
+    });
+    section.style.height = newH + "px";
+  }
+
+  // bingkai: superelips dengan tepi bergelombang (scallop), cincin marun di atas, bawah, dan kedua sisi
+  function scallopFrameSvg(w, h) {
+    const cx = w / 2, cy = h / 2, a = w / 2 - 16, b = h / 2 - 16, n = 2.6, A = 13, m = 7, N = 420;
+    const pts = [];
+    for (let i = 0; i < N; i++) {
+      const t = (i / N) * Math.PI * 2, c = Math.cos(t), s = Math.sin(t);
+      const x = a * Math.sign(c) * Math.pow(Math.abs(c), 2 / n), y = -b * Math.sign(s) * Math.pow(Math.abs(s), 2 / n);
+      const r = Math.hypot(x, y) || 1, k = 1 + (A * Math.abs(Math.sin(m * t))) / r;
+      pts.push([cx + x * k, cy + y * k]);
+    }
+    const d = "M" + pts.map((p) => p[0].toFixed(1) + " " + p[1].toFixed(1)).join("L") + "Z";
+    // cincin: titik di tepi pada y tertentu, digeser ke dalam
+    const edgeAt = (fy, side) => {
+      const y = h * fy;
+      const cand = pts.filter((p) => (side < 0 ? p[0] < cx : p[0] > cx)).sort((p, q) => Math.abs(p[1] - y) - Math.abs(q[1] - y))[0];
+      return [cand[0] - side * 13, cand[1]];
+    };
+    const rings = [[cx, 17], [cx, h - 17], edgeAt(0.43, -1), edgeAt(0.43, 1), edgeAt(0.6, -1), edgeAt(0.6, 1)];
+    return (
+      '<svg class="intro-frame__svg" viewBox="0 0 ' + w + " " + h + '" width="' + w + '" height="' + h + '" aria-hidden="true">' +
+      '<defs><filter id="introMarble" x="0" y="0" width="100%" height="100%">' +
+      '<feTurbulence type="fractalNoise" baseFrequency="0.018 0.035" numOctaves="3" seed="7"/>' +
+      '<feColorMatrix values="0 0 0 0 0.86  0 0 0 0 0.84  0 0 0 0 0.83  0 0 0 0.55 0"/>' +
+      '<feComposite in2="SourceGraphic" operator="in"/></filter></defs>' +
+      '<path d="' + d + '" fill="#f3efec"/>' +
+      '<path d="' + d + '" fill="#f3efec" filter="url(#introMarble)"/>' +
+      '<path d="' + d + '" fill="none" stroke="#8b1a2b" stroke-width="5" stroke-linejoin="round"/>' +
+      rings.map((p) => '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="6.5" fill="#f3efec" stroke="#8b1a2b" stroke-width="3.6"/>').join("") +
+      "</svg>"
+    );
+  }
+
+  function buildIntroSection() {
+    const section = $("#details section");
+    if (!section || section.querySelector(".intro")) return;
+    const box = $("._mXnjA", section);
+    if (!box) return;
+    $$(":scope > *", box).forEach((el) => { el.style.display = "none"; });
+    setSectionHeight(section, INTRO_H);
+    section.classList.add("intro-section");
+    // bunga boleh menjuntai melewati batas section (pembungkus Canva memotong dengan overflow: hidden)
+    Object.assign(section.parentElement.style, { overflow: "visible", position: "relative", zIndex: "2" });
+
+    const add = (html) => {
+      const wrap = document.createElement("div");
+      wrap.innerHTML = html;
+      const el = wrap.firstElementChild;
+      box.appendChild(el);
+      introEls.push(el);
+      return el;
+    };
+    add('<div class="intro intro-band"><p class="intro-band__title">SAVE <i>THE</i> DATE!</p>' +
+      '<div class="intro-cd">' +
+      ["Days", "Hours", "Minutes", "Seconds"].map((l, i) =>
+        (i ? '<span class="intro-cd__sep">:</span>' : "") +
+        '<div class="intro-cd__u' + (i === 3 ? " is-sec" : "") + '"><b data-cd="' + i + '">00</b><small>' + l + "</small></div>").join("") +
+      "</div></div>");
+    add('<img class="intro intro-pearls" src="' + TPL + '6bdbbb03529f3e7d294c0ab232845faa.png" alt="">');
+    add('<div class="intro intro-frame">' + scallopFrameSvg(314, 408) +
+      '<p class="intro-bismillah" lang="ar">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>' +
+      '<p class="intro-ayat" lang="ar">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا<br>لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ<br>ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>' +
+      '<p class="intro-arti">Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.</p>' +
+      '<p class="intro-ref">Q.S. Ar Rum : 21</p></div>');
+    add('<img class="intro intro-bouquet" src="' + TPL + 'df6a476e3100a3687f7317b0a7add0d5.png" alt="">');
+    add('<img class="intro intro-sparkle" src="' + TPL + 'a0191da0e41966b9c0b27f63a25eb916.png" alt="">');
+    const vin = add('<button type="button" class="intro intro-vinyl" aria-label="Putar / jeda musik">' +
+      '<img src="' + TPL + '46017cbd6293305e69c70dd0a2e2a225.png" alt="">' +
+      '<span class="intro-vinyl__play"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span></button>');
+    add('<p class="intro intro-playtext">play the music!</p>');
+    add('<img class="intro intro-anthurium" src="' + TPL + 'd447a34c0d6c0bbc285b0528ebd8d52f.png" alt="">');
+    vin.addEventListener("click", toggleMusic);
+    vinyl = $("img", vin);
+    tick();
+  }
+
   // ============ 6. Kartu mempelai ============
   // Disusun ulang seperti contoh: kartu renda portrait (aset renda template via border-image), nama + orang tua +
   // Instagram, photo strip miring di kanan bawah, dan bunga anthurium/lili pink. Kartu asli template disembunyikan,
@@ -311,11 +403,10 @@ export function initInvitation(W, hooks) {
         (i ? '<span class="sep">:</span>' : "") + '<div class="u"><b data-cd="' + i + '">00</b><small>' + l + "</small></div>").join("") +
       "</div>";
   });
-  const cds = $$("[data-cd]");
   const tick = () => {
     const s = Math.max(0, Math.floor((main - new Date()) / 1000));
     const v = [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60];
-    cds.forEach((el) => { el.textContent = pad(v[+el.dataset.cd]); });
+    $$("[data-cd]").forEach((el) => { el.textContent = pad(v[+el.dataset.cd]); });
   };
   tick(); setInterval(tick, 1000);
 
@@ -395,12 +486,13 @@ export function initInvitation(W, hooks) {
       window.scrollTo(0, 0);
       layout();
       moveHighlight();
+      buildIntroSection();
       buildCoupleCard();
       hideUnusedBanks();
       fitWidgets();
       if (io) revealEls.forEach((el) => io.observe(el));
       else revealEls.forEach((el) => el.classList.add("in"));
-      coupleEls.forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
+      introEls.concat(coupleEls).forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
     }, 700);
   };
   $$('#cover a[href^="#page"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); open(); }));
