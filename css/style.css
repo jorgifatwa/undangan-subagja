@@ -9,12 +9,13 @@
 }
 
 html, body { margin: 0; padding: 0; }
+/* template.css (Canva) mengunci html/body: height 100% + overflow hidden. Batalkan di sini. */
+html, html body { height: auto !important; min-height: 100%; overflow-y: auto !important; overflow-x: hidden !important; }
 body {
   background: var(--green-deep);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
-body.locked { overflow: hidden; }
+html body.locked { overflow: hidden !important; }
 
 /* ========== Workspace ========== */
 .workspace { min-height: 100vh; }
@@ -33,7 +34,8 @@ body.locked { overflow: hidden; }
 .pg--cover.is-leaving { opacity: 0; transform: translateY(-30px); pointer-events: none; }
 
 @media (min-width: 900px) {
-  body { overflow: hidden; }
+  /* desktop: yang discroll kolom HP, bukan halaman */
+  html, html body { height: 100% !important; overflow: hidden !important; }
   .workspace { display: flex; height: 100vh; }
 
   .side { display: flex; position: relative; flex: 1; overflow: hidden; align-items: flex-end; }
