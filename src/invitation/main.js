@@ -741,7 +741,10 @@ export function initInvitation(W, hooks) {
     add('<div class="cl-band"></div>');
     const photo = W.photos.gallery[0];
     if (photo) {
-      const pol = add('<button type="button" class="cl-polaroid" aria-label="Buka foto"><img src="' + photo + '" alt="Foto Annisa dan Rizki"></button>');
+      const pol = add('<button type="button" class="cl-polaroid" aria-label="Buka foto">' +
+        '<span class="cl-pol__tape" aria-hidden="true"></span>' +
+        '<span class="cl-pol__photo"><img src="' + photo + '" alt="Foto ' + esc(W.bride.nick) + " dan " + esc(W.groom.nick) + '"></span>' +
+        "</button>");
       pol.addEventListener("click", () => hooks.openGallery && hooks.openGallery(0));
     }
     add('<img class="cl-calla" src="' + TPL + 'cd433c5065e3b51a535f1d5f60d89b09.png" alt="">');
