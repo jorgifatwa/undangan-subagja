@@ -364,3 +364,35 @@ body.locked .music { display: none; }
   .door { transition: none; }
   .intro-enter * { animation: none !important; }
 }
+
+/* ========== Kelopak sakura putih (dari undangan-jorgi-estetik) ========== */
+.sakura-layer { position: fixed; z-index: 40; overflow: hidden; pointer-events: none; container-type: size; --wind: 0;
+  filter: drop-shadow(0 1px 1.2px rgba(40, 30, 20, .28)); }
+.sakura-rain-group { position: absolute; inset: 0; }
+.sakura-rain { position: absolute; top: 0;
+  transform: translate3d(calc(var(--wind) * var(--depth) * 0.35px), calc(var(--wind) * var(--depth) * -0.6px), 0) rotate(calc(var(--wind) * 0.3deg));
+  transition: opacity 1.2s ease; }
+.sakura-fall { width: 100%; height: 100%; opacity: 0; animation: sakuraFall var(--duration) linear var(--delay) infinite both; }
+.sakura-tumble { display: block; animation: sakuraTumble 2.6s ease-in-out infinite alternate; }
+.sakura-layer[data-density="9"] .sakura-rain:nth-child(n + 10),
+.sakura-layer[data-density="7"] .sakura-rain:nth-child(n + 8),
+.sakura-layer[data-density="6"] .sakura-rain:nth-child(n + 7),
+.sakura-layer[data-density="5"] .sakura-rain:nth-child(n + 6) { opacity: 0; }
+@keyframes sakuraFall {
+  0% { translate: 0 -30px; rotate: 0deg; opacity: 0; }
+  6% { opacity: .95; }
+  25% { translate: var(--sway) calc(25cqh - 30px); rotate: 80deg; }
+  50% { translate: calc(var(--sway) * -1) calc(50cqh - 15px); rotate: 170deg; }
+  75% { translate: var(--sway) 75cqh; rotate: 260deg; }
+  94% { opacity: .95; }
+  100% { translate: 0 calc(100cqh + 30px); rotate: 340deg; opacity: 0; }
+}
+@keyframes sakuraTumble { from { scale: 1 1; } to { scale: .4 1; } }
+.sakura-burst { position: absolute; opacity: 0; animation: sakuraBurst var(--duration) cubic-bezier(.2, .6, .4, 1) var(--delay) both; }
+@keyframes sakuraBurst {
+  0% { translate: 0 0; rotate: 0deg; scale: .3; opacity: 0; }
+  8% { opacity: 1; scale: 1; }
+  30% { translate: var(--bx) var(--by); }
+  70% { opacity: .95; }
+  100% { translate: calc(var(--bx) * 1.4) calc(var(--by) + var(--drop)); rotate: var(--spin); opacity: 0; }
+}

@@ -1,6 +1,8 @@
 // Runtime undangan: mengisi data dari config ke markup template, skala layar, widget, dan buka undangan.
 // Dipanggil sekali dari InvitationRuntime (komponen React) setelah markup ada di halaman.
 
+import { createSakura } from "./sakura";
+
 const DESIGN_W = 430;
 const COVER_H = 764.444;
 const BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -546,6 +548,16 @@ export function initInvitation(W, hooks) {
     return introSection;
   }
 
+  // kelopak sakura putih: jumlah per section (section padat teks lebih sedikit)
+  const sakura = createSakura(phone, (sec) => {
+    if (sec.querySelector('[data-widget="rsvp"]')) return 5;
+    if (sec.querySelector('[data-widget="copy"]') || sec.classList.contains("couple-section")) return 6;
+    if (sec.classList.contains("intro-section")) return 7;
+    const all = $$("#details section");
+    if (sec === all[all.length - 1]) return 12;
+    return 9;
+  });
+
   let opened = false;
   const open = (instant) => {
     if (opened) return;
@@ -553,13 +565,17 @@ export function initInvitation(W, hooks) {
     if (W.music) audio.play().then(() => setPlaying(true)).catch(() => {});
     if (instant || reduceMotion) {
       showDetails();
+      sakura.start(false);
       return;
     }
     const doors = makeDoors();
+    const seam = doors.getBoundingClientRect();
     const introSection = showDetails();
     if (introSection) introSection.classList.add("intro-enter");
     // dua frame agar posisi awal pintu tergambar sebelum transisi dimulai
     requestAnimationFrame(() => requestAnimationFrame(() => doors.classList.add("is-open")));
+    // kelopak terlempar dari celah pintu, lalu hujan kelopak mulai dari atas
+    setTimeout(() => { sakura.burst(seam.left + seam.width / 2, seam.top + seam.height * 0.55); sakura.start(true); }, 120);
     setTimeout(() => doors.remove(), DOOR_MS + 150);
   };
   $$('#cover a[href^="#page"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); open(); }));
