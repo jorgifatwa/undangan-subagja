@@ -5,7 +5,7 @@
  */
 :root {
   --design-w: 430px;
-  --phone-w: 430px;
+  --phone-w: 440px;
   --green-deep: #04170a;
 }
 
@@ -38,12 +38,13 @@ html body.locked { overflow: hidden !important; }
 .pg--cover { transition: opacity .7s ease, transform .7s ease; }
 .pg--cover.is-leaving { opacity: 0; transform: translateY(-30px); pointer-events: none; }
 
-@media (min-width: 900px) {
-  /* desktop: yang discroll kolom HP, bukan halaman */
-  html, html body { height: 100% !important; overflow: hidden !important; }
-  .workspace { display: flex; height: 100vh; }
+@media (min-width: 480px) {
+  /* desktop/tablet: seperti undangan-jorgi-estetik — satu kolom HP (maks. 440px) di tengah layar gelap;
+     yang discroll kolom HP, bukan halaman */
+  html, html body { height: 100% !important; overflow: hidden !important; background: #121212 !important; }
+  .workspace { display: flex; justify-content: center; height: 100vh; background: #121212; }
 
-  .side { display: flex; position: relative; flex: 1; overflow: hidden; align-items: flex-end; }
+  .side { display: none !important; }
   .side__bg {
     position: absolute; inset: -4%;
     background: #0d2a14 url("../assets/template/ded4bbababdabc4d2c1f4096fe48b9e9.png") center / cover no-repeat;
@@ -67,7 +68,7 @@ html body.locked { overflow: hidden !important; }
     height: 100vh;
     overflow-y: auto;
     scrollbar-width: none;
-    box-shadow: -24px 0 60px rgba(0, 0, 0, .5);
+    box-shadow: 0 0 50px rgba(0, 0, 0, .9);
   }
   .phone::-webkit-scrollbar { display: none; }
   body.locked .phone { overflow: hidden; }
@@ -258,8 +259,7 @@ body.locked .music { display: none; }
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-@media (min-width: 900px) {
-  .music { right: 20px; }
-  .toast { left: auto; right: calc(var(--phone-w) / 2); transform: translate(50%, 16px); }
-  .toast.show { transform: translate(50%, 0); }
+@media (min-width: 480px) {
+  /* tombol musik tetap di dalam kolom HP */
+  .music { right: calc(50% - var(--phone-w) / 2 + 16px); }
 }

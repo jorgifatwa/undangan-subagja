@@ -34,6 +34,11 @@ export function initInvitation(W, hooks) {
   }
   window.addEventListener("resize", layout);
   layout();
+  // desktop: scroll di area gelap di samping kolom HP tetap menggulir undangan
+  $(".workspace").addEventListener("wheel", (e) => {
+    if (phone.contains(e.target) || document.body.classList.contains("locked")) return;
+    phone.scrollBy({ top: e.deltaY, left: 0 });
+  }, { passive: true });
 
   // ============ 2. Ganti teks dari config ============
   const banks = W.gift.banks;
