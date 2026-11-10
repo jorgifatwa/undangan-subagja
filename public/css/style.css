@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 @font-face { font-family: NickainleyLocal; font-display: swap; src: url("/assets/fonts/Nickainley.otf") format("opentype"); }
 @font-face { font-family: CormorantItalicLocal; font-style: italic; font-weight: 500; font-display: swap;
   src: url("/assets/fonts/fallback/CormorantGaramond-500italic.woff2") format("woff2"); }
@@ -25,7 +24,6 @@ html body.locked { overflow: hidden !important; }
 
 /* ========== Workspace ========== */
 .workspace { min-height: 100vh; }
-.side { display: none; }
 .phone { position: relative; width: 100%; overflow-x: hidden; background: var(--green-deep); }
 
 .stage { width: 100%; }
@@ -49,23 +47,6 @@ html body.locked { overflow: hidden !important; }
   html, html body { height: 100% !important; overflow: hidden !important; background: #121212 !important; }
   .workspace { display: flex; justify-content: center; height: 100vh; background: #121212; }
 
-  .side { display: none !important; }
-  .side__bg {
-    position: absolute; inset: -4%;
-    background: #0d2a14 url("../assets/template/ded4bbababdabc4d2c1f4096fe48b9e9.png") center / cover no-repeat;
-    animation: kenburns 30s ease-in-out infinite alternate;
-  }
-  .side__bg::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(4, 23, 10, 0) 30%, rgba(4, 23, 10, .55) 70%, rgba(4, 23, 10, .85));
-  }
-  .side__content { position: relative; padding: 0 72px 80px; color: #fff; }
-  .side__eyebrow { margin: 0; font-family: YAFdJsnKuGg_0, sans-serif; font-weight: 400; font-size: 22px; letter-spacing: .02em; }
-  .side__names { margin: 8px 0 6px; font-family: YACkoCuIQTA_0, cursive; font-weight: 400; font-size: clamp(72px, 7.5vw, 128px); line-height: 1.05; }
-  .side__amp { font-size: .55em; }
-  .side__date { margin: 0; font-family: YAEtW56nQTQ_0, cursive; font-size: 28px; letter-spacing: .06em; }
-  .side__guest { margin: 28px 0 0; font-family: YAFdJsnKuGg_0, sans-serif; font-size: 16px; opacity: .9; }
-  .side__guest b { display: block; font-size: 24px; font-weight: 500; }
 
   .phone {
     flex: 0 0 var(--phone-w);
@@ -78,7 +59,6 @@ html body.locked { overflow: hidden !important; }
   .phone::-webkit-scrollbar { display: none; }
   body.locked .phone { overflow: hidden; }
 }
-@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.1) translate(-1.5%, -1%); } }
 
 /* ========== Animasi muncul ========== */
 /* pakai `translate` (bukan transform) agar posisi asli elemen Canva tidak tertimpa */
@@ -86,26 +66,13 @@ html body.locked { overflow: hidden !important; }
 .reveal.in { opacity: 1; translate: 0 0; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; translate: none; transition: none; }
-  .side__bg { animation: none; }
 }
 
 /* ========== Widget pengganti embed ========== */
 .embed-slot { position: relative; }
 
-/* musik: area klik transparan di atas piringan hitam */
-.w-music { position: absolute; inset: 0; border: 0; padding: 0; background: transparent; cursor: pointer; }
-.vinyl-spin { animation: spin 3.5s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* hitung mundur (meniru tickcounter) */
-.w-countdown {
-  display: flex; align-items: flex-start; justify-content: center; height: 100%;
-  font-family: Arial, Helvetica, sans-serif; color: #fff;
-}
-.w-countdown .u { display: flex; flex-direction: column; align-items: center; min-width: 36px; }
-.w-countdown b { font-size: 25px; line-height: 1; font-weight: 700; letter-spacing: .02em; }
-.w-countdown small { margin-top: 5px; font-size: 7px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
-.w-countdown .sep { font-size: 22px; font-weight: 700; line-height: 1; padding: 0 3px; }
 
 /* tombol copy rekening */
 .w-copy { display: flex; align-items: center; justify-content: center; height: 100%; }
@@ -147,12 +114,6 @@ html body.locked { overflow: hidden !important; }
 }
 .w-rsvp .choice button:hover, .w-rsvp .choice button:focus-visible { background: var(--maroon); color: #fbf6ee; outline: none; }
 .w-rsvp .choice svg { width: 9px; height: 9px; }
-.w-rsvp .extra { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 3px; font-size: 6.6px; color: var(--soft); }
-.w-rsvp .extra button, .w-rsvp .extra a {
-  border: 0; padding: 0; background: none; cursor: pointer;
-  font-family: inherit; font-size: 6.8px; font-style: italic; line-height: 1.2; color: var(--ink);
-  text-decoration: underline; text-decoration-color: rgba(139, 26, 43, .5); text-underline-offset: 2px;
-}
 .w-rsvp .wall-title { display: flex; align-items: center; gap: 6px; margin-top: 2px; font: 400 11px/1.2 YAFdJhX-538_0, 'Cormorant Garamond', serif; font-style: italic; color: var(--ink); }
 .w-rsvp .wall-title .rule { flex: 1; border-top: 1px dashed rgba(58, 40, 20, .35); }
 .w-rsvp .wall-count { font-size: 5.8px; letter-spacing: .04em; color: var(--soft); margin: 1px 0 3px; }
@@ -166,33 +127,28 @@ html body.locked { overflow: hidden !important; }
 .w-rsvp .msg time { display: block; margin-top: 1px; font-size: 5.4px; color: #9a8672; font-style: italic; }
 .w-rsvp .empty { font-size: 7px; font-style: italic; color: var(--soft); text-align: center; margin-top: 10px; }
 
-/* Dialog form ucapan & QR check-in: kertas krem bertepi renda (menimpa gaya hijau di globals.css) */
-.checkin-pass-backdrop { background-color: rgba(4, 14, 8, .78); }
-.checkin-pass-backdrop .checkin-pass-card {
+/* Dialog form ucapan: kertas krem bertepi renda (menimpa gaya hijau di globals.css) */
+.dialog-backdrop { background-color: rgba(4, 14, 8, .78); }
+.dialog-backdrop .dialog-card {
   max-width: 360px; padding: 22px 18px 18px; border-radius: 0;
   border: 34px solid transparent;
   border-image: url("/assets/template/ef905905cd3d5b3b46ebd1cebd113abe.png") 112 fill / 34px round;
   background: none; box-shadow: none; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, .55));
   color: #3a2814; font-family: YACgEXvxf8Q_0, Lora, Georgia, serif !important;
 }
-.checkin-pass-backdrop .checkin-pass-card .checkin-pass-close { top: -14px; right: -14px; color: #8b1a2b; font-size: 15px; }
-.checkin-pass-backdrop .checkin-pass-card > p:first-of-type,
+.dialog-backdrop .dialog-card .dialog-close { top: -14px; right: -14px; color: #8b1a2b; font-size: 15px; }
+.dialog-backdrop .dialog-card > p:first-of-type,
 .rsvp-card__title { margin: 0; font: 400 36px/1.25 YAGL3qRU9qw_0, 'Great Vibes', cursive !important; color: #2b1d12; }
-.checkin-pass-backdrop .checkin-pass-note { color: #6a5644; font-size: 12.5px; }
-.checkin-pass-backdrop .checkin-pass-intro { border: 1px dashed rgba(139, 26, 43, .45); border-radius: 6px; color: #3a2814; font-size: 13px; }
-.checkin-pass-backdrop .checkin-pass-name { color: #2b1d12; }
-.checkin-pass-backdrop .checkin-pass-qr { border: 1px solid rgba(58, 40, 20, .2); }
-.checkin-pass-backdrop .checkin-pass-error { color: #a3162b; }
-.checkin-pass-backdrop .checkin-pass-card .checkin-pass-button { border-radius: 99px; background-color: #8b1a2b; color: #fbf6ee; letter-spacing: .03em; }
-.checkin-pass-backdrop .checkin-pass-card .checkin-pass-link { color: #6a5644; }
-.checkin-pass-backdrop .checkin-pass-card .checkin-pass-input,
+.dialog-backdrop .dialog-note { color: #6a5644; font-size: 12.5px; }
+.dialog-backdrop .dialog-error { color: #a3162b; }
+.dialog-backdrop .dialog-card .dialog-button { border-radius: 99px; background-color: #8b1a2b; color: #fbf6ee; letter-spacing: .03em; }
 .rsvp-card .rsvp-field {
   width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 6px;
   background-color: #fffdf9 !important; border: 1px solid rgba(58, 40, 20, .28) !important; color: #2b1d12 !important;
   font: 15px/1.35 YACgEXvxf8Q_0, Lora, Georgia, serif; resize: none;
 }
-.checkin-pass-backdrop .wish-field::placeholder { color: #a08d7a; }
-.checkin-pass-backdrop .wish-field:focus { outline: none; border-color: #8b1a2b !important; box-shadow: 0 0 0 2px rgba(139, 26, 43, .15); }
+.dialog-backdrop .wish-field::placeholder { color: #a08d7a; }
+.dialog-backdrop .wish-field:focus { outline: none; border-color: #8b1a2b !important; box-shadow: 0 0 0 2px rgba(139, 26, 43, .15); }
 .rsvp-form { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; text-align: left; }
 .rsvp-card .rsvp-field option { color: #1f1f1f; }
 .rsvp-card .rsvp-field--locked { display: flex; align-items: center; gap: 8px; border-style: dashed !important; background-color: #f6efe4 !important; }
@@ -292,13 +248,6 @@ html body.locked { overflow: hidden !important; }
 .music.playing .i-pause { display: block; }
 body.locked .music { display: none; }
 
-.toast {
-  position: fixed; left: 50%; bottom: 76px; z-index: 60;
-  transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
-  background: rgba(0, 0, 0, .82); color: #fff; font: 13px/1.2 -apple-system, sans-serif;
-  padding: 8px 16px; border-radius: 999px; transition: .3s;
-}
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 @media (min-width: 480px) {
   /* tombol musik tetap di dalam kolom HP */
@@ -454,11 +403,6 @@ body.locked .music { display: none; }
 .intro-band__cal[hidden] { display: none !important; }
 
 /* ========== Kartu acara (kalender + Akad/Resepsi + lokasi). px desain 430 ========== */
-.ev-band { display: none; position: absolute; left: 0; width: 430px; z-index: 0; overflow: hidden;
-  background: #3e6340; box-shadow: inset 0 7px 0 #1c3520; }
-.ev-band::before { content: ''; position: absolute; inset: 7px 0 0; opacity: .9;
-  background: url("/assets/template/ded4bbababdabc4d2c1f4096fe48b9e9.png") center 20% / 460px auto repeat-y;
-  filter: brightness(1.75) saturate(.72) contrast(1.12); }
 .ev-card { position: absolute; z-index: 3; box-sizing: border-box; border-radius: 10px; padding: 14px 18px 18px;
   display: flex; flex-direction: column; align-items: center; text-align: center; color: #f6efe4;
   background-color: #5a1420; background-size: cover; background-position: center;
@@ -533,8 +477,6 @@ body.locked .music { display: none; }
 .rsvp-card2 .w-rsvp .choice { gap: 10px; margin-bottom: 10px; }
 .rsvp-card2 .w-rsvp .choice button { padding: 10px 6px; font-size: 13.5px; gap: 6px; }
 .rsvp-card2 .w-rsvp .choice svg { width: 14px; height: 14px; }
-.rsvp-card2 .w-rsvp .extra { gap: 8px; margin-bottom: 8px; font-size: 11px; }
-.rsvp-card2 .w-rsvp .extra button, .rsvp-card2 .w-rsvp .extra a { font-size: 12px; }
 .rsvp-card2 .w-rsvp .wall-title { gap: 10px; font-size: 19px; margin-top: 4px; }
 .rsvp-card2 .w-rsvp .wall-count { font-size: 10px; margin: 2px 0 6px; }
 .rsvp-card2 .w-rsvp .msg { padding: 8px 0; }

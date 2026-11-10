@@ -1,18 +1,19 @@
 # Font
 
-Template memakai font berikut. Font gratis (lisensi OFL) sudah tersedia di `free/`.
-Font komersial **tidak disertakan**: unduh atau beli sendiri, lalu taruh di folder ini
-dengan nama file **persis** seperti tabel di bawah (ekstensi boleh `.woff2`, `.woff`, `.otf`, atau `.ttf`).
-Selama file belum ada, halaman otomatis memakai font pengganti di `fallback/`.
+Semua font template sudah terpasang di folder ini dan dirujuk dari `public/css/template.css`.
 
-| Font | Dipakai untuk | Nama file |
+| Font | Dipakai untuk | File |
 |---|---|---|
-| Lemon Tuesday | Nama "Bride & Groom" di cover & penutup | `LemonTuesday.otf` |
-| Nourd (Light/Regular/Medium/Bold) | Teks paragraf, "The Wedding Of", tombol | `Nourd-Light.otf`, `Nourd-Regular.otf`, `Nourd-Medium.otf`, `Nourd-Bold.otf` |
+| Lemon Tuesday | Nama di cover & penutup | `LemonTuesday.otf` |
+| Nourd (Light/Regular/Medium/Bold) | Teks kecil, orang tua, "The Wedding Of" | `Nourd-*.ttf` |
 | FC Palette | Tanggal tulisan tangan di cover | `FCPalette.otf` |
-| 29LT Zarid Serif | Teks Arab (ayat & basmalah) | `29LTZaridSerif.otf` |
-| Adlery Swash | Nama bulan di kalender ("Oktober") | `AdlerySwash.otf` |
+| 29LT Zarid Serif | Teks Arab (ayat, basmalah, salam) | `29LTZaridSerif.ttf` |
+| Adlery Swash | Nama bulan di kartu acara | `AdlerySwash.ttf` |
 | Afrah | Judul "Wedding Gift" | `Afrah.otf` |
-| Amoresa | Nama "The Bride" / "The Groom" dan "&" | `Amoresa.otf` |
+| Amoresa | Nama mempelai, judul script | `Amoresa.otf` |
+| Nickainley | "Kami Akan Menikah!" | `Nickainley.otf` |
 
-Font gratis yang sudah dibundel: Cormorant Garamond, Lora, Cardo, Courier Prime, Raleway, Ballet.
+Font bebas (OFL) dari template ada di `free/` (Cormorant Garamond, Lora, Cardo, Courier Prime, Raleway, Ballet).
+`fallback/CormorantGaramond-500italic.woff2` dipakai untuk kata "THE" di Save The Date.
+
+Catatan lisensi: Adlery Swash versi *trial* dan Lemon Tuesday *free personal use*. Gunakan hanya untuk undangan pribadi.

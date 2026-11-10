@@ -64,8 +64,6 @@ Masjid Darushudur
 Berikut link undangan kami untuk info lengkap dari acara:
 {link}
 
-Mohon simpan *QR Check-in* yang tersedia di undangan untuk ditunjukkan kepada penerima tamu saat hadir.
-
 Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
 
 Mohon maaf perihal undangan hanya dibagikan melalui pesan ini.
@@ -221,24 +219,6 @@ export const resetAllSent = async (): Promise<number> => {
   return updateJson<Guest[], number>(GUESTS, [], (guests) => {
     const count = guests.filter((guest) => guest.sentAt).length;
     return { data: guests.map((guest) => (guest.sentAt ? { ...guest, sentAt: null } : guest)), result: count };
-  });
-};
-
-// Checks a guest in once: the first scan sets the time, later scans report the time already set (`already`)
-export const checkInGuest = async (id: string): Promise<{ guest: Guest; already: boolean } | null> => {
-  const sql = await getDb();
-  if (sql) {
-    const [row] = await sql<GuestRow[]>`update guests set checked_in_at = now() where id = ${id} and checked_in_at is null returning *`;
-    if (row) return { guest: fromRow(row), already: false };
-    const guest = await getGuest(id);
-    return guest ? { guest, already: true } : null;
-  }
-  return updateJson<Guest[], { guest: Guest; already: boolean } | null>(GUESTS, [], (guests) => {
-    const current = guests.find((guest) => guest.id === id);
-    if (!current) return { data: guests, result: null };
-    if (current.checkedInAt) return { data: guests, result: { guest: current, already: true } };
-    const updated = { ...current, checkedInAt: new Date().toISOString() };
-    return { data: guests.map((guest) => (guest.id === id ? updated : guest)), result: { guest: updated, already: false } };
   });
 };
 

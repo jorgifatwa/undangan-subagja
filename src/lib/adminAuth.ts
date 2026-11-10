@@ -2,8 +2,7 @@ import "server-only";
 import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 import { getDb } from "./db";
-import { DEFAULT_ADMIN_USERNAME, findDatabaseUrl, hashPassword, verifyPassword } from "./dbShared.mjs";
-import { readJson, updateJson } from "./jsonStore";
+import { DEFAULT_ADMIN_USERNAME, findDatabaseUrl, verifyPassword } from "./dbShared.mjs";
 
 // Admin accounts live in the Postgres table admin_users (seeded from ADMIN_USERNAME / ADMIN_PASSWORD, see db.ts and
 // scripts/seed.mjs). Without a database the single account is ADMIN_USERNAME / ADMIN_PASSWORD from the environment.
@@ -65,64 +64,3 @@ export const sessionCookieOptions = {
 export const isAdminRequest = async () => verifySessionToken((await cookies()).get(SESSION_COOKIE)?.value);
 
 export const unauthorized = () => Response.json({ error: "Sesi admin berakhir, silakan login kembali." }, { status: 401 });
-
-// Reception desk (QR check-in at /checkin): one shared PIN for every committee member, set by the admin. Stored hashed
-// in settings; a PIN login gives its own signed cookie that only opens the check-in API, and changing the PIN logs every
-// desk phone out. An admin session opens the check-in API too.
-
-export const CHECKIN_COOKIE = "checkin_session";
-const CHECKIN_TTL_SECONDS = 2 * 24 * 60 * 60;
-const PIN_KEY = "checkin_pin";
-
-export const PIN_PATTERN = /^\d{6}$/;
-
-const getPinHash = async (): Promise<string | null> => {
-  const sql = await getDb();
-  if (sql) {
-    const [row] = await sql<{ value: string }[]>`select value from settings where key = ${PIN_KEY}`;
-    return row?.value ?? null;
-  }
-  return (await readJson<{ pinHash?: string }>(PIN_KEY, {})).pinHash ?? null;
-};
-
-export const isPinSet = async () => (await getPinHash()) !== null;
-
-export const savePin = async (pin: string) => {
-  const hash = hashPassword(pin);
-  const sql = await getDb();
-  if (sql) {
-    await sql`insert into settings (key, value) values (${PIN_KEY}, ${hash}) on conflict (key) do update set value = excluded.value`;
-    return;
-  }
-  await updateJson<{ pinHash?: string }, null>(PIN_KEY, {}, () => ({ data: { pinHash: hash }, result: null }));
-};
-
-export const checkPin = async (pin: string) => {
-  const hash = await getPinHash();
-  return hash !== null && verifyPassword(pin, hash);
-};
-
-// The token names the PIN it was issued for (a slice of its hash), so a new PIN invalidates it
-const checkinPayload = (expires: string, pinHash: string) => `checkin.${expires}.${pinHash.slice(-16)}`;
-
-export const createCheckinToken = async () => {
-  const pinHash = await getPinHash();
-  if (!pinHash) return null;
-  const expires = String(Math.floor(Date.now() / 1000) + CHECKIN_TTL_SECONDS);
-  return `${expires}.${sign(checkinPayload(expires, pinHash))}`;
-};
-
-export const checkinCookieOptions = { ...sessionCookieOptions, maxAge: CHECKIN_TTL_SECONDS };
-
-const verifyCheckinToken = async (token: string | undefined) => {
-  if (!token || !signingKey()) return false;
-  const [expires, signature] = token.split(".");
-  if (!expires || !signature || Number(expires) * 1000 < Date.now()) return false;
-  const pinHash = await getPinHash();
-  return pinHash !== null && safeEqual(signature, sign(checkinPayload(expires, pinHash)));
-};
-
-// Desk phone with the PIN, or the admin
-export const isCheckinRequest = async () => (await isAdminRequest()) || verifyCheckinToken((await cookies()).get(CHECKIN_COOKIE)?.value);
-
-export const checkinUnauthorized = () => Response.json({ error: "Sesi panitia berakhir, masukkan PIN lagi." }, { status: 401 });

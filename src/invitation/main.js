@@ -10,7 +10,6 @@ const BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
 const pad = (n) => String(n).padStart(2, "0");
-const day = (s) => { const p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); };
 const norm = (s) => s.replace(/\s+/g, " ").trim();
 const fmtDay = (d) => d.getDate() + " " + BULAN[d.getMonth()] + " " + d.getFullYear();
 
@@ -22,7 +21,6 @@ export function initInvitation(W, hooks) {
   const phone = $("#phone"), cover = $("#cover"), details = $("#details");
   document.body.classList.add("locked"); // cover terkunci sampai "Buka Undangan"
   const main = new Date(W.date);
-  const couple = W.bride.nick + " & " + W.groom.nick;
   const zoomOf = () => {
     const w = details.firstElementChild.getBoundingClientRect().width;
     return w > 0 ? w / DESIGN_W : parseFloat(details.firstElementChild.style.zoom) || 1;
@@ -47,24 +45,14 @@ export function initInvitation(W, hooks) {
 
   // ============ 2. Ganti teks dari config ============
   const banks = W.gift.banks;
+  // teks asli template -> teks baru (null = hanya ditandai untuk dicari elemennya)
   const TEXT = [
     ["14/11/2026", pad(main.getDate()) + "/" + pad(main.getMonth() + 1) + "/" + main.getFullYear()],
-    ["The Bride", W.bride.name],
-    ["The Groom", W.groom.name],
-    ["Putri dari Bapak & Ibu", W.bride.parents],
-    ["Putra dari Bapak & Ibu", W.groom.parents],
-    ["Oktober", BULAN[main.getMonth()]],
-    ["22 oktober 2026", fmtDay(day(W.events[0].date))],
-    ["Pukul 12:00-13:00 WIB", W.events[0].time],
-    ["KUA Ambarawa", W.events[0].place],
-    ["25 Oktober 2026", fmtDay(day(W.events[1].date))],
-    ["Pukul 09.00 WIB -selesai", W.events[1].time],
-    ["Balai dusun puser pasekan Ambarawa", W.events[1].place],
+    ["The Bride", null],
     ["BANK BCA an. Bride", banks[0] && banks[0].label],
     ["8888998888", banks[0] && banks[0].number],
     ["BANK Mandiri an. Groom", banks[1] && banks[1].label],
     ["88882288222", banks[1] && banks[1].number],
-    ["Bride & Groom", couple],
   ];
   const LETTERS = [["Bride", W.bride.nick], ["Groom", W.groom.nick]];
   const marked = {}; // teks asli -> elemen <p> (untuk langkah berikutnya)
@@ -119,43 +107,6 @@ export function initInvitation(W, hooks) {
       if (opened) fitCoupleNames();
     });
   }
-
-  // ============ 3. Kalender: minggu yang memuat tanggal acara ============
-  const monday = new Date(main.getFullYear(), main.getMonth(), main.getDate());
-  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
-  $$("[data-cal]").forEach((el) => {
-    const d = new Date(monday);
-    d.setDate(monday.getDate() + (+el.dataset.cal - 19)); // urutan kolom template: Senin=19 ... Minggu=25
-    ($("span", el) || el).textContent = d.getDate();
-  });
-  const colWidth = () => {
-    const a = $('[data-cal="19"]'), b = $('[data-cal="20"]');
-    return a && b ? (b.getBoundingClientRect().left - a.getBoundingClientRect().left) / zoomOf() : 0;
-  };
-  // sorotan hati ada di kolom Sabtu pada template: geser ke hari acara
-  function moveHighlight() {
-    const shift = ((main.getDay() + 6) % 7) - 5;
-    if (!shift) return;
-    const marker = $('[data-cal="24"]');
-    if (!marker) return;
-    const r = marker.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    let hl = null;
-    $$(".stage .DF_utQ").forEach((el) => {
-      if (el.contains(marker) || el.querySelector("p")) return;
-      const b = el.getBoundingClientRect();
-      if (b.width < 15 || b.width > 90) return;
-      if (cx > b.left && cx < b.right && cy > b.top && cy < b.bottom) hl = el;
-    });
-    if (hl) hl.style.marginLeft = shift * colWidth() + "px";
-  }
-
-  // ============ 4. Link Google Maps ============
-  $$('.stage a[href*="maps"]').forEach((a, i) => {
-    const ev = W.events[i] || W.events[W.events.length - 1];
-    if (ev && ev.maps) a.href = ev.maps;
-    a.target = "_blank";
-    a.rel = "noopener";
-  });
 
   // ============ 5. Foto ============
   const swapPhoto = (file, src) => {
@@ -319,7 +270,7 @@ export function initInvitation(W, hooks) {
   let coupleEls = [];
 
   // ============ 6b. Kartu acara: kalender + Akad/Resepsi + lokasi (dirapikan, rata tengah) ============
-  const EV = { bandTop: 850, card: { l: 38, t: 944, w: 354, h: 336 }, sectionH: 1326 };
+  const EV = { card: { l: 38, t: 944, w: 354, h: 336 }, sectionH: 1326 };
   function buildEventCard(texture) {
     if (!coupleBox || coupleBox.querySelector(".ev-card")) return;
     const HARI = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
@@ -336,11 +287,6 @@ export function initInvitation(W, hooks) {
     const ORN = '<p class="ev-orn" aria-hidden="true"><span></span>❦<span></span></p>';
     const PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>';
     const MAP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m20.5 3-.16.03L15 5.1 9 3 3.36 4.9a.5.5 0 0 0-.36.48V20.5a.5.5 0 0 0 .5.5l.16-.03L9 18.9l6 2.1 5.64-1.9a.5.5 0 0 0 .36-.48V3.5a.5.5 0 0 0-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>';
-    const band = document.createElement("div");
-    band.className = "ev-band";
-    band.style.top = EV.bandTop + "px";
-    band.style.height = EV.sectionH - EV.bandTop + "px";
-    coupleBox.appendChild(band);
     const c = EV.card;
     const card = document.createElement("div");
     card.className = "ev-card reveal";
@@ -476,22 +422,6 @@ export function initInvitation(W, hooks) {
   if (W.music) { audio.src = W.music; musicBtn.hidden = false; }
   musicBtn.addEventListener("click", toggleMusic);
 
-  $$('[data-widget="music"]').forEach((slot) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "w-music"; b.setAttribute("aria-label", "Putar / jeda musik");
-    b.addEventListener("click", toggleMusic);
-    slot.innerHTML = "<div></div>";
-    slot.firstChild.appendChild(b);
-    $$('.stage img[src*="46017cbd"]').forEach((im) => { vinyl = im.closest(".DF_utQ") || im; });
-  });
-
-  // hitung mundur
-  $$('[data-widget="countdown"]').forEach((slot) => {
-    slot.innerHTML = '<div class="w-countdown">' +
-      ["Days", "Hours", "Minutes", "Seconds"].map((l, i) =>
-        (i ? '<span class="sep">:</span>' : "") + '<div class="u"><b data-cd="' + i + '">00</b><small>' + l + "</small></div>").join("") +
-      "</div>";
-  });
   const tick = () => {
     const s = Math.max(0, Math.floor((main - new Date()) / 1000));
     const v = [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60];
@@ -520,7 +450,6 @@ export function initInvitation(W, hooks) {
     });
   });
 
-  // RSVP: isi slot dirender oleh React (ucapan, kehadiran, QR check-in)
   // RSVP dirender React ke wadah sendiri; wadah dipindah ke kartu RSVP baru saat undangan dibuka (buildRsvpSection)
   const rsvpHost = document.createElement("div");
   rsvpHost.className = "w-rsvp-root";
@@ -544,16 +473,6 @@ export function initInvitation(W, hooks) {
     });
   }
   window.addEventListener("resize", fitWidgets);
-
-  // ============ 9. Panel desktop ============
-  const guest = new URLSearchParams(location.search).get("to") || "";
-  $$(".side [data-k]").forEach((el) => {
-    const k = el.dataset.k;
-    if (k === "bride.nick") el.textContent = W.bride.nick;
-    else if (k === "groom.nick") el.textContent = W.groom.nick;
-    else if (k === "dateShort") el.textContent = pad(main.getDate()) + "/" + pad(main.getMonth() + 1) + "/" + main.getFullYear();
-  });
-  if (guest) { const sg = $("#sideGuest"); sg.hidden = false; $("b", sg).textContent = guest; }
 
   // ============ 10. Animasi muncul per elemen ============
   const revealEls = $$("#details section ._mXnjA > .DF_utQ");
@@ -595,7 +514,6 @@ export function initInvitation(W, hooks) {
     phone.scrollTop = 0;
     window.scrollTo(0, 0);
     layout();
-    moveHighlight();
     buildIntroSection();
     buildCoupleCard();
     addGiftSparkles();

@@ -3,12 +3,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "./Toast";
-import { CheckinPassDialog } from "./CheckinPass";
 import { ATTENDANCE_OPTIONS, MESSAGE_MAX, NAME_MAX, attendanceLabel, validateWish, type Attendance } from "@/lib/wishValidation";
 
 // RSVP & ucapan di kartu renda (menggantikan widget RSVP template). Logikanya sama dengan WishesSection di
-// undangan-jorgi-estetik: link personal ?g=<id> mengunci nama, ucapan tersimpan lewat /api/wishes, dan tamu yang
-// memilih "Hadir" langsung mendapat QR check-in.
+// undangan-jorgi-estetik: link personal ?g=<id> mengunci nama dan ucapan tersimpan lewat /api/wishes.
 
 interface Wish {
   id: string;
@@ -68,8 +66,6 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
   const [error, setError] = useState<string | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [newWishId, setNewWishId] = useState<string | null>(null);
-  // QR check-in: dibuka dari tombol, atau otomatis setelah tamu mengirim "Hadir"
-  const [pass, setPass] = useState<{ intro?: string; name?: string } | null>(null);
   const { showToast } = useToast();
   const listRef = useRef<HTMLDivElement | null>(null);
 
@@ -164,8 +160,7 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
       listRef.current?.scrollTo({ top: 0, behavior: "smooth" });
       setMessage("");
       setFormOpen(false);
-      if (attendance === "hadir") setPass({ intro: "Terima kasih, ucapan Anda sudah terkirim! Kami menantikan kehadiran Anda.", name: name.trim() });
-      else showToast("Terima kasih, ucapan Anda sudah terkirim!");
+      showToast(attendance === "hadir" ? "Terima kasih! Kami menantikan kehadiran Anda." : "Terima kasih, ucapan Anda sudah terkirim!");
       setAttendance("");
     } catch {
       fail("Koneksi bermasalah, ucapan belum terkirim. Silakan coba lagi.");
@@ -195,11 +190,6 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
           Tidak Hadir
         </button>
       </div>
-      <div className="extra">
-        <button type="button" onClick={() => setPass({})}>
-          QR Check-in
-        </button>
-      </div>
       <p className="wall-title">
         <span className="rule" />
         Dinding Tamu
@@ -224,13 +214,13 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
 
       {formOpen &&
         createPortal(
-          <div role="dialog" aria-modal="true" aria-label="Ucapan & Doa" className="checkin-pass-backdrop" onClick={() => !submitting && setFormOpen(false)}>
-            <div className="checkin-pass-card rsvp-card" onClick={(e) => e.stopPropagation()}>
-              <button type="button" onClick={() => setFormOpen(false)} aria-label="Tutup" className="checkin-pass-close">
+          <div role="dialog" aria-modal="true" aria-label="Ucapan & Doa" className="dialog-backdrop" onClick={() => !submitting && setFormOpen(false)}>
+            <div className="dialog-card rsvp-card" onClick={(e) => e.stopPropagation()}>
+              <button type="button" onClick={() => setFormOpen(false)} aria-label="Tutup" className="dialog-close">
                 ✕
               </button>
               <p className="rsvp-card__title">Ucapan &amp; Doa</p>
-              <p className="checkin-pass-note">Kirimkan ucapan dan doa terbaik untuk kedua mempelai</p>
+              <p className="dialog-note">Kirimkan ucapan dan doa terbaik untuk kedua mempelai</p>
               <form onSubmit={handleSubmit} noValidate className="rsvp-form">
                 {nameLocked ? (
                   <div aria-label="Nama" className="rsvp-field rsvp-field--locked">
@@ -281,11 +271,11 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
                 <div className="rsvp-count">
                   {message.length}/{MESSAGE_MAX}
                 </div>
-                <button type="submit" disabled={submitting} aria-busy={submitting} className="checkin-pass-button">
+                <button type="submit" disabled={submitting} aria-busy={submitting} className="dialog-button">
                   {submitting ? "Mengirim..." : "Kirim Ucapan"}
                 </button>
                 {error && (
-                  <p role="alert" className="checkin-pass-error">
+                  <p role="alert" className="dialog-error">
                     Ucapan belum terkirim: {error}
                   </p>
                 )}
@@ -295,7 +285,6 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
           document.body,
         )}
 
-      {pass && <CheckinPassDialog intro={pass.intro} suggestedName={pass.name} onClose={() => setPass(null)} />}
     </div>
   );
 };

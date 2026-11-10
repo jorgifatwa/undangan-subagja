@@ -34,10 +34,9 @@ interface Guest {
   sentAt: string | null;
   attendance?: Attendance | null;
   respondedAt?: string | null;
-  // Added in this admin, took a QR from a group link, added at the reception desk, or a paper invitation added in the
-  // guest list; missing = "admin"
+  // Added in this admin, or a paper invitation added in the guest list; missing = "admin". ("self" / "desk" only on
+  // older data from the removed QR check-in.)
   source?: "admin" | "self" | "desk" | "paper";
-  checkedInAt?: string | null;
   groupId?: string | null;
 }
 
@@ -45,7 +44,7 @@ interface InviteSettings {
   template: string;
 }
 
-type Tab = "wishes" | "guests" | "invites" | "checkin";
+type Tab = "wishes" | "guests" | "invites";
 
 const api = async <T,>(url: string, init?: RequestInit): Promise<T> => {
   const res = await fetch(url, { cache: "no-store", ...init, headers: { "Content-Type": "application/json", ...init?.headers } });
@@ -1032,7 +1031,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
         api<{ guests: Guest[] }>("/api/admin/guests"),
         api<{ settings: InviteSettings; defaultTemplate: string }>("/api/admin/settings"),
       ]);
-      // Guests who took a QR from a group link or were added at the desk were never sent an invitation: Check-in tab
+      // Only guests added here get an invitation link (paper-invitation guests have none)
       setGuests(guestData.guests.filter((guest) => (guest.source ?? "admin") === "admin"));
       setSettings(settingsData.settings);
       setSavedTemplate(settingsData.settings.template);
@@ -1434,297 +1433,9 @@ const sourceLabel = (guest: Guest, groupNames: Map<string, string>) => {
   return guest.source === "desk" ? "Ditambah di lokasi" : "Undangan pribadi";
 };
 
-// QR check-in at the venue: the desk PIN, the desk page link and who has arrived (every person, whatever their source;
-// group invitations themselves are left out, their members are listed with the group's name)
-const CheckinTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
-  const confirm = useConfirm();
-  const [guests, setGuests] = useState<Guest[]>([]);
-  const [groupNames, setGroupNames] = useState<Map<string, string>>(new Map());
-  const [pinSet, setPinSet] = useState<boolean | null>(null);
-  const [pin, setPin] = useState("");
-  const [savingPin, setSavingPin] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [loaded, setLoaded] = useState(false);
-  const [notice, setNotice] = useState<{ kind: "error" | "success"; text: string } | null>(null);
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<"all" | "in" | "out">("all");
-  const [busyId, setBusyId] = useState<string | null>(null);
-
-  const handleError = useCallback(
-    (err: unknown) => {
-      if ((err as { status?: number }).status === 401) onAuthError();
-      else setNotice({ kind: "error", text: (err as Error).message });
-    },
-    [onAuthError],
-  );
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    try {
-      const [guestData, pinData] = await Promise.all([
-        api<{ guests: Guest[] }>("/api/admin/guests"),
-        api<{ pinSet: boolean }>("/api/admin/checkin-pin"),
-      ]);
-      setGroupNames(new Map(guestData.guests.filter(isGroupInvite).map((g) => [g.id, g.name])));
-      setGuests(guestData.guests.filter((g) => !isGroupInvite(g)));
-      setPinSet(pinData.pinSet);
-    } catch (err) {
-      handleError(err);
-    } finally {
-      setLoading(false);
-      setLoaded(true);
-    }
-  }, [handleError]);
-
-  useEffect(() => {
-    const initial = setTimeout(load, 0);
-    return () => clearTimeout(initial);
-  }, [load]);
-
-  const savePin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSavingPin(true);
-    try {
-      await api("/api/admin/checkin-pin", { method: "PUT", body: JSON.stringify({ pin }) });
-      setNotice({ kind: "success", text: pinSet ? "PIN panitia diganti. HP panitia perlu masuk lagi dengan PIN baru." : "PIN panitia disimpan." });
-      setPinSet(true);
-      setPin("");
-    } catch (err) {
-      handleError(err);
-    } finally {
-      setSavingPin(false);
-    }
-  };
-
-  const setCheckedIn = async (guest: Guest, checkedIn: boolean) => {
-    setBusyId(guest.id);
-    try {
-      const data = checkedIn
-        ? await api<{ guest: Guest }>("/api/checkin", { method: "POST", body: JSON.stringify({ id: guest.id }) })
-        : await api<{ guest: Guest }>(`/api/checkin?id=${encodeURIComponent(guest.id)}`, { method: "DELETE" });
-      setGuests((prev) => prev.map((g) => (g.id === guest.id ? { ...g, checkedInAt: data.guest.checkedInAt } : g)));
-    } catch (err) {
-      handleError(err);
-    } finally {
-      setBusyId(null);
-    }
-  };
-
-  const remove = (guest: Guest) =>
-    confirm({
-      title: "Hapus tamu?",
-      message: (
-        <>
-          <span className="font-semibold text-[#1f2a22]">{guest.name}</span> akan dihapus dari daftar, dan QR-nya tidak bisa dipakai
-          check-in lagi.
-        </>
-      ),
-      confirmLabel: "Hapus Tamu",
-      busyLabel: "Menghapus...",
-      action: async () => {
-        try {
-          await api(`/api/admin/guests?id=${encodeURIComponent(guest.id)}`, { method: "DELETE" });
-          setGuests((prev) => prev.filter((g) => g.id !== guest.id));
-        } catch (err) {
-          handleError(err);
-        }
-      },
-    });
-
-  const deskUrl = `${siteUrl()}/checkin`;
-
-  // Arrived guests first, most recent on top; then the rest in list order
-  const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return guests
-      .filter((g) => (filter === "all" || (filter === "in" ? g.checkedInAt : !g.checkedInAt)) && (!q || g.name.toLowerCase().includes(q)))
-      .sort((a, b) => (b.checkedInAt ?? "").localeCompare(a.checkedInAt ?? ""));
-  }, [guests, query, filter]);
-  const pagination = usePagination(visible);
-
-  const exportCsv = () => {
-    const escape = (value: string) => `"${value.replace(/"/g, '""')}"`;
-    const rows = [
-      ["Nama", "Asal", "Check-in"],
-      ...visible.map((g) => [g.name, sourceLabel(g, groupNames), g.checkedInAt ? formatDate(g.checkedInAt) : "-"]),
-    ];
-    const blob = new Blob(["\ufeff" + rows.map((row) => row.map(escape).join(",")).join("\n")], { type: "text/csv;charset=utf-8" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "check-in-annisa-rizki.csv";
-    link.click();
-    URL.revokeObjectURL(link.href);
-  };
-
-  const checkedIn = guests.filter((g) => g.checkedInAt).length;
-
-  return (
-    <div>
-      <div className="grid grid-cols-4 gap-4">
-        <StatCard label="Total Tamu" value={guests.length} loading={!loaded} />
-        <StatCard label="Sudah Check-in" value={checkedIn} loading={!loaded} tone="text-[#1f8f4e]" />
-        <StatCard label="Dari Link Grup/Umum" value={guests.filter((g) => g.source === "self").length} loading={!loaded} tone="text-[#3d5a80]" />
-        <StatCard label="Ditambah di Lokasi" value={guests.filter((g) => g.source === "desk").length} loading={!loaded} tone="text-[#a06a12]" />
-      </div>
-
-      {notice && (
-        <div
-          className={`mt-4 flex items-start justify-between rounded-lg p-3 text-sm ${
-            notice.kind === "error" ? "bg-[#fdf1f1] text-[#9b1c1c]" : "bg-[#e9f5ec] text-[#1f6b3a]"
-          }`}
-        >
-          {notice.text}
-          <button onClick={() => setNotice(null)} className="ml-4 opacity-60 hover:opacity-100" aria-label="Tutup">
-            ✕
-          </button>
-        </div>
-      )}
-
-      <div className="mt-6 grid grid-cols-[1fr_380px] gap-6">
-        <div>
-          <div className="flex items-center gap-3">
-            <input
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                pagination.setPage(1);
-              }}
-              placeholder="Cari nama..."
-              className="w-72 rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]"
-            />
-            <select
-              value={filter}
-              onChange={(e) => {
-                setFilter(e.target.value as typeof filter);
-                pagination.setPage(1);
-              }}
-              className="rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]"
-            >
-              <option value="all">Semua tamu</option>
-              <option value="in">Sudah check-in</option>
-              <option value="out">Belum check-in</option>
-            </select>
-            <div className="ml-auto flex gap-2">
-              <Button onClick={exportCsv} disabled={visible.length === 0}>
-                Ekspor CSV
-              </Button>
-              <Button onClick={load} disabled={loading}>
-                {loading && <Spinner />}
-                {loading ? "Memuat..." : "Muat Ulang"}
-              </Button>
-            </div>
-          </div>
-
-          <div className="mt-3 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
-            <table className={`w-full text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
-              {loading && loaded && <LoadingCaption />}
-              <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
-                <tr>
-                  <th className="px-4 py-3 font-medium">Nama</th>
-                  <th className="w-44 px-4 py-3 font-medium">Asal</th>
-                  <th className="w-44 px-4 py-3 font-medium">Check-in</th>
-                  <th className="w-[200px] px-4 py-3" />
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#efe9de] text-[#1f2a22]">
-                {!loaded && <SkeletonRows columns={["w-36", "w-24", "w-24", "ml-auto w-32"]} />}
-                {pagination.pageItems.map((guest) => (
-                  <tr key={guest.id}>
-                    <td className="px-4 py-3 font-medium [overflow-wrap:anywhere]">{guest.name}</td>
-                    <td className="px-4 py-3 text-[#3d463f]">{sourceLabel(guest, groupNames)}</td>
-                    <td className="px-4 py-3">
-                      {guest.checkedInAt ? (
-                        <span className="rounded-full bg-[#e6f4ea] px-2.5 py-0.5 text-xs font-medium text-[#1f6b3a]">{formatDate(guest.checkedInAt)}</span>
-                      ) : (
-                        <span className="text-xs text-[#b3ab9c]">Belum datang</span>
-                      )}
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex justify-end gap-2">
-                        <Button
-                          onClick={() => setCheckedIn(guest, !guest.checkedInAt)}
-                          disabled={busyId === guest.id}
-                          variant={guest.checkedInAt ? "secondary" : "primary"}
-                          className="px-2.5 py-1.5 text-xs"
-                        >
-                          {guest.checkedInAt ? "Batalkan" : "Check-in"}
-                        </Button>
-                        {(guest.source ?? "admin") !== "admin" && (
-                          <Button variant="danger" onClick={() => remove(guest)} className="px-2.5 py-1.5 text-xs">
-                            Hapus
-                          </Button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {loaded && !loading && visible.length === 0 && (
-                  <tr>
-                    <td colSpan={4} className="px-4 py-12 text-center text-[#8a8374]">
-                      {guests.length === 0 ? "Belum ada tamu." : "Tidak ada tamu yang cocok."}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            {loaded && <Pagination {...pagination} />}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <div className="rounded-xl border border-[#e5dfd3] bg-white p-5">
-            <h2 className="text-base font-semibold text-[#1f2a22]">Halaman Penerima Tamu</h2>
-            <p className="mt-1 text-xs leading-relaxed text-[#8a8374]">
-              Buka link ini di HP panitia pada hari acara, lalu masuk dengan PIN di bawah. Panitia bisa scan QR tamu, mencari nama tamu,
-              dan menambah tamu yang belum ada di daftar.
-            </p>
-            <div className="mt-3 truncate rounded-lg bg-[#faf8f4] px-3 py-2 font-mono text-sm text-[#24412f]">{deskUrl}</div>
-            <div className="mt-2 flex gap-2">
-              <CopyButton text={deskUrl} label="Salin Link" className="w-[104px]" />
-              <a
-                href="/checkin"
-                target="_blank"
-                className="inline-flex items-center rounded-lg px-3.5 py-2 text-sm font-medium text-[#24412f] underline-offset-4 hover:underline"
-              >
-                Buka ↗
-              </a>
-            </div>
-          </div>
-
-          <form onSubmit={savePin} className="rounded-xl border border-[#e5dfd3] bg-white p-5">
-            <h2 className="text-base font-semibold text-[#1f2a22]">PIN Panitia</h2>
-            <p className="mt-1 text-xs leading-relaxed text-[#8a8374]">
-              {pinSet === null
-                ? "Memuat..."
-                : pinSet
-                  ? "PIN sudah diatur. Mengganti PIN akan mengeluarkan semua HP panitia yang sedang masuk."
-                  : "Belum ada PIN. Atur 6 angka yang akan dibagikan ke semua panitia."}
-            </p>
-            <div className="mt-3 flex gap-2">
-              <input
-                value={pin}
-                onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                inputMode="numeric"
-                placeholder="6 angka"
-                aria-label="PIN panitia"
-                className="w-40 rounded-lg border border-[#d9d2c5] px-3 py-2 font-mono text-sm tracking-[0.3em] outline-none focus:border-[#24412f]"
-              />
-              <Button type="submit" variant="primary" disabled={pin.length !== 6 || savingPin}>
-                {savingPin && <Spinner />}
-                {pinSet ? "Ganti PIN" : "Simpan PIN"}
-              </Button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Everyone on the list in one table: personal and group invitations (whether sent), the people who took a QR from a
-// group or the general link, the guests added at the desk, their RSVP and their check-in. Guests with a paper
+// Everyone on the list in one table: personal and group invitations (whether sent) and their RSVP. Guests with a paper
 // invitation (no link, e.g. the parents' guests) are added here, optionally under a group (existing or new); entries
-// can be edited and deleted here; sending and checking in stay in the Kirim Undangan and Check-in tabs.
+// can be edited and deleted here; sending stays in the Kirim Undangan tab.
 type GuestKind = "pribadi" | "grup" | "anggota" | "umum" | "lokasi" | "kertas";
 
 interface GuestListRow {
@@ -1734,8 +1445,8 @@ interface GuestListRow {
   attendance: Attendance | null;
   // RSVP stored on the guest (personal link), or read from a wish sent under their name (group / general link)
   rsvpFromWish: boolean;
-  // Group invitations: how many people took a QR from it, and how many of them arrived
-  members?: { total: number; arrived: number };
+  // Group invitations: how many guests are filed under it
+  members?: { total: number };
 }
 
 const STATUS_FILTERS = [
@@ -1743,8 +1454,6 @@ const STATUS_FILTERS = [
   ["hadir", "Konfirmasi hadir"],
   ["tidak_hadir", "Konfirmasi tidak hadir"],
   ["belum_konfirmasi", "Belum konfirmasi"],
-  ["datang", "Sudah check-in"],
-  ["belum_datang", "Belum check-in"],
   ["belum_dikirim", "Undangan belum dikirim"],
 ] as const;
 
@@ -1752,10 +1461,7 @@ const KIND_FILTERS = [
   ["all", "Semua asal"],
   ["pribadi", "Undangan pribadi"],
   ["grup", "Undangan grup"],
-  ["anggota", "Anggota grup"],
   ["kertas", "Undangan kertas"],
-  ["umum", "Link umum"],
-  ["lokasi", "Ditambah di lokasi"],
 ] as const;
 
 const sameName = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
@@ -1775,7 +1481,7 @@ const buildGuestList = (guests: Guest[], wishes: Wish[]): GuestListRow[] => {
           origin: "Undangan grup",
           attendance: null,
           rsvpFromWish: false,
-          members: { total: members.length, arrived: members.filter((m) => m.checkedInAt).length },
+          members: { total: members.length },
         };
       }
       const kind: GuestKind =
@@ -1815,10 +1521,6 @@ const matchesStatus = (row: GuestListRow, status: (typeof STATUS_FILTERS)[number
       return row.attendance === status;
     case "belum_konfirmasi":
       return person && !row.attendance;
-    case "datang":
-      return person && !!row.guest.checkedInAt;
-    case "belum_datang":
-      return person && !row.guest.checkedInAt;
     case "belum_dikirim":
       return (row.kind === "pribadi" || row.kind === "grup") && !row.guest.sentAt;
   }
@@ -1843,7 +1545,7 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
       if (!next.delete(id)) next.add(id);
       return next;
     });
-  // Everyone filed under the group (QR taken from its link, or paper invitations added to it), whatever the filters
+  // Everyone filed under the group (paper invitations added to it), whatever the filters
   const membersOf = (groupId: string) => rows.filter((row) => row.kind !== "grup" && row.guest.groupId === groupId);
   // The add / edit window: a new paper-invitation guest, or the entry being edited
   const [form, setForm] = useState<{ mode: "add" } | { mode: "edit"; guest: Guest } | null>(null);
@@ -1893,14 +1595,12 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
           <>
             Undangan grup <span className="font-semibold text-[#1f2a22]">{row.guest.name}</span> akan dihapus dan link grupnya tidak
             terhubung lagi ke grup ini.
-            {row.members && row.members.total > 0
-              ? ` ${row.members.total} anggotanya tetap ada di daftar dan tetap bisa check-in.`
-              : ""}
+            {row.members && row.members.total > 0 ? ` ${row.members.total} anggotanya tetap ada di daftar.` : ""}
           </>
         ) : (
           <>
-            <span className="font-semibold text-[#1f2a22]">{row.guest.name}</span> akan dihapus dari daftar, dan QR-nya tidak bisa
-            dipakai check-in lagi.{row.kind === "pribadi" ? " Link undangan pribadinya tidak terhubung lagi ke daftar tamu." : ""}{" "}
+            <span className="font-semibold text-[#1f2a22]">{row.guest.name}</span> akan dihapus dari daftar.
+            {row.kind === "pribadi" ? " Link undangan pribadinya tidak terhubung lagi ke daftar tamu." : ""}{" "}
             Ucapan yang sudah dikirim tetap ada.
           </>
         ),
@@ -1920,20 +1620,17 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
   const people = rows.filter((row) => row.kind !== "grup");
   const invitationText = (row: GuestListRow) =>
     row.kind === "pribadi" || row.kind === "grup" ? (row.guest.sentAt ? `Terkirim ${formatDate(row.guest.sentAt)}` : "Belum dikirim") : "-";
-  const checkinText = (row: GuestListRow) =>
-    row.members ? `${row.members.arrived}/${row.members.total} anggota` : row.guest.checkedInAt ? formatDate(row.guest.checkedInAt) : "Belum datang";
 
   const exportCsv = () => {
     const escape = (value: string) => `"${value.replace(/"/g, '""')}"`;
     const csvRows = [
-      ["Nama", "Asal", "WhatsApp", "Undangan", "Konfirmasi", "Check-in"],
+      ["Nama", "Asal", "WhatsApp", "Undangan", "Konfirmasi"],
       ...visible.map((row) => [
         row.guest.name,
         row.members ? `${row.origin} (${row.members.total} anggota)` : row.origin,
         row.guest.phone ? formatPhone(row.guest.phone) : "-",
         invitationText(row),
         row.attendance ? `${attendanceLabel(row.attendance)}${row.rsvpFromWish ? " (dari ucapan)" : ""}` : "-",
-        checkinText(row),
       ]),
     ];
     const blob = new Blob(["﻿" + csvRows.map((row) => row.map(escape).join(",")).join("\n")], { type: "text/csv;charset=utf-8" });
@@ -2001,15 +1698,6 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
           <span className="text-xs text-[#b3ab9c]">{row.kind === "grup" ? "-" : "Belum"}</span>
         )}
       </td>
-      <td className="px-4 py-3">
-        {row.members ? (
-          <span className="text-xs text-[#3d463f]">{checkinText(row)}</span>
-        ) : row.guest.checkedInAt ? (
-          <span className="rounded-full bg-[#e6f4ea] px-2.5 py-0.5 text-xs font-medium text-[#1f6b3a]">{formatDate(row.guest.checkedInAt)}</span>
-        ) : (
-          <span className="text-xs text-[#b3ab9c]">Belum datang</span>
-        )}
-      </td>
       <td className="px-4 py-3 text-right">
         <div className="flex justify-end gap-1.5">
           <Button onClick={() => setForm({ mode: "edit", guest: row.guest })} className="px-2.5 py-1.5 text-xs">
@@ -2025,12 +1713,11 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
 
   return (
     <div>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         <StatCard label="Total Tamu" value={people.length} loading={!loaded} />
         <StatCard label="Undangan Grup" value={rows.length - people.length} loading={!loaded} tone="text-[#3d5a80]" />
         <StatCard label="Konfirmasi Hadir" value={people.filter((r) => r.attendance === "hadir").length} loading={!loaded} tone="text-[#1f8f4e]" />
         <StatCard label="Tidak Hadir" value={people.filter((r) => r.attendance === "tidak_hadir").length} loading={!loaded} tone="text-[#9b1c1c]" />
-        <StatCard label="Sudah Check-in" value={people.filter((r) => r.guest.checkedInAt).length} loading={!loaded} tone="text-[#a06a12]" />
       </div>
 
       <div className="mt-6 flex items-center gap-3">
@@ -2099,12 +1786,11 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
               <th className="w-40 px-4 py-3 font-medium">WhatsApp</th>
               <th className="w-44 px-4 py-3 font-medium">Undangan</th>
               <th className="w-40 px-4 py-3 font-medium">Konfirmasi</th>
-              <th className="w-40 px-4 py-3 font-medium">Check-in</th>
               <th className="w-36 px-4 py-3" />
             </tr>
           </thead>
           <tbody className="divide-y divide-[#efe9de] text-[#1f2a22]">
-            {!loaded && <SkeletonRows columns={["w-36", "w-28", "w-24", "w-24", "w-16", "w-20", "ml-auto w-24"]} />}
+            {!loaded && <SkeletonRows columns={["w-36", "w-28", "w-24", "w-24", "w-16", "ml-auto w-24"]} />}
             {pagination.pageItems.map((row) => (
               <React.Fragment key={row.guest.id}>
                 {renderRow(row)}
@@ -2113,7 +1799,7 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
             ))}
             {loaded && !loading && visible.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-12 text-center text-[#8a8374]">
+                <td colSpan={6} className="px-4 py-12 text-center text-[#8a8374]">
                   {rows.length === 0 ? "Belum ada tamu." : "Tidak ada tamu yang cocok."}
                 </td>
               </tr>
@@ -2229,8 +1915,7 @@ const GuestFormModal: React.FC<{
         </h2>
         {!editing && (
           <p className="mt-1 text-sm leading-relaxed text-[#5c645d]">
-            Untuk tamu yang hanya menerima undangan kertas (misalnya tamu orang tua). Mereka masuk daftar tamu dan bisa dicari
-            namanya oleh penerima tamu saat check-in.
+            Untuk tamu yang hanya menerima undangan kertas (misalnya tamu orang tua), supaya tetap tercatat di daftar tamu.
           </p>
         )}
 
@@ -2383,7 +2068,6 @@ export default function AdminPage() {
                 ["wishes", "Ucapan"],
                 ["guests", "Daftar Tamu"],
                 ["invites", "Kirim Undangan"],
-                ["checkin", "Check-in"],
               ] as const
             ).map(([value, label]) => (
               <button
@@ -2417,10 +2101,8 @@ export default function AdminPage() {
             <WishesTab onAuthError={handleAuthError} />
           ) : tab === "guests" ? (
             <GuestListTab onAuthError={handleAuthError} />
-          ) : tab === "invites" ? (
-            <InvitesTab onAuthError={handleAuthError} />
           ) : (
-            <CheckinTab onAuthError={handleAuthError} />
+            <InvitesTab onAuthError={handleAuthError} />
           )}
         </ConfirmProvider>
       </main>

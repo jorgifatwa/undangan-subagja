@@ -4,8 +4,7 @@ Undangan digital (Next.js 16) memakai tampilan template Canva "Green Kids". Hala
 
 - `/`: cover, lalu isi undangan setelah "Buka Undangan" (link personal: `/?to=Nama Tamu&g=<id>`)
 - `/details`: isi undangan tanpa cover
-- `/admin`: kelola ucapan, daftar tamu, kirim undangan WhatsApp, check-in (butuh password)
-- `/checkin`: halaman penerima tamu untuk panitia (scan QR, masuk dengan PIN)
+- `/admin`: kelola ucapan, daftar tamu, dan kirim undangan WhatsApp (butuh password)
 
 ## Mengganti isi undangan
 
@@ -16,7 +15,7 @@ Undangan digital (Next.js 16) memakai tampilan template Canva "Green Kids". Hala
 | Template pesan WhatsApp default | `src/lib/guestsStore.ts` (bisa juga diubah dari `/admin`) |
 | Judul & deskripsi pratinjau link | `src/app/layout.tsx`, gambar: `src/app/opengraph-image.jpg` |
 | Foto (cover, galeri, photo strip) | `public/assets/img/` |
-| Font komersial | lihat `public/assets/fonts/README.md` |
+| Font | lihat `public/assets/fonts/README.md` |
 
 ## Menjalankan di lokal
 
@@ -52,8 +51,8 @@ Tabel database dan akun admin pertama dibuat otomatis saat request pertama. Untu
 | Lokasi | Isi |
 | --- | --- |
 | `src/invitation/` | Halaman undangan: markup template (`index.html` → `markup.generated.ts` lewat `node scripts/build-markup.mjs`), runtime `main.js`, `config.ts` |
-| `src/components/RsvpWidget.tsx` | RSVP & ucapan di kartu renda (Attending / Not Attending, Guest Wall, QR check-in) |
-| `src/app/api/` | API ucapan, QR tamu, penerima tamu, admin |
+| `src/components/RsvpWidget.tsx` | RSVP & ucapan di kartu renda (Hadir / Tidak Hadir, Dinding Tamu) |
+| `src/app/api/` | API ucapan dan admin |
 | `src/lib/` | Validasi, autentikasi admin, penyimpanan (Postgres / file JSON) |
 | `public/css/template.css` | Style template hasil render Canva (jangan diedit manual) |
 | `public/css/style.css` | Layout workspace desktop, widget, photo strip |

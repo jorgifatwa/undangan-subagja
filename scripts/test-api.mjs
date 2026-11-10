@@ -1,9 +1,8 @@
-// Bug-hunting API test cases for every feature (wishes, guest list, settings, logins, desk PIN, QR check-in, calendar
-// file, pages). Each case states the behaviour we want; FAIL lines are bugs. Rate limits are per IP, so every case
+// Bug-hunting API test cases for every feature (wishes, guest list, settings, logins, calendar file, pages). Each case states the behaviour we want; FAIL lines are bugs. Rate limits are per IP, so every case
 // sends its own X-Forwarded-For.
 //
-// Runs only against a local dev server (`pnpm run dev`): it adds test guests and wishes and sets the desk PIN to 135790,
-// so back up data/ first and restore it afterwards.
+// Runs only against a local dev server (`pnpm run dev`): it adds test guests and wishes, so back up data/ first and
+// restore it afterwards.
 // Usage: pnpm test:api   (or: node scripts/test-api.mjs [base] [admin user] [admin password]; defaults from .env.local)
 import { existsSync } from "node:fs";
 
@@ -18,7 +17,7 @@ if (!/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(base)) {
 
 let ipCounter = 0;
 const freshIp = () => `10.9.${Math.floor(++ipCounter / 250)}.${ipCounter % 250}`;
-const jars = { admin: "", desk: "" };
+const jars = { admin: "" };
 const call = async (path, { method = "GET", body, raw, as, ip = freshIp(), headers = {} } = {}) => {
   const res = await fetch(base + path, {
     method,
@@ -47,12 +46,9 @@ const check = (name, ok, detail = "") => {
 };
 const show = (r) => `${r.status} ${r.text.slice(0, 160)}`;
 
-// ---- setup: admin + desk sessions, test guests
+// ---- setup: admin session, test guests
 let r = await call("/api/admin/login", { method: "POST", body: { username: adminUser, password: adminPassword }, as: "admin" });
 check("admin login", r.status === 200, show(r));
-await call("/api/admin/checkin-pin", { method: "PUT", body: { pin: "135790" }, as: "admin" });
-r = await call("/api/checkin/session", { method: "POST", body: { pin: "135790" }, as: "desk" });
-check("desk login", r.status === 200, show(r));
 r = await call("/api/admin/guests", {
   method: "POST",
   as: "admin",
@@ -67,7 +63,7 @@ r = await call("/api/admin/guests", {
 check("add test guests", r.status === 201, show(r));
 const [ahmad, group, longName] = r.json?.guests ?? [];
 
-// ---- authorization: every admin / desk endpoint refuses anonymous requests
+// ---- authorization: every admin endpoint refuses anonymous requests
 for (const [method, path] of [
   ["GET", "/api/admin/guests"],
   ["POST", "/api/admin/guests"],
@@ -77,21 +73,10 @@ for (const [method, path] of [
   ["PUT", "/api/admin/settings"],
   ["GET", "/api/admin/wishes"],
   ["DELETE", "/api/admin/wishes?id=x"],
-  ["GET", "/api/admin/checkin-pin"],
-  ["PUT", "/api/admin/checkin-pin"],
-  ["GET", "/api/checkin"],
-  ["POST", "/api/checkin"],
-  ["DELETE", "/api/checkin?id=x"],
 ]) {
   r = await call(path, { method, body: method === "GET" || method === "DELETE" ? undefined : {} });
   check(`anonymous ${method} ${path} -> 401`, r.status === 401, show(r));
 }
-// The desk session must not open admin endpoints
-r = await call("/api/admin/guests", { as: "desk" });
-check("desk session cannot read the admin guest list", r.status === 401, show(r));
-// A forged desk cookie
-r = await call("/api/checkin", { headers: { Cookie: "checkin_session=9999999999.deadbeef" } });
-check("forged desk cookie -> 401", r.status === 401, show(r));
 
 // ---- wishes
 r = await call("/api/wishes", { method: "POST", raw: "{not json" });
@@ -175,70 +160,13 @@ check("settings: template without {link} -> 400", r.status === 400, show(r));
 r = await call("/api/admin/settings", { method: "PUT", as: "admin", body: { template: "x".repeat(4001) + "{link}" } });
 check("settings: template over 4000 -> 400", r.status === 400, show(r));
 
-// ---- desk PIN
-r = await call("/api/admin/checkin-pin", { method: "PUT", as: "admin", body: { pin: 135790 } });
-check("pin: number instead of string -> 400", r.status === 400, show(r));
-r = await call("/api/admin/checkin-pin", { method: "PUT", as: "admin", body: { pin: "1234567" } });
-check("pin: 7 digits -> 400", r.status === 400, show(r));
-// Several committee phones on one venue Wi-Fi (one IP) logging in with the right PIN must never be locked out
-const venueIp = freshIp();
-let lockedOut = false;
-for (let i = 0; i < 12; i++) {
-  r = await call("/api/checkin/session", { method: "POST", ip: venueIp, body: { pin: "135790" } });
-  if (r.status !== 200) lockedOut = true;
-}
-check("pin: 12 correct logins from one IP are all accepted", !lockedOut, show(r));
-// ...while guessing is still capped
-const guessIp = freshIp();
-let capped = false;
-for (let i = 0; i < 15; i++) {
-  r = await call("/api/checkin/session", { method: "POST", ip: guessIp, body: { pin: String(100000 + i) } });
-  if (r.status === 429) capped = true;
-}
-check("pin: guessing from one IP gets capped", capped, show(r));
-r = await call("/api/checkin/session", { method: "POST", ip: guessIp, body: { pin: "135790" } });
-check("pin: once capped, even the right PIN waits", r.status === 429, show(r));
-
-// ---- QR pass + desk
-r = await call("/api/pass", { method: "POST", body: { name: "   " } });
-check("pass: blank name -> 400", r.status === 400, show(r));
-r = await call("/api/pass", { method: "POST", body: { name: "x".repeat(81) } });
-check("pass: 81 chars -> 400", r.status === 400, show(r));
-r = await call("/api/pass", { method: "POST", raw: "[]" });
-check("pass: array body -> 400", r.status === 400, show(r));
-
-// Ten phones submitting the same name in the same group at the same moment: exactly one may get it
-const sameName = await Promise.all(Array.from({ length: 10 }, () => call("/api/pass", { method: "POST", body: { name: "Rani Balapan", group: group?.id } })));
-const created = sameName.filter((x) => x.status === 201).length;
-check("pass: same name sent 10x at once -> exactly one created", created === 1, `created ${created}: ${sameName.map((x) => x.status).join(",")}`);
-
-r = await call("/api/pass", { method: "POST", body: { name: "Tamu QR Uji", group: group?.id } });
-const pass = r.json;
-// Ten desk phones scanning the same QR at once: one "check-in berhasil", the rest "sudah check-in"
-const scans = await Promise.all(Array.from({ length: 10 }, () => call("/api/checkin", { method: "POST", as: "desk", body: { id: pass?.id } })));
-const fresh = scans.filter((x) => x.json?.already === false).length;
-check("desk: same QR scanned 10x at once -> one fresh check-in", fresh === 1, `fresh ${fresh}`);
-r = await call("/api/checkin", { method: "POST", as: "desk", body: { id: group?.id } });
-check("desk: scanning the group invitation itself -> 400", r.status === 400, show(r));
-r = await call("/api/checkin", { method: "POST", as: "desk", body: { id: 12345 } });
-check("desk: id not a string -> 400", r.status === 400, show(r));
-r = await call("/api/checkin?id=tidak-ada", { method: "DELETE", as: "desk" });
-check("desk: undo unknown -> 404", r.status === 404, show(r));
-r = await call("/api/checkin", { method: "POST", as: "desk", body: { name: "Grup Uji Coba" } });
-check("desk: walk-in may share a group invitation's name", r.status === 201, show(r));
-const walkIns = await Promise.all(Array.from({ length: 6 }, () => call("/api/checkin", { method: "POST", as: "desk", body: { name: "Tamu Dadakan Sama" } })));
-check("desk: same walk-in added from 6 phones at once -> one entry", walkIns.filter((x) => x.status === 201).length === 1, walkIns.map((x) => x.status).join(","));
-r = await call("/api/checkin", { as: "desk" });
-check("desk list excludes group invitations", r.status === 200 && !r.json.guests.some((g) => g.id === group?.id), show(r));
-check("desk list carries the group name", r.json?.guests.find((g) => g.id === pass?.id)?.group === "Grup Uji Coba", show(r));
-
 // ---- calendar file
 r = await call("/kalender.ics");
 check("ics: text/calendar", (r.headers.get("content-type") ?? "").startsWith("text/calendar"), r.headers.get("content-type"));
 check("ics: CRLF lines, folded at 75", r.text.includes("\r\n") && r.text.split("\r\n").every((line) => Buffer.byteLength(line) <= 75), "");
 
 // ---- pages
-for (const path of ["/", "/details", "/admin", "/checkin", "/?to=%3Cscript%3Ealert(1)%3C%2Fscript%3E&g=x"]) {
+for (const path of ["/", "/details", "/admin", "/?to=%3Cscript%3Ealert(1)%3C%2Fscript%3E&g=x"]) {
   r = await call(path, { headers: { Accept: "text/html" } });
   check(`page ${path} -> 200`, r.status === 200, String(r.status));
 }
