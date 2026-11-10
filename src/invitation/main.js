@@ -277,7 +277,8 @@ export function initInvitation(W, hooks) {
     (p.instagram ? '<a class="cc-ig" href="https://instagram.com/' + encodeURIComponent(p.instagram) + '" target="_blank" rel="noopener">@' + esc(p.instagram) + "</a>" : "");
 
   // Posisi dalam px desain 430 (relatif terhadap section)
-  const CC = { card: { l: 44, t: 30, w: 300, h: 452 }, eventTop: 548 };
+  // kartu mempelai satu layar (850px); kalender mulai setelahnya
+  const CC = { card: { l: 30, t: 58, w: 340, h: 704 }, eventTop: 866 };
   const TPL = "/assets/template/";
   let coupleEls = [];
 
@@ -285,6 +286,7 @@ export function initInvitation(W, hooks) {
     if (!coupleBox || coupleBox.querySelector(".cc-card")) return;
     const z = zoomOf();
     const section = coupleBox.closest("section");
+    section.classList.add("couple-section");
     const base = coupleBox.getBoundingClientRect();
     const H = section.getBoundingClientRect().height / z;
     const items = $$(":scope > .DF_utQ", coupleBox).map((el) => {
@@ -300,8 +302,10 @@ export function initInvitation(W, hooks) {
     const shift = CC.eventTop - oldEventTop;
 
     // sembunyikan kartu asli + buket anthurium merah
+    $$('img[src*="1d3be2d6"]', coupleBox).forEach((im) => { (im.closest("._mXnjA > .DF_utQ") || im).style.display = "none"; });
+    // semua elemen template selain kartu acara & latar disembunyikan (termasuk sisa buket yang menyeberang batas)
     items.forEach((i) => {
-      if ((i.t >= lace.t - 4 && i.b <= lace.b + 4 && i.h < H * 0.8) || isAnthurium(i)) i.el.style.display = "none";
+      if (!eventItems.includes(i) && i.h < H * 0.8) i.el.style.display = "none";
     });
     // geser kartu acara ke bawah & tambah tinggi section
     eventItems.forEach((i) => { i.el.style.marginTop = shift + "px"; });
@@ -329,7 +333,7 @@ export function initInvitation(W, hooks) {
       "</div>"
     );
     if (W.photos.strip && W.photos.strip.length) {
-      add('<div class="photo-strip" style="left:282px;top:292px">' +
+      add('<div class="photo-strip" style="left:284px;top:604px">' +
         W.photos.strip.map((src) => '<div class="photo-strip__img"><img src="' + src + '" alt="" loading="lazy"></div>').join("") +
         "</div>");
     }
@@ -350,7 +354,7 @@ export function initInvitation(W, hooks) {
       const span = $("span", h);
       span.style.fontSize = "";
       const box = h.clientWidth, need = span.scrollWidth;
-      if (box && need > box) span.style.fontSize = (box / need) * 0.96 + "em";
+      if (box && need > box * 0.88) span.style.fontSize = ((box * 0.88) / need) + "em";
     });
   }
 
