@@ -117,54 +117,82 @@ html body.locked { overflow: hidden !important; }
 .w-copy button.done { background: #2d5a33; }
 .w-copy svg { width: 12px; height: 12px; }
 
-/* RSVP (meniru widget RSVP di template). Ukuran dalam px desain 430 (diskalakan oleh fitWidgets). */
+/* RSVP gaya klasik kertas krem. Ukuran dalam px visual slot (258 x 226, diskalakan oleh fitWidgets). */
 .w-rsvp-root { position: absolute; inset: 0; }
 .w-rsvp {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  padding: 12px 12px 8px; box-sizing: border-box;
-  background: linear-gradient(135deg, #e9e1d6, #f7f2ec 55%, #e6ddd1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1f1f1f;
+  --maroon: #8b1a2b; --ink: #3a2814; --soft: #7a6450;
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: stretch;
+  padding: 9px 12px 6px; box-sizing: border-box; text-align: center;
+  background: #fbf6ee;
+  font-family: YACgEXvxf8Q_0, Lora, Georgia, serif; color: var(--ink);
 }
-.w-rsvp h3 { margin: 0 0 6px; text-align: center; font: 700 17px/1.2 YACgEXvxf8Q_0, Georgia, serif; }
-.w-rsvp .date { margin: 0 0 6px; font-size: 10px; }
-.w-rsvp .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 5px; }
+.w-rsvp p { margin: 0; }
+.w-rsvp h3 { margin: 0; font: 400 22px/1.15 YAGL3qRU9qw_0, 'Great Vibes', cursive; color: #2b1d12; white-space: nowrap; }
+.w-rsvp .date { margin-top: 1px; font-style: italic; font-size: 7.6px; color: var(--soft); }
+.w-rsvp .ornament { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 3px 0 2px; font-size: 8px; color: var(--maroon); }
+.w-rsvp .ornament span { width: 46px; border-top: 1px dotted rgba(139, 26, 43, .55); }
+.w-rsvp .ask { font-size: 6.6px; color: var(--soft); margin-bottom: 4px; }
+.w-rsvp .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 4px; }
 .w-rsvp .choice button {
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
-  padding: 7px 4px; border: 1px solid transparent; border-radius: 5px; cursor: pointer;
-  background: rgba(255, 255, 255, .6); font-family: inherit; font-size: 7.5px; font-weight: 600; line-height: 1.1; color: #333;
-  transition: background .2s, border-color .2s;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 5px 4px; border: 1px solid var(--maroon); border-radius: 99px; cursor: pointer;
+  background: transparent; color: var(--maroon);
+  font-family: inherit; font-size: 8px; font-weight: 600; letter-spacing: .03em; line-height: 1.1;
+  transition: background .2s, color .2s;
 }
-.w-rsvp .choice button:hover { background: #fff; border-color: rgba(0, 0, 0, .25); }
-.w-rsvp .choice svg { width: 13px; height: 13px; }
-.w-rsvp .extra { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 4px; font-size: 7px; color: #666; }
+.w-rsvp .choice button:hover, .w-rsvp .choice button:focus-visible { background: var(--maroon); color: #fbf6ee; outline: none; }
+.w-rsvp .choice svg { width: 9px; height: 9px; }
+.w-rsvp .extra { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 3px; font-size: 6.6px; color: var(--soft); }
 .w-rsvp .extra button, .w-rsvp .extra a {
-  border: 0; padding: 0; background: none; cursor: pointer; font-family: inherit; font-size: 7.5px; font-weight: 600; line-height: 1.2; color: #1f3a26; text-decoration: underline; text-underline-offset: 2px;
+  border: 0; padding: 0; background: none; cursor: pointer;
+  font-family: inherit; font-size: 6.8px; font-style: italic; line-height: 1.2; color: var(--ink);
+  text-decoration: underline; text-decoration-color: rgba(139, 26, 43, .5); text-underline-offset: 2px;
 }
-.w-rsvp .wall-title { margin: 2px 0 4px; font-size: 7.5px; font-weight: 700; }
-.w-rsvp .wall-title span { font-weight: 400; color: #666; }
-.w-rsvp .wall { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 6px; padding-right: 2px; scrollbar-width: thin; }
-.w-rsvp .msg { display: flex; gap: 6px; align-items: flex-start; }
-.w-rsvp .ava { flex: none; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: rgba(0, 0, 0, .07); font-size: 6.5px; font-weight: 600; }
-.w-rsvp .msg b { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; font-size: 7px; overflow-wrap: anywhere; }
-.w-rsvp .msg em { font-style: normal; font-weight: 500; font-size: 5.5px; padding: 0 4px; border-radius: 99px; border: 1px solid rgba(0, 0, 0, .2); color: #555; }
-.w-rsvp .msg em.on { border-color: #4f7d51; color: #2f5a32; background: rgba(79, 125, 81, .1); }
-.w-rsvp .msg .text { display: block; font-size: 6.5px; color: #444; white-space: pre-line; overflow-wrap: anywhere; }
-.w-rsvp .msg time { display: block; font-size: 5.5px; color: #888; font-style: italic; }
-.w-rsvp .empty { font-size: 7px; color: #777; margin: 0; }
+.w-rsvp .wall-title { display: flex; align-items: center; gap: 6px; margin-top: 2px; font: 400 11px/1.2 YAFdJhX-538_0, 'Cormorant Garamond', serif; font-style: italic; color: var(--ink); }
+.w-rsvp .wall-title .rule { flex: 1; border-top: 1px dashed rgba(58, 40, 20, .35); }
+.w-rsvp .wall-count { font-size: 5.8px; letter-spacing: .04em; color: var(--soft); margin: 1px 0 3px; }
+.w-rsvp .wall { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; text-align: left; padding-right: 3px; scrollbar-width: thin; scrollbar-color: rgba(139, 26, 43, .35) transparent; }
+.w-rsvp .msg { padding: 4px 0; border-bottom: 1px dashed rgba(58, 40, 20, .22); }
+.w-rsvp .msg:last-child { border-bottom: 0; }
+.w-rsvp .msg b { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 7.2px; font-weight: 700; overflow-wrap: anywhere; color: #2b1d12; }
+.w-rsvp .msg em { font-style: normal; font-weight: 500; font-size: 5.4px; letter-spacing: .03em; padding: 0 5px; border-radius: 99px; border: 1px solid rgba(58, 40, 20, .3); color: var(--soft); }
+.w-rsvp .msg em.on { border-color: var(--maroon); color: var(--maroon); }
+.w-rsvp .msg .text { display: block; margin-top: 1px; font-size: 6.8px; line-height: 1.45; color: #4a3b2e; white-space: pre-line; overflow-wrap: anywhere; }
+.w-rsvp .msg time { display: block; margin-top: 1px; font-size: 5.4px; color: #9a8672; font-style: italic; }
+.w-rsvp .empty { font-size: 7px; font-style: italic; color: var(--soft); text-align: center; margin-top: 10px; }
 
-/* Dialog form ucapan (pakai gaya dialog QR check-in) */
-.checkin-pass-card { font-family: YAFdJhX-538_0, 'Cormorant Garamond', Georgia, serif !important; }
-.rsvp-card__title { margin: 0; font: 400 38px/1.3 YAGL3qRU9qw_0, 'Great Vibes', cursive; }
-.rsvp-form { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; text-align: left; }
-.rsvp-card .rsvp-field {
-  width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 8px;
-  background-color: rgba(10, 22, 15, .35); border: 1px solid rgba(250, 243, 237, .45); color: #faf3ed;
-  font: 16px/1.35 YAFdJhX-538_0, 'Cormorant Garamond', Georgia, serif; resize: none;
+/* Dialog form ucapan & QR check-in: kertas krem bertepi renda (menimpa gaya hijau di globals.css) */
+.checkin-pass-backdrop { background-color: rgba(4, 14, 8, .78); }
+.checkin-pass-backdrop .checkin-pass-card {
+  max-width: 360px; padding: 22px 18px 18px; border-radius: 0;
+  border: 34px solid transparent;
+  border-image: url("/assets/template/ef905905cd3d5b3b46ebd1cebd113abe.png") 112 fill / 34px round;
+  background: none; box-shadow: none; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, .55));
+  color: #3a2814; font-family: YACgEXvxf8Q_0, Lora, Georgia, serif !important;
 }
+.checkin-pass-backdrop .checkin-pass-card .checkin-pass-close { top: -14px; right: -14px; color: #8b1a2b; font-size: 15px; }
+.checkin-pass-backdrop .checkin-pass-card > p:first-of-type,
+.rsvp-card__title { margin: 0; font: 400 36px/1.25 YAGL3qRU9qw_0, 'Great Vibes', cursive !important; color: #2b1d12; }
+.checkin-pass-backdrop .checkin-pass-note { color: #6a5644; font-size: 12.5px; }
+.checkin-pass-backdrop .checkin-pass-intro { border: 1px dashed rgba(139, 26, 43, .45); border-radius: 6px; color: #3a2814; font-size: 13px; }
+.checkin-pass-backdrop .checkin-pass-name { color: #2b1d12; }
+.checkin-pass-backdrop .checkin-pass-qr { border: 1px solid rgba(58, 40, 20, .2); }
+.checkin-pass-backdrop .checkin-pass-error { color: #a3162b; }
+.checkin-pass-backdrop .checkin-pass-card .checkin-pass-button { border-radius: 99px; background-color: #8b1a2b; color: #fbf6ee; letter-spacing: .03em; }
+.checkin-pass-backdrop .checkin-pass-card .checkin-pass-link { color: #6a5644; }
+.checkin-pass-backdrop .checkin-pass-card .checkin-pass-input,
+.rsvp-card .rsvp-field {
+  width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 6px;
+  background-color: #fffdf9 !important; border: 1px solid rgba(58, 40, 20, .28) !important; color: #2b1d12 !important;
+  font: 15px/1.35 YACgEXvxf8Q_0, Lora, Georgia, serif; resize: none;
+}
+.checkin-pass-backdrop .wish-field::placeholder { color: #a08d7a; }
+.checkin-pass-backdrop .wish-field:focus { outline: none; border-color: #8b1a2b !important; box-shadow: 0 0 0 2px rgba(139, 26, 43, .15); }
+.rsvp-form { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; text-align: left; }
 .rsvp-card .rsvp-field option { color: #1f1f1f; }
-.rsvp-card .rsvp-field--locked { display: flex; align-items: center; gap: 8px; border-style: dashed; background-color: rgba(10, 22, 15, .2); }
+.rsvp-card .rsvp-field--locked { display: flex; align-items: center; gap: 8px; border-style: dashed !important; background-color: #f6efe4 !important; }
 .rsvp-field--locked span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.rsvp-count { margin-top: -6px; text-align: right; font-size: 13px; color: rgba(250, 243, 237, .7); }
+.rsvp-count { margin-top: -5px; text-align: right; font-size: 12px; color: #8a7562; }
 
 /* ===== Section 1: Ayat + Save The Date (disusun ulang seperti referensi). px desain 430 ===== */
 .intro-section { background: #1d3a22 !important; overflow: visible !important; position: relative; z-index: 2; }

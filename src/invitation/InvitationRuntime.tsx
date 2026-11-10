@@ -25,8 +25,9 @@ const Runtime: React.FC = () => {
 
   const last = WEDDING.events[WEDDING.events.length - 1];
   const [y, m, d] = last.date.split("-").map(Number);
-  const dateText = `${d} ${BULAN[m - 1]} ${y}`;
-  const title = `${WEDDING.bride.nick} & ${WEDDING.groom.nick}`.toLowerCase();
+  const HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const dateText = `${HARI[new Date(y, m - 1, d).getDay()]}, ${d} ${BULAN[m - 1]} ${y}`;
+  const title = `${WEDDING.bride.nick} & ${WEDDING.groom.nick}`;
   const photos = WEDDING.photos.gallery.filter(Boolean);
 
   return (

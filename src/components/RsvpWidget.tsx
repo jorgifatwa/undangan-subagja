@@ -189,14 +189,18 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
     <div className="w-rsvp">
       <h3>{title}</h3>
       <p className="date">{dateText}</p>
+      <p className="ornament" aria-hidden="true">
+        <span />❦<span />
+      </p>
+      <p className="ask">Mohon konfirmasi kehadiran Anda</p>
       <div className="choice">
         <button type="button" onClick={() => openForm("hadir")}>
           <CheckIcon />
-          Attending
+          Hadir
         </button>
         <button type="button" onClick={() => openForm("tidak_hadir")}>
           <CrossIcon />
-          Not Attending
+          Tidak Hadir
         </button>
       </div>
       <div className="extra">
@@ -209,21 +213,23 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
         </a>
       </div>
       <p className="wall-title">
-        Guest Wall <span>· {wishes.length} Ucapan · {presentCount} Hadir · {absentCount} Tidak Hadir</span>
+        <span className="rule" />
+        Dinding Tamu
+        <span className="rule" />
+      </p>
+      <p className="wall-count">
+        {wishes.length} Ucapan · {presentCount} Hadir · {absentCount} Tidak Hadir
       </p>
       <div className="wall" ref={listRef}>
         {loaded && wishes.length === 0 && <p className="empty">Belum ada ucapan. Jadilah yang pertama!</p>}
         {wishes.map((wish) => (
           <article key={wish.id} className={`msg${wish.id === newWishId ? " wish-new" : ""}`}>
-            <span className="ava">{wish.name.trim().charAt(0).toUpperCase()}</span>
-            <div>
-              <b>
-                {wish.name}
-                {wish.attendance && <em className={wish.attendance === "hadir" ? "on" : ""}>{attendanceLabel(wish.attendance)}</em>}
-              </b>
-              <span className="text">{wish.message}</span>
-              <time>{relativeTime(wish.createdAt)}</time>
-            </div>
+            <b>
+              {wish.name}
+              {wish.attendance && <em className={wish.attendance === "hadir" ? "on" : ""}>{attendanceLabel(wish.attendance)}</em>}
+            </b>
+            <span className="text">{wish.message}</span>
+            <time>{relativeTime(wish.createdAt)}</time>
           </article>
         ))}
       </div>
