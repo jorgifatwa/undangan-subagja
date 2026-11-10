@@ -31,7 +31,10 @@ html body.locked { overflow: hidden !important; }
 .pg[hidden] { display: none !important; }
 
 /* cover: isi 430 x 764 diskalakan mengikuti lebar layar; sisa tinggi diisi tekstur daun yang sama */
-.pg--cover { background: #1c3a22 url("/assets/template/ded4bbababdabc4d2c1f4096fe48b9e9.png") center / cover no-repeat; }
+.pg--cover { background: #1d3f24; isolation: isolate; }
+/* latar daun dipasang sedikit melewati tepi: piksel paling tepi gambar agak transparan dan tampak sebagai garis terang */
+.pg--cover::before { content: ""; position: absolute; inset: -8px; z-index: -1; pointer-events: none;
+  background: url("/assets/template/ded4bbababdabc4d2c1f4096fe48b9e9.png") center / cover no-repeat; }
 .pg--cover { position: relative; overflow: hidden; height: 100vh; height: 100svh; }
 .pg--cover > div { position: absolute; left: 50%; top: 50%; width: var(--design-w); transform-origin: 50% 50%; }
 .pg--cover > div, .pg--cover section { min-height: 0 !important; height: auto !important; }
