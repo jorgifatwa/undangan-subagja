@@ -6,6 +6,7 @@ import { ToastProvider, useToast } from "@/components/Toast";
 import { RsvpWidget } from "@/components/RsvpWidget";
 import { GalleryLightbox } from "@/components/GalleryLightbox";
 import { WEDDING } from "./config";
+import { googleCalendarUrl } from "@/lib/weddingEvent";
 
 const BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
@@ -20,7 +21,7 @@ const Runtime: React.FC = () => {
     const root = document.getElementById("phone");
     if (!root || root.dataset.ready) return; // sekali saja (StrictMode menjalankan efek dua kali di dev)
     root.dataset.ready = "1";
-    import("./main").then(({ initInvitation }) => initInvitation(WEDDING, { mountRsvp: setRsvpEl, showToast, openGallery: setPhotoIndex }));
+    import("./main").then(({ initInvitation }) => initInvitation(WEDDING, { mountRsvp: setRsvpEl, showToast, openGallery: setPhotoIndex, calendarUrl: googleCalendarUrl() }));
   }, [showToast]);
 
   const last = WEDDING.events[WEDDING.events.length - 1];

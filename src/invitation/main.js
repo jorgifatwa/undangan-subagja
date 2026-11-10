@@ -16,7 +16,7 @@ const fmtDay = (d) => d.getDate() + " " + BULAN[d.getMonth()] + " " + d.getFullY
 
 /**
  * @param {import("./config").Wedding} W
- * @param {{ mountRsvp: (el: HTMLElement) => void, showToast: (msg: string) => void, openGallery?: (i: number) => void }} hooks
+ * @param {{ mountRsvp: (el: HTMLElement) => void, showToast: (msg: string) => void, openGallery?: (i: number) => void, calendarUrl?: string }} hooks
  */
 export function initInvitation(W, hooks) {
   const phone = $("#phone"), cover = $("#cover"), details = $("#details");
@@ -254,12 +254,24 @@ export function initInvitation(W, hooks) {
     const std = document.createElement("section");
     std.className = "std-section";
     section.after(std);
-    add('<div class="intro intro-band"><p class="intro-band__title">SAVE <i>THE</i> DATE!</p>' +
+    const HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const band = add('<div class="intro intro-band"><p class="intro-band__title">SAVE <i>THE</i> DATE!</p>' +
+      '<p class="intro-band__date">' + HARI[main.getDay()] + ", " + fmtDay(main) + "</p>" +
       '<div class="intro-cd">' +
       ["Days", "Hours", "Minutes", "Seconds"].map((l, i) =>
         (i ? '<span class="intro-cd__sep">:</span>' : "") +
         '<div class="intro-cd__u' + (i === 3 ? " is-sec" : "") + '"><b data-cd="' + i + '">00</b><small>' + l + "</small></div>").join("") +
-      "</div></div>", std);
+      "</div>" +
+      '<p class="intro-cd__done" hidden>Hari bahagia telah tiba</p>' +
+      (hooks.calendarUrl ? '<a class="intro-band__cal" href="' + hooks.calendarUrl + '" target="_blank" rel="noopener noreferrer">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>' +
+        "Simpan ke Kalender</a>" : "") +
+      "</div>", std);
+    // iPhone/iPad/Mac membuka file .ics di aplikasi Kalender; lainnya ke Google Calendar
+    const cal = $(".intro-band__cal", band);
+    if (cal) cal.addEventListener("click", () => {
+      if (/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)) { cal.href = "/kalender.ics"; cal.removeAttribute("target"); }
+    });
     add('<img class="intro intro-pearls" src="' + TPL + '6bdbbb03529f3e7d294c0ab232845faa.png" alt="">');
     add('<div class="intro intro-frame">' + scallopFrameSvg(366, 680) +
       '<p class="intro-bismillah" lang="ar">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>' +
@@ -435,6 +447,8 @@ export function initInvitation(W, hooks) {
     const s = Math.max(0, Math.floor((main - new Date()) / 1000));
     const v = [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60];
     $$("[data-cd]").forEach((el) => { el.textContent = pad(v[+el.dataset.cd]); });
+    // setelah hari H: hitung mundur diganti ucapan
+    if (s === 0) $$(".intro-cd").forEach((cd) => { cd.hidden = true; const done = cd.parentElement.querySelector(".intro-cd__done"); if (done) done.hidden = false; const c = cd.parentElement.querySelector(".intro-band__cal"); if (c) c.hidden = true; });
   };
   tick(); setInterval(tick, 1000);
 
