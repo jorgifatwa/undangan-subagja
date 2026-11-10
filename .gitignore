@@ -46,3 +46,7 @@ next-env.d.ts
 
 # unused assets kept locally (not deployed)
 /_unused-assets/
+
+# contoh/salinan env berisi rahasia
+contoh-env
+*-env
