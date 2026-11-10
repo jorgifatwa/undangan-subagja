@@ -597,6 +597,7 @@ export function initInvitation(W, hooks) {
     buildCoupleCard();
     addGiftSparkles();
     buildRsvpSection();
+    buildClosingSection();
     hideUnusedBanks();
     fitWidgets();
     if (io) revealEls.forEach((el) => io.observe(el));
@@ -607,7 +608,7 @@ export function initInvitation(W, hooks) {
     firstScreen.forEach((el) => el.classList.remove("reveal"));
     introEls.filter((el) => !firstScreen.includes(el))
       .forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
-    rsvpEls.forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
+    rsvpEls.concat(closeEls).forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
     // Section 2: animasi masuk berurutan saat kartu mempelai terlihat
     const coupleSec = $(".couple-section");
     if (coupleSec) {
@@ -660,7 +661,7 @@ export function initInvitation(W, hooks) {
       });
     });
     $$(".intro-bouquet, .intro-anthurium, .cc-flower--tr, .cc-flower--l").forEach((el) => mark(el, true));
-    $$(".cc-lily, .rsvp-lily").forEach((el) => mark(el, false));
+    $$(".cc-lily, .rsvp-lily, .cl-calla, .cl-bouquet").forEach((el) => mark(el, false));
   }
 
   // Kilau berkedip di sekitar kotak hadiah Wedding Gift (animasi Lottie yang sama dengan undangan-jorgi-estetik)
@@ -715,6 +716,48 @@ export function initInvitation(W, hooks) {
     const card = add('<div class="rsvp-card2" style="left:' + c.l + "px;top:" + c.t + "px;width:" + c.w + "px;height:" + c.h + 'px"></div>');
     card.appendChild(rsvpHost);
     add('<img class="cc-flower rsvp-lily" src="' + TPL + '021c7d4f4f83e191f99f39b52e279810.png" alt="">');
+  }
+
+  // ============ Section penutup: polaroid + "Kami Akan Menikah!" + kertas perangko ============
+  const CLOSE_H = 900;
+  let closeEls = [];
+  function buildClosingSection() {
+    const all = $$("#details section");
+    const section = all[all.length - 1];
+    const box = section && $("._mXnjA", section);
+    if (!box || box.querySelector(".cl-stamp")) return;
+    $$(":scope > *", box).forEach((el) => { el.style.display = "none"; }); // termasuk latar satin template
+    setSectionHeight(section, CLOSE_H);
+    section.classList.add("close-section");
+    const add = (html) => {
+      const w = document.createElement("div");
+      w.innerHTML = html;
+      const el = w.firstElementChild;
+      box.appendChild(el);
+      closeEls.push(el);
+      return el;
+    };
+    const family = (parents) => "Keluarga " + esc(parents.replace(/^Putr[ai] dari\s*/i, ""));
+    add('<div class="cl-band"></div>');
+    const photo = W.photos.gallery[0];
+    if (photo) {
+      const pol = add('<button type="button" class="cl-polaroid" aria-label="Buka foto"><img src="' + photo + '" alt="Foto Annisa dan Rizki"></button>');
+      pol.addEventListener("click", () => hooks.openGallery && hooks.openGallery(0));
+    }
+    add('<img class="cl-calla" src="' + TPL + 'cd433c5065e3b51a535f1d5f60d89b09.png" alt="">');
+    add('<img class="cl-butterfly" src="' + TPL + '6a2fd4d294fde9674f91d38da6748ad2.gif" alt="">');
+    add('<h2 class="cl-title">Kami<br>Akan<br>Menikah!</h2>');
+    add('<p class="cl-text">Dengan izin Allah, kami memulai lembaran baru. Terima kasih telah menjadi bagian dari perjalanan kami.</p>');
+    add('<div class="cl-stamp">' +
+      '<p>Suatu kehormatan dan kebahagiaan bagi kami sekeluarga apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa dan restu kepada kedua mempelai.</p>' +
+      '<p>Atas kehadiran serta doa restunya, kami ucapkan terima kasih.</p>' +
+      '<p class="cl-salam">Wassalamu\'alaikum Warahmatullahi Wabarakatuh</p>' +
+      '<p class="cl-happy">Kami yang berbahagia</p>' +
+      '<p class="cl-names">' + esc(W.bride.nick) + " &amp; " + esc(W.groom.nick) + "</p>" +
+      '<p class="cl-family">' + family(W.bride.parents) + "<br>" + family(W.groom.parents) + "</p>" +
+      "</div>");
+    add('<img class="cl-seal" src="' + TPL + 'd73e76347fb6c5fa5e5d18905dfda4b4.png" alt="">');
+    add('<img class="cl-bouquet" src="' + TPL + '696933280fff5a395be069f8a6eb7697.png" alt="">');
   }
 
   let opened = false;

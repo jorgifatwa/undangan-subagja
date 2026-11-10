@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+@font-face { font-family: NickainleyLocal; font-display: swap; src: url("/assets/fonts/Nickainley.otf") format("opentype"); }
 @font-face { font-family: CormorantItalicLocal; font-style: italic; font-weight: 500; font-display: swap;
   src: url("/assets/fonts/fallback/CormorantGaramond-500italic.woff2") format("woff2"); }
 /*
@@ -543,3 +544,33 @@ body.locked .music { display: none; }
 .rsvp-card2 .w-rsvp .msg time { font-size: 9.5px; margin-top: 2px; }
 .rsvp-card2 .w-rsvp .empty { font-size: 12.5px; margin-top: 18px; }
 .rsvp-lily { left: 330px; top: 92px; width: 100px; transform: rotate(18deg); z-index: 5; }
+
+/* ========== Section penutup. px desain 430 ========== */
+.close-section [style*="background"]:not(.cl-band):not(.cl-stamp) { background-color: #04170a !important; }
+.close-section, .close-section * { overflow: visible; }
+.close-section ._8jGYJw { contain: none !important; }
+.cl-band { position: absolute; left: 0; top: 370px; width: 430px; height: 530px; z-index: 0; overflow: hidden; background: #3e6340; }
+.cl-band::before { content: ''; position: absolute; inset: 0; opacity: .9;
+  background: url("/assets/template/ded4bbababdabc4d2c1f4096fe48b9e9.png") center 30% / 460px auto no-repeat;
+  filter: brightness(1.75) saturate(.72) contrast(1.12); }
+.cl-polaroid { position: absolute; left: 34px; top: 54px; width: 196px; height: 236px; z-index: 3; padding: 10px 10px 42px; border: 0; cursor: pointer;
+  background: #fbfaf7; box-shadow: 0 10px 26px rgba(0, 0, 0, .5); rotate: -3deg; box-sizing: border-box; }
+.cl-polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.cl-calla { position: absolute; left: 318px; top: -4px; width: 108px; z-index: 2; }
+.cl-butterfly { position: absolute; left: 262px; top: 96px; width: 48px; z-index: 4; pointer-events: none; }
+.cl-title { position: absolute; left: 232px; top: 140px; width: 180px; margin: 0; z-index: 4; text-align: center;
+  font: 400 36px/0.95 NickainleyLocal, 'Great Vibes', cursive; color: #f6efe4; rotate: -6deg; }
+.cl-text { position: absolute; left: 240px; top: 262px; width: 170px; margin: 0; z-index: 4; text-align: center;
+  font: italic 400 11.5px/1.55 YACgEXvxf8Q_0, Lora, Georgia, serif; color: rgba(246, 239, 228, .9); }
+.cl-stamp { position: absolute; left: 40px; top: 412px; width: 350px; height: 418px; z-index: 3; box-sizing: border-box; padding: 46px 30px 26px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #3a2814;
+  background: url("/assets/template/f125f9f97be7490bf3b8c5abd8444bb6.png") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .4)); }
+.cl-stamp p { margin: 0 0 10px; font: 400 12px/1.6 YACgEXvxf8Q_0, Lora, Georgia, serif; }
+.cl-stamp .cl-salam { margin-top: 4px; font-style: italic; }
+.cl-stamp .cl-happy { margin: 8px 0 0; font: italic 400 11px/1.4 YACgEXvxf8Q_0, Lora, Georgia, serif; color: #7a6450; }
+.cl-stamp .cl-names { margin: 2px 0 6px; font: 400 44px/1.15 YACkoCuIQTA_0, 'Kaushan Script', cursive; color: #5b3712; white-space: nowrap; }
+.cl-stamp .cl-family { margin: 0; font: 400 9.4px/1.6 YAFdJsnKuGg_0, Jost, sans-serif; color: #4b3a2a; }
+.cl-seal { position: absolute; left: 175px; top: 372px; width: 80px; z-index: 5; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .45)); }
+.cl-bouquet { position: absolute; left: -44px; top: 372px; width: 112px; z-index: 6; }
+.close-section { background: #04170a !important; }
