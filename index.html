@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Wedding Of</title>
+  <meta name="description" content="Undangan pernikahan digital">
+  <meta name="theme-color" content="#0b2410">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&family=Kaushan+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="locked">
+
+  <div class="workspace">
+    <!-- ===== Panel kiri (hanya tampil di desktop) ===== -->
+    <aside class="side" aria-hidden="true">
+      <div class="side__bg" data-bg="cover"></div>
+      <div class="side__content">
+        <p class="eyebrow">The Wedding Of</p>
+        <h1 class="brush" data-text="couple"></h1>
+        <p class="side__date" data-text="dateShort"></p>
+        <p class="side__quote">“Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu merasa tenteram kepadanya.”</p>
+        <p class="side__ref">Q.S. Ar-Rum : 21</p>
+      </div>
+    </aside>
+
+    <!-- ===== Kolom HP ===== -->
+    <main class="phone" id="phone">
+
+      <!-- Cover -->
+      <section class="cover" id="cover">
+        <div class="leaf-bg"></div>
+        <div class="cover__inner">
+          <p class="eyebrow">The Wedding Of</p>
+          <h1 class="brush cover__names">
+            <span data-text="bride.nick"></span>
+            <span class="amp">&amp;</span>
+            <span data-text="groom.nick"></span>
+          </h1>
+          <p class="cover__date" data-text="dateShort"></p>
+          <div class="oval-frame"><div class="oval-frame__photo" data-bg="cover"></div></div>
+          <div class="guest">
+            <span>Kepada Yth. Bapak/Ibu/Saudara/i</span>
+            <strong id="guestName">Tamu Undangan</strong>
+          </div>
+          <button class="btn btn--gold" id="openBtn" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 5c-1.1-.35-2.3-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+            Buka Undangan
+          </button>
+        </div>
+      </section>
+
+      <!-- Ayat -->
+      <section class="sec sec--green verse">
+        <div class="leaf-bg"></div>
+        <p class="arabic reveal">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>
+        <p class="verse__id reveal">“Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.”</p>
+        <p class="verse__ref reveal">Q.S. Ar-Rum : 21</p>
+      </section>
+
+      <!-- Save the date -->
+      <section class="sec sec--maroon std">
+        <h2 class="brush reveal">Save The Date!</h2>
+        <div class="countdown reveal" id="countdown">
+          <div><b data-cd="d">0</b><span>Days</span></div>
+          <div><b data-cd="h">0</b><span>Hours</span></div>
+          <div><b data-cd="m">0</b><span>Minutes</span></div>
+          <div><b data-cd="s">0</b><span>Seconds</span></div>
+        </div>
+        <p class="hint reveal">Klik tombol play di pojok kanan bawah untuk menyalakan musik</p>
+      </section>
+
+      <!-- Mempelai -->
+      <section class="sec sec--deep">
+        <div class="lace reveal">
+          <div class="lace__card">
+            <p class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+            <p class="small">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.</p>
+
+            <div class="person">
+              <div class="person__photo" data-bg="bride.photo"></div>
+              <h3 class="script" data-text="bride.name"></h3>
+              <p class="small" data-text="bride.parents"></p>
+              <a class="ig" data-href="bride.instagram" target="_blank" rel="noopener"></a>
+            </div>
+
+            <p class="script amp-big">&amp;</p>
+
+            <div class="person">
+              <div class="person__photo" data-bg="groom.photo"></div>
+              <h3 class="script" data-text="groom.name"></h3>
+              <p class="small" data-text="groom.parents"></p>
+              <a class="ig" data-href="groom.instagram" target="_blank" rel="noopener"></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Acara -->
+      <section class="sec sec--deep event">
+        <div class="event__card reveal">
+          <h2 class="brush" id="calMonth"></h2>
+          <div class="week" id="calWeek"></div>
+          <div id="events"></div>
+        </div>
+      </section>
+
+      <!-- Galeri -->
+      <section class="sec sec--green gallery">
+        <div class="leaf-bg"></div>
+        <h2 class="brush reveal">Our Gallery</h2>
+        <div class="grid" id="gallery"></div>
+      </section>
+
+      <!-- Wedding gift -->
+      <section class="sec sec--cream gift">
+        <h2 class="brush reveal">Wedding Gift</h2>
+        <p class="small reveal">Kehadiran dan doa Anda merupakan hadiah terindah bagi kami. Namun, apabila Anda ingin memberikan tanda kasih, kami akan menerimanya dengan tulus dan penuh rasa syukur.</p>
+        <div id="banks"></div>
+        <div class="address reveal">
+          <p class="small">Hadiah fisik dapat dikirim ke alamat berikut, lalu konfirmasi ke nomor di bawah:</p>
+          <p class="address__text" data-text="gift.address"></p>
+          <div id="contacts"></div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section class="sec sec--deep">
+        <div class="lace reveal">
+          <div class="lace__card rsvp">
+            <h2 class="script">RSVP &amp; Ucapan</h2>
+            <form id="rsvpForm">
+              <input name="name" id="rsvpName" placeholder="Nama" required>
+              <div class="choice">
+                <label><input type="radio" name="attend" value="Hadir" required><span>✓ Hadir</span></label>
+                <label><input type="radio" name="attend" value="Tidak Hadir"><span>✕ Tidak Hadir</span></label>
+              </div>
+              <textarea name="msg" rows="3" placeholder="Ucapan & doa"></textarea>
+              <button class="btn btn--green" type="submit">Kirim via WhatsApp</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Penutup -->
+      <section class="sec sec--green closing">
+        <div class="leaf-bg"></div>
+        <div class="paper reveal">
+          <div class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <p class="small">Suatu kehormatan dan kebahagiaan bagi kami sekeluarga apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa dan restu kepada kedua mempelai.</p>
+          <p class="small">Atas kehadiran serta doa restunya, kami ucapkan terima kasih.</p>
+          <p class="brush closing__names" data-text="couple"></p>
+        </div>
+      </section>
+
+      <button class="music" id="musicBtn" type="button" aria-label="Putar / jeda musik" hidden>
+        <svg class="i-play" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <div class="toast" id="toast"></div>
+    </main>
+  </div>
+
+  <audio id="bgm" loop preload="none"></audio>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
