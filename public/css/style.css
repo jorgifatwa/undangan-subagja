@@ -499,3 +499,7 @@ body.locked .music { display: none; }
 
 /* kilau berkedip di Wedding Gift */
 .gift-sparkle { position: absolute; z-index: 6; pointer-events: none; }
+
+/* cover: satu latar daun utuh setinggi layar (latar di dalam konten 430x764 disembunyikan agar tidak ada garis sambungan) */
+.pg--cover img[src*="ded4bbababdabc4d2c1f4096fe48b9e9"] { visibility: hidden; }
+.pg--cover ._8jGYJw { background: transparent !important; }
