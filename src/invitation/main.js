@@ -23,7 +23,10 @@ export function initInvitation(W, hooks) {
   document.body.classList.add("locked"); // cover terkunci sampai "Buka Undangan"
   const main = new Date(W.date);
   const couple = W.bride.nick + " & " + W.groom.nick;
-  const zoomOf = () => parseFloat(details.firstElementChild.style.zoom) || 1;
+  const zoomOf = () => {
+    const w = details.firstElementChild.getBoundingClientRect().width;
+    return w > 0 ? w / DESIGN_W : parseFloat(details.firstElementChild.style.zoom) || 1;
+  };
 
   // ============ 1. Skala: desain 430px -> lebar layar ============
   function layout() {
@@ -189,9 +192,15 @@ export function initInvitation(W, hooks) {
   let introEls = [];
 
   // tinggi section Canva: ubah semua elemen yang tingginya sama dengan section
+  function sectionDesignH(section) {
+    if (section.dataset.h) return +section.dataset.h;
+    const inner = $("._8jGYJw", section);
+    const h = inner && parseFloat(inner.style.height);
+    return h || section.getBoundingClientRect().height / zoomOf();
+  }
   function setSectionHeight(section, newH) {
-    const z = zoomOf();
-    const H = section.getBoundingClientRect().height / z;
+    const H = sectionDesignH(section);
+    section.dataset.h = newH;
     $$('[style*="height"]', section).concat([section]).forEach((el) => {
       const h = parseFloat(el.style.height);
       if (Math.abs(h - H) < 1.5) el.style.height = newH + "px";
@@ -381,10 +390,7 @@ export function initInvitation(W, hooks) {
     const evTexture = texImg ? texImg.getAttribute("src") : "";
     eventItems.forEach((i) => { i.el.style.display = "none"; });
     void shift;
-    $$('[style*="height"]', section).concat([section]).forEach((el) => {
-      const h = parseFloat(el.style.height);
-      if (Math.abs(h - H) < 1.5) el.style.height = EV.sectionH + "px";
-    });
+    setSectionHeight(section, EV.sectionH);
 
     const add = (html) => {
       const wrap = document.createElement("div");
@@ -450,12 +456,9 @@ export function initInvitation(W, hooks) {
     parts.forEach((el) => { el.style.display = "none"; });
     // pendekkan section setinggi kartu yang hilang
     const z = zoomOf();
-    const H = section.getBoundingClientRect().height / z;
+    const H = sectionDesignH(section);
     const delta = Math.min((section.getBoundingClientRect().bottom - y1) / z - 12, H);
-    $$('[style*="height"]', section).concat([section]).forEach((el) => {
-      const h = parseFloat(el.style.height);
-      if (Math.abs(h - H) < 1.5) el.style.height = H - delta + "px";
-    });
+    setSectionHeight(section, H - delta);
   }
 
   // ============ 8. Widget ============
