@@ -595,6 +595,7 @@ export function initInvitation(W, hooks) {
     moveHighlight();
     buildIntroSection();
     buildCoupleCard();
+    addGiftSparkles();
     hideUnusedBanks();
     fitWidgets();
     if (io) revealEls.forEach((el) => io.observe(el));
@@ -658,6 +659,33 @@ export function initInvitation(W, hooks) {
     });
     $$(".intro-bouquet, .intro-anthurium, .cc-flower--tr, .cc-flower--l").forEach((el) => mark(el, true));
     $$(".cc-lily").forEach((el) => mark(el, false));
+  }
+
+  // Kilau berkedip di sekitar kotak hadiah Wedding Gift (animasi Lottie yang sama dengan undangan-jorgi-estetik)
+  function addGiftSparkles() {
+    const gift = $('#details img[src*="blob-1206374b"]');
+    const box = gift && gift.closest("._mXnjA");
+    const el = gift && gift.closest(".DF_utQ");
+    if (!box || !el || box.querySelector(".gift-sparkle")) return;
+    const z = zoomOf(), b = box.getBoundingClientRect(), r = el.getBoundingClientRect();
+    const gx = (r.left - b.left) / z, gy = (r.top - b.top) / z, gw = r.width / z, gh = r.height / z;
+    const spots = [[gx + gw * 0.74, gy - gh * 0.12, 38], [gx - gw * 0.06, gy + gh * 0.5, 28]];
+    const holders = spots.map(([l, t, w]) => {
+      const d = document.createElement("div");
+      d.className = "gift-sparkle";
+      d.setAttribute("aria-hidden", "true");
+      d.style.cssText = "left:" + l.toFixed(1) + "px;top:" + t.toFixed(1) + "px;width:" + w + "px;height:" + (w * 1.408).toFixed(1) + "px";
+      box.appendChild(d);
+      return d;
+    });
+    if (reduceMotion) return;
+    import("lottie-web/build/player/lottie_light").then(({ default: lottie }) => {
+      holders.forEach((container, i) => {
+        const anim = lottie.loadAnimation({ container, renderer: "svg", loop: true, autoplay: false, path: "/assets/lottie/sparkle.json" });
+        // gugus kedua mulai sedikit terlambat supaya berkedip bergantian
+        setTimeout(() => anim.play(), i * 700);
+      });
+    });
   }
 
   let opened = false;
