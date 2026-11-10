@@ -14,7 +14,7 @@ const fmtDay = (d) => d.getDate() + " " + BULAN[d.getMonth()] + " " + d.getFullY
 
 /**
  * @param {import("./config").Wedding} W
- * @param {{ mountRsvp: (el: HTMLElement) => void, showToast: (msg: string) => void }} hooks
+ * @param {{ mountRsvp: (el: HTMLElement) => void, showToast: (msg: string) => void, openGallery?: (i: number) => void }} hooks
  */
 export function initInvitation(W, hooks) {
   const phone = $("#phone"), cover = $("#cover"), details = $("#details");
@@ -165,7 +165,20 @@ export function initInvitation(W, hooks) {
   swapPhoto("437440eb32d2a85f1c7d462179d92128.png", W.photos.cover);
   ["ebf27f722497c2a3d9bddfbfef2a84e9.jpg", "5e58cf630e86bd88360ab5d13a1a8f24.jpg", "c9ffc257bee7f549e3a7798bbc8cd47b.jpg",
     "9abeae4dd1ec6197e7e5e73bc351e9ee.jpg", "d366f0402762a99a6c2cc9a8ec154ffd.jpg", "5b4dddd417f7af8511d70cdc8ab653be.jpg"]
-    .forEach((f, i) => swapPhoto(f, W.photos.gallery[i]));
+    .forEach((f, i) => {
+      // foto galeri bisa diklik untuk membuka lightbox (seperti undangan-jorgi-estetik)
+      $$('img[src$="' + f + '"]').forEach((img) => {
+        const el = img.closest(".DF_utQ") || img; // kotak foto itu sendiri (galeri dikelompokkan dalam satu grup Canva)
+        el.classList.add("gallery-photo");
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("aria-label", "Buka foto " + (i + 1));
+        const open = () => hooks.openGallery && hooks.openGallery(i);
+        el.addEventListener("click", open);
+        el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+      });
+      swapPhoto(f, W.photos.gallery[i]);
+    });
 
   // ============ 5b. Section 1: Ayat + Save The Date (disusun ulang seperti referensi) ============
   // Isi Canva asli section ini disembunyikan, diganti bingkai scallop marun (SVG), teks ayat, mutiara, bunga,

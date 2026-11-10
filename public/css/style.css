@@ -270,3 +270,8 @@ body.locked .music { display: none; }
 .couple-section { position: relative; z-index: 3; overflow: visible !important; }
 .couple-section ._8jGYJw { contain: none !important; }
 .couple-section * { overflow: visible !important; }
+
+/* foto galeri bisa diklik (lightbox) */
+.gallery-photo { cursor: pointer; pointer-events: auto !important; transition: filter .2s; }
+.gallery-photo:hover { filter: brightness(1.08); }
+.gallery-photo:focus-visible { outline: 2px solid #f2ef3c; outline-offset: 2px; }
