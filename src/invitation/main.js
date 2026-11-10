@@ -170,7 +170,7 @@ export function initInvitation(W, hooks) {
   // ============ 5b. Section 1: Ayat + Save The Date (disusun ulang seperti referensi) ============
   // Isi Canva asli section ini disembunyikan, diganti bingkai scallop marun (SVG), teks ayat, mutiara, bunga,
   // piringan hitam "play the music!", dan pita hijau Save The Date. Ukuran dalam px desain 430.
-  const INTRO_H = 932; // satu layar HP penuh (430 x 932)
+  const INTRO_H = 850;
   let introEls = [];
 
   // tinggi section Canva: ubah semua elemen yang tingginya sama dengan section
