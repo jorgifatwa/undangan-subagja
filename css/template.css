@@ -1,0 +1,921 @@
+/* CSS hasil render template Canva (dipangkas otomatis). Jangan edit manual: override di css/style.css */
+.theme{color-scheme: var(--tk9EiQ);}
+.light{--tk9EiQ: light;}
+html{--safe-area-inset-top: 0px; --safe-area-inset-bottom: 0px; --safe-area-inset-left: 0px; --safe-area-inset-right: 0px;}
+@supports (height:env(safe-area-inset-top)){html{--safe-area-inset-top: env(safe-area-inset-top); --safe-area-inset-bottom: env(safe-area-inset-bottom); --safe-area-inset-left: env(safe-area-inset-left); --safe-area-inset-right: env(safe-area-inset-right);}}
+:root{--wczjwA: calc(var(----lgQg,.1rem)*42); --32-5Rg: calc(var(----lgQg,.1rem)*36); --q5aPlw: calc(var(----lgQg,.1rem)*36); --XAu0sw: calc(var(----lgQg,.1rem)*32); --OJy8Yg: calc(var(----lgQg,.1rem)*32); --Vf8OSg: calc(var(----lgQg,.1rem)*36); --A3YTsg: calc(var(----lgQg,.1rem)*24); --Dynksw: calc(var(----lgQg,.1rem)*21); --VrAiwg: calc(var(----lgQg,.1rem)*16); --5QGiVg: calc(var(----lgQg,.1rem)*14); --R07nfg: calc(var(----lgQg,.1rem)*12); --m8t8Kw: calc(var(----lgQg,.1rem)*21); --ZYsOLQ: calc(var(----lgQg,.1rem)*18); --__4QUw: calc(var(----lgQg,.1rem)*16); --ZOMbtg: calc(var(----lgQg,.1rem)*14); --ylZqXQ: calc(var(----lgQg,.1rem)*12); --ggP9YA: calc(var(----lgQg,.1rem)*11); --Csadrg: 1.1; --3HwnTg: 1.1; --guGCJg: 1.1; --Pz31Ow: 1.1; --qKnIjA: 1.25; --a60EZw: 1.25; --KMUE6w: 1.25; --moczTQ: calc(var(----lgQg,.1rem)*26); --VbcScA: calc(var(----lgQg,.1rem)*24); --0LLpdQ: calc(var(----lgQg,.1rem)*20); ---eZrnA: calc(var(----lgQg,.1rem)*18); --Vr1mRA: 1.5; --HMj1Lg: 1.5; --lQwhPA: calc(var(----lgQg,.1rem)*24); --X8ysKw: calc(var(----lgQg,.1rem)*22); --RJKbrQ: calc(var(----lgQg,.1rem)*20); --xQU-mQ: calc(var(----lgQg,.1rem)*16);}
+@media (min-width: 600px){:root{--wczjwA: calc(var(----lgQg,.1rem)*56); --32-5Rg: calc(var(----lgQg,.1rem)*48); --q5aPlw: calc(var(----lgQg,.1rem)*48); --XAu0sw: calc(var(----lgQg,.1rem)*36); --OJy8Yg: calc(var(----lgQg,.1rem)*32); --Vf8OSg: calc(var(----lgQg,.1rem)*48); --A3YTsg: calc(var(----lgQg,.1rem)*32); --Dynksw: calc(var(----lgQg,.1rem)*24); --VrAiwg: calc(var(----lgQg,.1rem)*18); --m8t8Kw: calc(var(----lgQg,.1rem)*24); --ZYsOLQ: calc(var(----lgQg,.1rem)*21); --moczTQ: calc(var(----lgQg,.1rem)*32);}}
+@media (min-width: 900px){:root{--wczjwA: calc(var(----lgQg,.1rem)*72); --32-5Rg: calc(var(----lgQg,.1rem)*64); --q5aPlw: calc(var(----lgQg,.1rem)*56); --XAu0sw: calc(var(----lgQg,.1rem)*42); --OJy8Yg: calc(var(----lgQg,.1rem)*36);}}
+@media (min-width: 1200px){:root{--wczjwA: calc(var(----lgQg,.1rem)*96); --32-5Rg: calc(var(----lgQg,.1rem)*84); --q5aPlw: calc(var(----lgQg,.1rem)*64); --XAu0sw: calc(var(----lgQg,.1rem)*48); --OJy8Yg: calc(var(----lgQg,.1rem)*42); --qKnIjA: 1.1;}}
+@media (min-width: 1650px){:root{--wczjwA: calc(var(----lgQg,.1rem)*112); --32-5Rg: calc(var(----lgQg,.1rem)*96); --q5aPlw: calc(var(----lgQg,.1rem)*72); --XAu0sw: calc(var(----lgQg,.1rem)*56); --OJy8Yg: calc(var(----lgQg,.1rem)*48);}}
+._2UyCZQ{color: rgb(0, 0, 0); --H97cbQ: 16px; letter-spacing: 0px; --Xm-_8w: 0; text-align: left; text-transform: none; tab-size: 4; font-synthesis: none; font-kerning: none; font-feature-settings: "liga" var(--I1TtXQ,off), "clig" var(--rt6TaA,off), "calt" var(--o_YY6w,off); -webkit-font-smoothing: antialiased; word-break: normal; overflow-wrap: break-word; white-space: normal; text-size-adjust: none; contain: style; direction: ltr; height: auto; padding: 0px; font-family: unset; font-style: normal; font-weight: 400; line-height: 1.4; position: relative; overflow: visible;}
+.a_GcMg{opacity: calc(var(--kPI9Uw,1)*var(--q1eooA,1));}
+.e1_zQg{user-select: text; pointer-events: auto;}
+.SglrXg .jfNO9A{display: inline-flex; position: relative;}
+@supports ((-webkit-hyphens:none)) and (not ((-moz-appearance:none))){._28USrA:not(._2ENCSQ) .zV8YKg{white-space: pre-wrap;}}
+.Mb8E_A{text-wrap: nowrap; overflow-wrap: normal;}
+ ._28USrA{font-size: var(--H97cbQ); margin: 0px; position: relative;}
+.jfNO9A{padding-left: var(--ZurDLQ,0px); padding-right: var(--GCe_Bw,0px); padding-top: var(--nWK-aQ,0px); padding-bottom: var(--nWK-aQ,0px); margin-left: calc(var(--26G6TA,0px) + var(--ZurDLQ,0px)*-1); margin-right: calc(var(--GCe_Bw,0px)*-1); margin-top: calc(var(--nWK-aQ,0px)*-1); margin-bottom: calc(var(--nWK-aQ,0px)*-1);}
+._28USrA .xtSH_A{display: inline-block;}
+.vkN2Cw ._28USrA{top: calc(var(--UF50hQ,0)*1em);}
+.vkN2Cw ._28USrA{margin-top: calc(var(--gixK-A)*1em);}
+.vkN2Cw ._4N4NA{margin-top: 0px;}
+.XN6uKA{direction: ltr;}
+.naUDPA{direction: rtl;}
+._28USrA.XN6uKA.GEC0sA{text-align: left;}
+._28USrA.XN6uKA.AfeL7g, ._28USrA.naUDPA.AfeL7g{text-align: center;}
+._28USrA{margin-inline-start: var(--kJ5CrQ);}
+ ._28USrA:not(.hhtymQ){counter-reset: list-1 0 list-2 0 list-3 0 list-4 0 list-5 0 list-6 0 list-7 0 list-8 0;}
+.light{--iBIYpw: #f3f4f7; --Ypt7xQ: #fff; --LIE6Cw: #fff; --Ps9yUA: #fff; --a5p9-A: 0px 0px 0px .5px #404f6d0f,0px 1px 2px 0px #151e821f,0px 2px 4px 0px #151e820f; --galhog: 0px 0px 0px .5px #404f6d12,0px 2px 5px 0px #151e821f,0px 6px 12px 0px #151e820f; --JF44pw: 0px 0px 0px .5px #404f6d0f,0px 8px 16px 0px #151e821f,0px 24px 24px 0px #151e820f; --A2-tbg: 0px 24px 24px -18px inset #ffffff29,0px 1px .5px 0px inset #ffffff40,0px -1px .5px 0px inset #151e821f,0px 4px 8px 0px #151e8212,0px 8px 16px 0px #151e8208; --gISI6g: 0px 24px 24px -18px inset #ffffff29,0px 1px .5px 0px inset #ffffff40,0px -1px .5px 0px inset #151e821f,0px 1px 2px 0px #151e8212,0px 3px 4px 0px #151e8208;}
+@keyframes c2cyRQ { 
+  0% { opacity: 0.07; }
+  25% { opacity: 0.05; }
+  50% { opacity: 0.07; }
+  100% { opacity: 0.07; }
+}
+.light{--9v5PLg: linear-gradient(90deg, #00c4cc, #7d2ae8); --LsXbHQ: linear-gradient(135deg, #00c4cc, #7d2ae8); --U8pJuw: linear-gradient(135deg, #00c4cc, #7d2ae8); --0BpVqA: linear-gradient(135deg, #03a5ab, #7d2ae8); --dbTMCw: linear-gradient(180deg, #f9f5fe, #f5ffff);}
+.light{--Kd3K9A: #8b3dff; --DVEAGQ: #7630d7; --V0s6Og: #612dae; --PqRKXQ: #fff; --R-jrhg: #0f101500; --GXtk9g: #404f6d0f; --xGXQgA: #39466024; --oAdupw: #0f1015; --8-4niA: #35415a33; --wd-tZA: #0f101500; --ntzWpQ: #404f6d0f; --BorQ6g: #39466024; --O8dBuQ: #0f1015; --EvA8JQ: #13162099; --gIrJLw: #101219b2; --XxI4hg: #0f1015d9; --SvgSpA: #13162099; --N8Oz5g: #fff; --4zRigw: #ffffffb2; --wv7owA: #db142c; --m9I-bA: #b61629; --Hxdoag: #911826; --pxBf3A: #fff; --1sn2Sg: #a370fc26; --4HnQxA: #a370fc26; --NRjSsw: #a370fc33; --GviWcg: #4a2e7e; --kl47TA: #8b3dff; --gFgXSg: #404f6d0f; --wBWOJg: #1c213080; --BVrlVA: #39466024; --KwfPsg: #0f101500; --p5yS_g: #1c213080; --jz0LSw: #008009; --CJur3Q: #fff; --UfNqTg: #c3eac4; --QcueGQ: #133416; --bdtRFA: #1a62ff; --YrdGEw: #fff; --_bpjsw: #cce1ff; --x3uTOw: #182c59; --Am6Phw: #ad5a00; --X8oIbA: #fff; --G_qVww: #ffd9ad; --HfWZ1A: #3e2a14; --43wRQw: #db142c; --9luNoA: #fff; --qKGzFw: #ffd6d8; --CMMUiA: #501b21; --RzZG4Q: #8b3dff; --M8YsdQ: #fff; --xc412Q: #e7dbff; --XZIM8Q: #352459; --6Hmmng: #13162099; --SxhHZg: #fff; --3ifkTA: #fff; --W1_3nw: #404f6d0f; --igdHlg: #35415a33; --IzK8tQ: #1c213080; --_kLulA: #1c213080; --uHakiw: #8b3dff; --TCEPKw: #39466024; --BhjlKg: #db142c; --j6I-wg: #8b3dff; --I7Yc2g: #7630d7; --Mm01yw: #612dae; --4sJsqA: #39466024; --hBXVcA: #fff; --xcCO9w: #1c213080; --WcghmA: #8b3dff; --ezSU3w: #fff; --ooFCBA: #c1c5cd; --8jnd6g: #8b3dff; ---2QwGw: #7630d7; --KgLrHA: #612dae; --jDAtXQ: #1c213080; --FOH6ww: #db142c; --jyDisg: #b61629; --QclmLg: #911826; --VcZbvQ: #0f1015; --UpESEg: #0f1015d9; --PRQgyw: #101219b2; --TJtBjA: #13162099; --vCqPYw: #008009; --NRkSiw: #db142c; --gdRMVA: #1a62ff; --cVPmKw: #ad5a00; --enMi_w: #39466024; --4DkvNQ: #3d8bff; --xwa5zw: #39466024; --2yga1g: #404f6d0f; --0ypBAQ: #35415a33; --P1hAvA: #242c3d66; --1z_vxQ: #242c3d66;}
+.DF_utQ{cursor: auto; outline: none; position: absolute;}
+.DF_utQ:hover{cursor: unset;}
+._0xkaeQ{pointer-events: auto;}
+._3zDNwA{width: 100%; height: 100%; display: block; position: absolute; top: 0px; left: 0px;}
+@media print{.DF_utQ{contain: size;}}
+._KMJVg{width: 100%; height: 100%; display: block;}
+.Ms_IOA{position: absolute; inset: 0px;}
+@keyframes _5Wn9Ig { 
+  100% { opacity: 1; }
+}
+.CQVqQQ{color-scheme: initial; forced-color-adjust: initial; math-depth: initial; position: initial; position-anchor: initial; text-size-adjust: initial; appearance: initial; color: initial; font: initial; font-palette: initial; font-synthesis: initial; position-area: initial; text-orientation: initial; text-rendering: initial; text-spacing-trim: initial; -webkit-font-smoothing: initial; -webkit-locale: initial; -webkit-text-orientation: initial; -webkit-writing-mode: initial; writing-mode: initial; zoom: initial; accent-color: initial; place-content: initial; place-items: initial; place-self: initial; alignment-baseline: initial; anchor-name: initial; anchor-scope: initial; animation-composition: initial; animation: initial; animation-trigger: initial; app-region: initial; aspect-ratio: initial; backdrop-filter: initial; backface-visibility: initial; background: initial; background-blend-mode: initial; baseline-shift: initial; baseline-source: initial; block-size: initial; border-block: initial; border: initial; border-radius: initial; border-collapse: initial; border-end-end-radius: initial; border-end-start-radius: initial; border-inline: initial; border-shape: initial; border-start-end-radius: initial; border-start-start-radius: initial; inset: initial; box-decoration-break: initial; box-shadow: initial; box-sizing: initial; break-after: initial; break-before: initial; break-inside: initial; buffered-rendering: initial; caption-side: initial; caret-animation: initial; caret-color: initial; caret-shape: initial; clear: initial; clip: initial; clip-path: initial; clip-rule: initial; color-interpolation: initial; color-interpolation-filters: initial; color-rendering: initial; columns: initial; column-fill: initial; gap: initial; rule-break: initial; rule: initial; rule-inset: initial; rule-visibility-items: initial; column-span: initial; contain: initial; contain-intrinsic-block-size: initial; contain-intrinsic-size: initial; contain-intrinsic-inline-size: initial; container: initial; content: initial; content-visibility: initial; corner-shape: initial; corner-block-end-shape: initial; corner-block-start-shape: initial; counter-increment: initial; counter-reset: initial; counter-set: initial; cursor: initial; cx: initial; cy: initial; d: initial; display: initial; dominant-baseline: initial; dynamic-range-limit: initial; empty-cells: initial; field-sizing: initial; fill: initial; fill-opacity: initial; fill-rule: initial; filter: initial; flex: initial; flex-flow: initial; flex-line-count: initial; float: initial; flood-color: initial; flood-opacity: initial; frame-sizing: initial; grid: initial; grid-area: initial; height: initial; hyphenate-character: initial; hyphenate-limit-chars: initial; hyphens: initial; image-orientation: initial; image-rendering: initial; initial-letter: initial; inline-size: initial; inset-block: initial; inset-inline: initial; interactivity: initial; interest-delay: initial; interpolate-size: initial; isolation: initial; letter-spacing: initial; lighting-color: initial; line-break: initial; list-style: initial; margin-block: initial; margin: initial; margin-inline: initial; margin-trim: initial; marker: initial; mask: initial; mask-type: initial; math-shift: initial; math-style: initial; max-block-size: initial; max-height: initial; max-inline-size: initial; max-width: initial; min-block-size: initial; min-height: initial; min-inline-size: initial; min-width: initial; mix-blend-mode: initial; object-fit: initial; object-position: initial; object-view-box: initial; offset: initial; opacity: initial; order: initial; orphans: initial; outline: initial; outline-offset: initial; overflow-anchor: initial; overflow-block: initial; overflow-clip-margin: initial; overflow-inline: initial; overflow-wrap: initial; overflow: initial; overlay: initial; overscroll-behavior-block: initial; overscroll-behavior-inline: initial; overscroll-behavior: initial; padding-block: initial; padding: initial; padding-inline: initial; page: initial; page-margin-safety: initial; page-orientation: initial; paint-order: initial; perspective: initial; perspective-origin: initial; pointer-events: initial; position-try: initial; position-visibility: initial; quotes: initial; r: initial; reading-flow: initial; reading-order: initial; resize: initial; rotate: initial; ruby-align: initial; ruby-overhang: initial; ruby-position: initial; rule-overlap: initial; rx: initial; ry: initial; scale: initial; scroll-axis-lock: initial; scroll-behavior: initial; scroll-initial-target: initial; scroll-margin-block: initial; scroll-margin: initial; scroll-margin-inline: initial; scroll-marker-group: initial; scroll-padding-block: initial; scroll-padding: initial; scroll-padding-inline: initial; scroll-snap-align: initial; scroll-snap-stop: initial; scroll-snap-type: initial; scroll-target-group: initial; scroll-timeline: initial; scrollbar-color: initial; scrollbar-gutter: initial; scrollbar-width: initial; shape-image-threshold: initial; shape-margin: initial; shape-outside: initial; shape-rendering: initial; size: initial; speak: initial; stop-color: initial; stop-opacity: initial; stroke: initial; stroke-dasharray: initial; stroke-dashoffset: initial; stroke-linecap: initial; stroke-linejoin: initial; stroke-miterlimit: initial; stroke-opacity: initial; stroke-width: initial; tab-size: initial; table-layout: initial; text-align: initial; text-align-last: initial; text-anchor: initial; text-autospace: initial; text-box: initial; text-combine-upright: initial; text-decoration: initial; text-decoration-inset: initial; text-decoration-skip-ink: initial; text-emphasis: initial; text-emphasis-position: initial; text-fit: initial; text-indent: initial; text-justify: initial; text-overflow: initial; text-shadow: initial; text-transform: initial; text-underline-offset: initial; text-underline-position: initial; text-wrap: initial; timeline-scope: initial; timeline-trigger: initial; touch-action: initial; transform: initial; transform-box: initial; transform-origin: initial; transform-style: initial; transition: initial; translate: initial; trigger-scope: initial; user-select: initial; vector-effect: initial; vertical-align: initial; view-timeline: initial; view-transition-class: initial; view-transition-group: initial; view-transition-name: initial; view-transition-scope: initial; visibility: initial; border-spacing: initial; -webkit-box-align: initial; -webkit-box-decoration-break: initial; -webkit-box-direction: initial; -webkit-box-flex: initial; -webkit-box-ordinal-group: initial; -webkit-box-orient: initial; -webkit-box-pack: initial; -webkit-box-reflect: initial; -webkit-line-break: initial; -webkit-line-clamp: initial; -webkit-mask-box-image: initial; -webkit-rtl-ordering: initial; -webkit-ruby-position: initial; -webkit-tap-highlight-color: initial; -webkit-text-combine: initial; -webkit-text-decorations-in-effect: initial; -webkit-text-fill-color: initial; -webkit-text-security: initial; -webkit-text-stroke: initial; -webkit-user-drag: initial; white-space-collapse: initial; widows: initial; width: initial; will-change: initial; window-drag: initial; word-break: initial; word-spacing: initial; x: initial; y: initial; z-index: initial; print-color-adjust: exact;}
+.uzRrVg{box-sizing: border-box; cursor: inherit; font-size: 1rem; display: block;}
+.TRWryw{width: 100%; height: 100%;}
+.light{--mZd2dw: #00c4cc; --7dKt9A: #7630d7; --PfAhjQ: #0f101500; --qoG_LA: #242c3d66; --WIvwOg: #2b354a4d; --mu_GGA: #ffffffb2; --djTVRw: #fff;}
+.S3wQqg{opacity: 0; width: 100%; height: 100%;}
+._8YzbFQ{opacity: 1;}
+.uqhtBg{width: inherit; height: inherit;}
+.bFnJ2A{position: absolute; top: 0px; left: 0px; overflow: hidden;}
+._7KaXww{width: 0px; height: 0px; position: absolute;}
+.qhHTGg{pointer-events: none; position: relative;}
+._4c2rDg{width: 100%; height: 100%;}
+.GxUsfw{transition: transform 0.3s;}
+.a26Xuw{width: 100%; height: 100%;}
+.a26Xuw ::selection{user-select: none;}
+.fbzKiw{position: absolute; inset: 0px;}
+.PcHy7w{width: 100%; height: 100%;}
+.Izwocg{position: relative;}
+.uk_25A{width: 100%; height: 100%;}
+.H5qArQ{width: 100%; height: 100%; overflow: hidden;}
+.Ty61NA{transition: transform 0.3s;}
+._7_i_XA{pointer-events: none; object-fit: fill; width: 100%; height: 100%; display: block; position: absolute;}
+.dMHlHA{pointer-events: none; width: 100%; height: 100%; display: block; position: absolute;}
+.Dt3KRw{width: 100%; height: 100%; display: block; position: absolute;}
+.twbtjQ{direction: ltr; position: relative;}
+.GDnEHQ{overflow: hidden;}
+.o2Yl2g{transform-origin: 0px 0px;}
+.QhExXw{pointer-events: none; direction: ltr; position: absolute; bottom: 0px; left: 0px;}
+.QhExXw.pKfnlA{transform: translateZ(0px);}
+.onhyOQ{box-sizing: border-box; border-radius: inherit; justify-content: center; display: flex; position: relative; overflow: hidden;}
+._mXnjA{position: relative;}
+.WyoGFw{pointer-events: none;}
+._6t4CHA{pointer-events: auto; outline: none; position: absolute; inset: 0px; overflow: hidden;}
+.light{--M05zEQ: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024; --gzwI8Q: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024; --al4BcQ: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024; --5n3Uvg: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024;}
+._0yZ6Qg{text-rendering: geometricprecision;}
+.aF9o6Q{height: 100%;}
+.Zp7NQw{width: 100%; height: 100%; position: relative; overflow: hidden;}
+.E8yZTA{position: relative;}
+.Pr6LEA{pointer-events: none; width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;}
+.hWv4NA{transform-origin: 0px 0px; position: relative;}
+@keyframes eT6GTQ { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.paNqSg{object-fit: fill; width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;}
+.jXCxjw{width: 100%; height: 100%;}
+._8jGYJw{contain: strict; z-index: 0; background: rgb(255, 255, 255); position: relative; overflow: hidden;}
+.fMSICA{width: 100%; height: 100%; display: none; position: absolute; top: 0px; left: 0px;}
+.h517IA{display: unset;}
+._5yhCRQ{width: 100%; height: 100%;}
+._1UF_UQ{min-height: 100%;}
+.uPOslw{justify-content: center; align-items: center; display: flex;}
+.rGeu6w{flex: 1 1 0%;}
+.rGeu6w ~ .rGeu6w{margin-top: -1px;}
+.KYQZFA{flex-direction: column; width: 100%; min-height: 100%; display: flex; overflow: hidden;}
+html, body{height: 100%;}
+body{touch-action: manipulation; overflow: hidden;}
+html{font-size: 62.5%;}
+html, body{width: 100%; margin: 0px; padding: 0px;}
+html.EHoceA, .EHoceA body{user-select: none;}
+body{}
+ button{-webkit-tap-highlight-color: transparent;}
+.wI2uWQ{width: inherit; height: inherit;}
+.s5Xvtg._0YWo_Q:not(.agLBbw):hover .p8DDOg:not(:active) + .l_S_Ng:not(.iGjddQ){box-shadow: inset 0 0 0 min(max(1px, calc(var(--V8rdkw)/36)), 3px) var(--3ZWdlg);}
+.s5Xvtg._0YWo_Q:not(.agLBbw):hover .p8DDOg:not(:active) + .l_S_Ng:not(.iGjddQ) ._8CNofA{color: var(--Cs3XTw); opacity: 1;}
+.s5Xvtg._0YWo_Q:not(.agLBbw):hover .p8DDOg:not(:active) + .l_S_Ng.iGjddQ{box-shadow: inset 0 0 0 calc(var(--V8rdkw)*.5) var(--pMrTCg);}
+.UB_yHg{width: 100%; height: 100%; position: relative;}
+.KYSIUA{width: 100%; height: 100%; position: absolute;}
+.light{--snAkZw: #ffffffb2;}
+@keyframes jghgtQ { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes UKPTSQ { 
+  0% { opacity: 1; }
+  100% { opacity: 0.25; }
+}
+.light{--gJAqkA: #ffffff80;}
+@keyframes BsPUfw { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes tkWxZg { 
+  0% { opacity: 0.5; transform: scale(0); }
+  100% { opacity: 0; transform: scale(3); }
+}
+.light{--s2EMVg: #fff6;}
+.light{--xhNO4Q: linear-gradient(to right, #ffffffb2 0%, 20%, transparent 100%); --V6yv2g: linear-gradient(to left, #ffffffb2 0%, 20%, transparent 100%); --NZqRRQ: #1c213080; --rHZB8Q: #fff; --BSTI8A: #2b354a4d;}
+@keyframes AMC4BQ { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes oQVnFA { 
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+@keyframes OGOkJg { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.fGuHgw:not(:hover):not(:active){background: var(--BorQ6g);}
+@keyframes Br9pCg { 
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+.light{--Gz-abA: #1c213080;}
+@keyframes _2TeOHg { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.light{--D_rk8Q: linear-gradient(to top, #ffffffb2 0%, transparent 100%);}
+.guWTXA{width: 100%; height: 100%;}
+@keyframes MRkCxg { 
+  0% { opacity: 0.15; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.15; }
+}
+@keyframes _21I6hA { 
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(9); }
+}
+@keyframes _Bk8qQ { 
+  0%, 100% { opacity: 0; background: rgb(125, 42, 232); }
+  50% { opacity: 0.4; background: rgb(15, 16, 21); }
+}
+@keyframes bynzDw { 
+  0% { opacity: 0.15; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.15; }
+}
+@keyframes oF_s9A { 
+  0% { background-size: 0% 0%; }
+  100% { background-size: 100% 100%; }
+}
+@keyframes QC9Ujw { 
+  0% { background-size: 100% 100%; }
+  100% { background-size: 0% 0%; }
+}
+@keyframes Nad2vQ { 
+  0% { color: rgba(0, 0, 0, 0); }
+  100% { color: rgb(255, 255, 255); }
+}
+@keyframes PXxj0g { 
+  0% { color: rgb(255, 255, 255); }
+  100% { color: rgba(0, 0, 0, 0); }
+}
+@keyframes tWmtUw { 
+  0% { opacity: 0; transform: scale(0.3) rotate(15deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes f8jRoA { 
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.6); }
+}
+@keyframes X1AFEg { 
+  0% { transform: translate(0px); }
+  18% { transform: translate(0px); }
+  32% { transform: translate(12.5px); }
+  46% { transform: translate(-12.5px); }
+  60% { transform: translate(12.5px); }
+  74% { transform: translate(-12.5px); }
+  86% { transform: translate(0px); }
+  100% { transform: translate(0px); }
+}
+@keyframes l9vWbg { 
+  0% { opacity: 1; }
+  11.5% { opacity: 1; }
+  12% { opacity: 0; }
+  93.5% { opacity: 0; }
+  94% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes TFF6tg { 
+  0% { opacity: 0; }
+  11.5% { opacity: 0; }
+  12% { opacity: 1; }
+  93.5% { opacity: 1; }
+  94% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes M0OD4A { 
+  0% { opacity: 1; }
+  25% { opacity: 0.36; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes iaFCqQ { 
+  30% { transform: none; }
+  100% { filter: none; transform: translateY(calc(-100% - 5vw)); }
+}
+@keyframes RwA6FA { 
+  0% { filter: none; transform: translateY(calc(-100% - 5vw)); }
+  70% { transform: none; }
+}
+@keyframes QXIBRw { 
+  100% { transform: translate(-150%) skew(-20deg) scale(0.5, 0.975); }
+}
+@keyframes _8rZznA { 
+  0% { transform: translate(-150%) skew(-20deg) scale(0.5, 0.975); }
+}
+@keyframes umVOEg { 
+  100% { transform: translate(150%) skew(20deg) scale(0.5, 0.975); }
+}
+@keyframes _0NZa1Q { 
+  0% { transform: translate(150%) skew(20deg) scale(0.5, 0.975); }
+}
+@keyframes x1g0pm36-B { 
+  0% { background-position: 100% 0px; }
+  75% { background-position: 0px 0px; }
+  100% { background-position: 0px 0px; }
+}
+@keyframes xhu7vme-B { 
+  0% { background-position: 100% 0px; }
+  75%, 100% { background-position: 0px 0px; }
+}
+@keyframes x1kd9uik-B { 
+  0% { background-position: 0px 0px; }
+  75% { background-position: 100% 0px; }
+  100% { background-position: 100% 0px; }
+}
+@keyframes xbvsqgp-B { 
+  0% { background-position: 0px 0px; }
+  75%, 100% { background-position: 100% 0px; }
+}
+@keyframes x1x35vq8-B { 
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+@keyframes x17rx7e9-B { 
+  0% { opacity: 0; transform: scale(0); }
+  15% { opacity: 1; transform: scale(0); }
+  60% { opacity: 0; transform: scale(2); }
+  100% { opacity: 0; transform: scale(0); }
+}
+@keyframes x18re5ia-B { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes xpsulm8-B { 
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes xnd5740-B { 
+  0% { opacity: 0; transform: scale(0.75); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes x8ht0xs-B { 
+  0% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  25% { opacity: var(--lightningcss-light,.025) var(--lightningcss-dark,.1); }
+  50% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  100% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+}
+@keyframes xty2yg8-B { 
+  0% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  25% { opacity: var(--lightningcss-light,.025) var(--lightningcss-dark,.1); }
+  50% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  100% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+}
+@keyframes x1wc8ddo-B { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes xrimgva-B { 
+  0% { transform: scale(0.85); }
+  20% { transform: scale(0.85); }
+  35% { transform: scale(1); }
+  80% { transform: scale(1); }
+  100% { transform: scale(0.85); }
+}
+:root{--x1blk3ao: transparent; --x32f7hi: transparent; --xwt6zy5: transparent; --x1o1059b: transparent; --xsseag9: initial; --x1q00yh5: initial; --x1mbvlc: initial; --x1paffo3: initial; --x1f7ufdn: initial; --x9v87em: initial; --xwbi4ry: initial; --x145r4f: initial;}
+:root, .x1yowkxt{--x1elj15z: 6px; --x4i95h9: 10px; --x1yrs1j7: 12px; --x148duef: 16px; --xy1thyd: 24px; --x1hwtkpd: 9999px; --xcz4mr0: 14px; --x14jesot: 16px; --x1mmspou: 20px; --x1ck8yvz: 24px; --xa8d127: 32px; --x1660u1e: initial; --x16hqakj: initial; --x3n0y69: initial; --xhg6az6: initial; --xh4m40x: initial; --xpvh4sr: initial; --x501k60: initial; --x1dsndmz: initial; --x1ir9kr0: initial; --xr554lp: initial; --x63a40r: initial; --xebw200: initial; --x1i8pmqk: initial; --x2ebo2r: initial; --x1q9iir0: initial; --xqnz2do: initial; --x18tj7p: initial; --xsdzku5: initial; --x19m57in: initial; --x1t1u828: initial; --x1p5og4y: initial; --x5ilee5: initial; --x4sjelh: initial; --xwkuh91: initial; --xgimmd3: initial; --x1lemt95: initial; --x1oqqnha: initial; --x1awq7qb: initial; --xl92dck: initial; --xe2ivut: initial; --x151354k: initial; --xjs6pkv: initial; --x1wktk2a: initial; --x120f3bx: initial; --xvimi7p: initial; --x1ddyelk: initial; --xo18w50: initial; --xy9f1if: initial; --xjvpt88: initial; --xkhl2ty: initial; --x18l31p8: initial; --xgwv5t7: initial; --xnemg5b: initial; --x19dd7i0: initial; --xfuzduc: initial; --xehadnz: initial; --x12ne0ft: initial; --x1w1o0vc: initial; --xeoo48q: initial; --xb0ss7s: initial; --x15t4y1o: initial; --x9qt2ij: initial; --xaf1imm: initial; --x1xrukdv: initial; --x4uufk8: initial; --x1vxkbn5: initial; --xv87jgu: initial; --x1astmcs: initial; --x1t1uism: initial; --xons9c3: initial; --x1ipaulr: initial; --x1df7mmp: initial; --xi1val4: initial; --x1h3470w: initial; --x7zbkm8: initial; --x16r6ouo: initial; --xkx7x6d: initial; --x6tqy5l: initial; --xboukqu: initial; --xxuhya4: initial; --x1gtpwm7: initial; --x9q6ch9: initial; --x1lvzpne: initial; --x1fbwvsx: initial; --xkvwjcq: initial; --xmy1rsr: initial; --x18ky53c: initial; --x9zeksj: initial; --x1bw7z3e: initial; --x1e0mmf0: initial; --xdqug6n: initial; --x14yqsw4: initial; --x1jm6d4o: initial; --x7qdu6k: initial; --x1cqhvjm: initial; --x7bg8nn: initial; --x1j1tewk: initial; --x24s82w: initial; --xnxrlhk: initial; --xj6tdmq: initial; --x1d72bzt: initial; --xh4btzm: initial; --x19mt2sw: initial; --xz780lh: initial; --x1ykqo7r: calc(42 * var(--pxInRem,.1rem)); --xxh0pty: calc(36 * var(--pxInRem,.1rem)); --x1rx4e74: calc(36 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(32 * var(--pxInRem,.1rem)); --xbupry8: calc(32 * var(--pxInRem,.1rem)); --x1w7k9mn: calc(36 * var(--pxInRem,.1rem)); --x1gj1jv6: calc(24 * var(--pxInRem,.1rem)); --x18kjbme: calc(21 * var(--pxInRem,.1rem)); --xaqhdfh: calc(16 * var(--pxInRem,.1rem)); --xzzy6bd: calc(14 * var(--pxInRem,.1rem)); --x1hshy65: calc(12 * var(--pxInRem,.1rem)); --xpnq4ll: calc(21 * var(--pxInRem,.1rem)); --x1vy0r3k: calc(18 * var(--pxInRem,.1rem)); --x13a330t: calc(16 * var(--pxInRem,.1rem)); --x19vlshh: calc(14 * var(--pxInRem,.1rem)); --xc0j5m4: calc(12 * var(--pxInRem,.1rem)); --xi2juu8: calc(11 * var(--pxInRem,.1rem)); --x16dy00y: 1.1; --x8jauk2: 1.1; --xrxyf3i: 1.1; --xe3pc16: 1.1; --xsee12u: 1.25; --x1vto1m6: 1.25; --xr3lmkt: 1.25; --xfgw0cl: calc(26 * var(--pxInRem,.1rem)); --xu0oeco: calc(24 * var(--pxInRem,.1rem)); --x5afm2p: calc(20 * var(--pxInRem,.1rem)); --x3mau8u: calc(18 * var(--pxInRem,.1rem)); --x1xni5qf: 1.5; --xxuojur: 1.5; --xr7moxs: calc(24 * var(--pxInRem,.1rem)); --x1c9628w: calc(22 * var(--pxInRem,.1rem)); --x7953bv: calc(20 * var(--pxInRem,.1rem)); --x917nj4: calc(16 * var(--pxInRem,.1rem)); --xdtx5m7: 400; --x1xhhelp: 400; --x2qrp50: 400; --xrp9e4e: 400; --x1dj2nnj: 400; --xx4c2nh: 500; --xwquawg: 600; --x128k5vu: 600; --x10bnwlg: 600; --x4z8d44: 700; --xgzoo92: 600; --x14c94s9: 400; --x19vrnhw: 400; --x1ns7jh6: 400; --xm1503g: 600; --x1ea7us5: 400; --x1uc9ba8: 600; --x1b4f7gc: 400; --x10rvc3u: 600; --x2q4gkm: 600; --xdbz0an: 700; --x12act6f: -.01em; --xz15bgx: -.01em; --x171usht: -.01em; --x1qu1dzr: -.01em; --x1fraq3l: -.01em; --x15r0110: 0em; --x1kr2whe: 0em; --x1daq42c: 0em; --xhihbju: 0em; --x1ut8ik5: 0em; --xz5swk: 0em; --x1dulin4: 0em; --x126rske: 0em; --x1njjyj5: 0em; --x1u4bvcj: 0em; --x7gypcq: 0em; --x2wncl3: .01em; --xhf5vib: initial; --xopx0hl: initial; --xafjxh: initial; --x1vocd1k: initial; --x64jd1c: initial; --x5ubs4o: initial; --xsdo7ii: initial; --x1k2an3g: initial; --x1lk3xck: initial; --xin2wzn: initial; --xgfqmhp: initial; --xk5icja: initial; --x4961oa: initial; --x1be2sc2: initial;}
+:root{--x1gi2out: initial;}
+:root{--x1lurnvl: auto;}
+:root{--x1pfu137: 0;}
+:root{--x1sgv1q3: calc(2.25 * 8px); --x1z12cec: calc(1.25 * 8px);}
+:root{--x9c5hy0: 1;}
+:root{--xhuwt7l: 0px; --x9v99d8: 0px; --x1lrcpzf: 0px;}
+:root{--xnoldoe: calc(calc(8 * var(--pxInRem,.1rem)) * 5); --x1f210dw: calc(calc(8 * var(--pxInRem,.1rem)) * 6); --x7isddy: 12px; --x1m1isvl: 16px;}
+:root{--xo6fwq9: .15s cubic-bezier(.35, 0, .58, 1); --x1ecmbga: .15s cubic-bezier(.35, 0, .58, 1);}
+:root{--xqvgnxq: 0;}
+:root{--xrzzatn: transparent; --x1tuug0r: transparent; --x1x01djy: 1; --xoq8ruw: transparent;}
+:root{--xup8402: 0px; --x8gp6zb: inset 0 0 0 0 transparent; --x3glq8o: transparent; --x1pmef4a: transparent; --xe1xq77: transparent;}
+@media (min-width: 600px){:root, .x1yowkxt{--x1w7k9mn: calc(48 * var(--pxInRem,.1rem)); --x1gj1jv6: calc(32 * var(--pxInRem,.1rem)); --x18kjbme: calc(24 * var(--pxInRem,.1rem)); --xaqhdfh: calc(18 * var(--pxInRem,.1rem)); --xpnq4ll: calc(24 * var(--pxInRem,.1rem)); --x1vy0r3k: calc(21 * var(--pxInRem,.1rem)); --xfgw0cl: calc(32 * var(--pxInRem,.1rem));}}
+@media (min-width: 1650px){:root, .x1yowkxt{--x1ykqo7r: calc(112 * var(--pxInRem,.1rem)); --xxh0pty: calc(96 * var(--pxInRem,.1rem)); --x1rx4e74: calc(72 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(56 * var(--pxInRem,.1rem)); --xbupry8: calc(48 * var(--pxInRem,.1rem));}}
+@media (min-width: 600px) and (max-width: 899.9px){:root, .x1yowkxt{--x1ykqo7r: calc(56 * var(--pxInRem,.1rem)); --xxh0pty: calc(48 * var(--pxInRem,.1rem)); --x1rx4e74: calc(48 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(36 * var(--pxInRem,.1rem)); --xbupry8: calc(32 * var(--pxInRem,.1rem));}}
+@media (min-width: 900px) and (max-width: 1199.9px){:root, .x1yowkxt{--x1ykqo7r: calc(72 * var(--pxInRem,.1rem)); --xxh0pty: calc(64 * var(--pxInRem,.1rem)); --x1rx4e74: calc(56 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(42 * var(--pxInRem,.1rem)); --xbupry8: calc(36 * var(--pxInRem,.1rem));}}
+@media (min-width: 1200px) and (max-width: 1649.9px){:root, .x1yowkxt{--x1ykqo7r: calc(96 * var(--pxInRem,.1rem)); --xxh0pty: calc(84 * var(--pxInRem,.1rem)); --x1rx4e74: calc(64 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(48 * var(--pxInRem,.1rem)); --xbupry8: calc(42 * var(--pxInRem,.1rem));}}
+@media (min-width: 1200px){:root, .x1yowkxt{--xsee12u: 1.1;}}
+.x6brqfx.x6brqfx, .x6brqfx.x6brqfx:root{--xl92dck: #404f6d0f; --x151354k: #39466024; --x1t1u828: #db142c; --x1p5og4y: #b61629; --x5ilee5: #911826; --x4sjelh: #fff; --xe2ivut: #1c213080; --x2ebo2r: #13162099; --x18tj7p: #13162099; --x1q9iir0: #101219b2; --xqnz2do: #0f1015d9; --xsdzku5: #fff; --x19m57in: #ffffffb2; --x1660u1e: #8b3dff; --x16hqakj: #7630d7; --x3n0y69: #612dae; --xhg6az6: #fff; --xh4m40x: #0f101500; --xpvh4sr: #404f6d0f; --x501k60: #39466024; --x1ir9kr0: #35415a33; --x1dsndmz: #0f1015; --xwkuh91: #a370fc26; --xgimmd3: #a370fc26; --x1lemt95: #a370fc33; --x1awq7qb: #8b3dff; --x1oqqnha: #4a2e7e; --xjs6pkv: #0f101500; --x1wktk2a: #1c213080; --xr554lp: #0f101500; --x63a40r: #404f6d0f; --xebw200: #39466024; --x1i8pmqk: #0f1015; --x1cqhvjm: #db142c; --x1e0mmf0: #0f1015; --x7bg8nn: #1a62ff; --x1jm6d4o: #13162099; --x7qdu6k: #008009; --xdqug6n: #0f1015d9; --x14yqsw4: #101219b2; --x1j1tewk: #ad5a00; --x1vxkbn5: #fff; --xv87jgu: #404f6d0f; --x1astmcs: #35415a33; --x1df7mmp: #39466024; --x1ipaulr: #8b3dff; --xons9c3: #1c213080; --xi1val4: #db142c; --x1h3470w: #8b3dff; --xkx7x6d: #39466024; --x7zbkm8: #7630d7; --x16r6ouo: #612dae; --xxuhya4: #8b3dff; --x6tqy5l: #fff; --xboukqu: #1c213080; --x1t1uism: #1c213080; --xehadnz: #db142c; --x12ne0ft: #fff; --x1w1o0vc: #ffd6d8; --xeoo48q: #501b21; --xb0ss7s: #8b3dff; --x15t4y1o: #fff; --x9qt2ij: #e7dbff; --xaf1imm: #352459; --xy9f1if: #1a62ff; --xjvpt88: #fff; --xkhl2ty: #cce1ff; --x18l31p8: #182c59; --x1xrukdv: #13162099; --x4uufk8: #fff; --x120f3bx: #008009; --xvimi7p: #fff; --x1ddyelk: #c3eac4; --xo18w50: #133416; --xgwv5t7: #ad5a00; --xnemg5b: #fff; --x19dd7i0: #ffd9ad; --xfuzduc: #3e2a14; --x1gtpwm7: #fff; --x9q6ch9: #c1c5cd; --x18ky53c: #db142c; --x9zeksj: #b61629; --x1bw7z3e: #911826; --x1lvzpne: #8b3dff; --xmy1rsr: #1c213080; --x1fbwvsx: #7630d7; --xkvwjcq: #612dae; --x24s82w: #39466024; --xnxrlhk: #3d8bff; --xj6tdmq: #39466024; --xh4btzm: #35415a33; --x19mt2sw: #242c3d66; --x1d72bzt: #404f6d0f; --xz780lh: #242c3d66; --x4961oa: 0px 24px 24px -18px inset #ffffff29, 0px 1px .5px 0px inset #ffffff40, 0px -1px .5px 0px inset #151e821f, 0px 4px 8px 0px #151e8212, 0px 8px 16px 0px #151e8208; --x1be2sc2: 0px 24px 24px -18px inset #ffffff29, 0px 1px .5px 0px inset #ffffff40, 0px -1px .5px 0px inset #151e821f, 0px 1px 2px 0px #151e8212, 0px 3px 4px 0px #151e8208; --xsdo7ii: #fff; --x1lk3xck: #fff; --xk5icja: 0px 0px 0px .5px #404f6d0f, 0px 8px 16px 0px #151e821f, 0px 24px 24px 0px #151e820f; --x1k2an3g: #fff; --xgfqmhp: 0px 0px 0px .5px #404f6d12, 0px 2px 5px 0px #151e821f, 0px 6px 12px 0px #151e820f; --xin2wzn: 0px 0px 0px .5px #404f6d0f, 0px 1px 2px 0px #151e821f, 0px 2px 4px 0px #151e820f; --x5ubs4o: #f3f4f7; --xopx0hl: linear-gradient(135deg, #00c4cc 0%, #7d2ae8 100%); --xafjxh: linear-gradient(135deg, #00c4cc 0%, #7d2ae8 100%); --x1vocd1k: linear-gradient(135deg, #03a5ab 0%, #7d2ae8 100%); --xhf5vib: linear-gradient(90deg, #00c4cc 0%, #7d2ae8 100%); --x64jd1c: linear-gradient(180deg, #f9f5fe 0%, #f5ffff 100%);}
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/Nourd-Bold.woff2") format("woff2"), url("../assets/fonts/Nourd-Bold.woff") format("woff"), url("../assets/fonts/Nourd-Bold.otf") format("opentype"), url("../assets/fonts/Nourd-Bold.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-700.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/Nourd-Bold.woff2") format("woff2"), url("../assets/fonts/Nourd-Bold.woff") format("woff"), url("../assets/fonts/Nourd-Bold.otf") format("opentype"), url("../assets/fonts/Nourd-Bold.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-700.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/Nourd-Bold.woff2") format("woff2"), url("../assets/fonts/Nourd-Bold.woff") format("woff"), url("../assets/fonts/Nourd-Bold.otf") format("opentype"), url("../assets/fonts/Nourd-Bold.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-700.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/Nourd-Bold.woff2") format("woff2"), url("../assets/fonts/Nourd-Bold.woff") format("woff"), url("../assets/fonts/Nourd-Bold.otf") format("opentype"), url("../assets/fonts/Nourd-Bold.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-700.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/Nourd-Medium.woff2") format("woff2"), url("../assets/fonts/Nourd-Medium.woff") format("woff"), url("../assets/fonts/Nourd-Medium.otf") format("opentype"), url("../assets/fonts/Nourd-Medium.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-500.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/Nourd-Medium.woff2") format("woff2"), url("../assets/fonts/Nourd-Medium.woff") format("woff"), url("../assets/fonts/Nourd-Medium.otf") format("opentype"), url("../assets/fonts/Nourd-Medium.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-500.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/Nourd-Medium.woff2") format("woff2"), url("../assets/fonts/Nourd-Medium.woff") format("woff"), url("../assets/fonts/Nourd-Medium.otf") format("opentype"), url("../assets/fonts/Nourd-Medium.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-500.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/Nourd-Light.woff2") format("woff2"), url("../assets/fonts/Nourd-Light.woff") format("woff"), url("../assets/fonts/Nourd-Light.otf") format("opentype"), url("../assets/fonts/Nourd-Light.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-300.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/Nourd-Light.woff2") format("woff2"), url("../assets/fonts/Nourd-Light.woff") format("woff"), url("../assets/fonts/Nourd-Light.otf") format("opentype"), url("../assets/fonts/Nourd-Light.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-300.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/Nourd-Light.woff2") format("woff2"), url("../assets/fonts/Nourd-Light.woff") format("woff"), url("../assets/fonts/Nourd-Light.otf") format("opentype"), url("../assets/fonts/Nourd-Light.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-300.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/Nourd-Light.woff2") format("woff2"), url("../assets/fonts/Nourd-Light.woff") format("woff"), url("../assets/fonts/Nourd-Light.otf") format("opentype"), url("../assets/fonts/Nourd-Light.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-300.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/Nourd-Light.woff2") format("woff2"), url("../assets/fonts/Nourd-Light.woff") format("woff"), url("../assets/fonts/Nourd-Light.otf") format("opentype"), url("../assets/fonts/Nourd-Light.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-300.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/Nourd-Bold.woff2") format("woff2"), url("../assets/fonts/Nourd-Bold.woff") format("woff"), url("../assets/fonts/Nourd-Bold.otf") format("opentype"), url("../assets/fonts/Nourd-Bold.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-700.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/Nourd-Regular.woff2") format("woff2"), url("../assets/fonts/Nourd-Regular.woff") format("woff"), url("../assets/fonts/Nourd-Regular.otf") format("opentype"), url("../assets/fonts/Nourd-Regular.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoCuIQTA_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/LemonTuesday.woff2") format("woff2"), url("../assets/fonts/LemonTuesday.woff") format("woff"), url("../assets/fonts/LemonTuesday.otf") format("opentype"), url("../assets/fonts/LemonTuesday.ttf") format("truetype"), url("../assets/fonts/fallback/KaushanScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEtW56nQTQ_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/FCPalette.woff2") format("woff2"), url("../assets/fonts/FCPalette.woff") format("woff"), url("../assets/fonts/FCPalette.otf") format("opentype"), url("../assets/fonts/FCPalette.ttf") format("truetype"), url("../assets/fonts/fallback/CaveatBrush-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/Nourd-Medium.woff2") format("woff2"), url("../assets/fonts/Nourd-Medium.woff") format("woff"), url("../assets/fonts/Nourd-Medium.otf") format("opentype"), url("../assets/fonts/Nourd-Medium.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-500.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/Nourd-Regular.woff2") format("woff2"), url("../assets/fonts/Nourd-Regular.woff") format("woff"), url("../assets/fonts/Nourd-Regular.otf") format("opentype"), url("../assets/fonts/Nourd-Regular.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/Nourd-Bold.woff2") format("woff2"), url("../assets/fonts/Nourd-Bold.woff") format("woff"), url("../assets/fonts/Nourd-Bold.otf") format("opentype"), url("../assets/fonts/Nourd-Bold.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-700.woff2") format("woff2"); }
+@font-face { font-family: YAFdJsnKuGg_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/Nourd-Light.woff2") format("woff2"), url("../assets/fonts/Nourd-Light.woff") format("woff"), url("../assets/fonts/Nourd-Light.otf") format("opentype"), url("../assets/fonts/Nourd-Light.ttf") format("truetype"), url("../assets/fonts/fallback/Jost-300.woff2") format("woff2"); }
+@keyframes spin { 
+  0% { transform: rotate(0turn); }
+  100% { transform: rotate(1turn); }
+}
+.theme{color-scheme: var(--tk9EiQ);}
+.light{--tk9EiQ: light;}
+html{--safe-area-inset-top: 0px; --safe-area-inset-bottom: 0px; --safe-area-inset-left: 0px; --safe-area-inset-right: 0px;}
+@supports (height:env(safe-area-inset-top)){html{--safe-area-inset-top: env(safe-area-inset-top); --safe-area-inset-bottom: env(safe-area-inset-bottom); --safe-area-inset-left: env(safe-area-inset-left); --safe-area-inset-right: env(safe-area-inset-right);}}
+:root{--wczjwA: calc(var(----lgQg,.1rem)*42); --32-5Rg: calc(var(----lgQg,.1rem)*36); --q5aPlw: calc(var(----lgQg,.1rem)*36); --XAu0sw: calc(var(----lgQg,.1rem)*32); --OJy8Yg: calc(var(----lgQg,.1rem)*32); --Vf8OSg: calc(var(----lgQg,.1rem)*36); --A3YTsg: calc(var(----lgQg,.1rem)*24); --Dynksw: calc(var(----lgQg,.1rem)*21); --VrAiwg: calc(var(----lgQg,.1rem)*16); --5QGiVg: calc(var(----lgQg,.1rem)*14); --R07nfg: calc(var(----lgQg,.1rem)*12); --m8t8Kw: calc(var(----lgQg,.1rem)*21); --ZYsOLQ: calc(var(----lgQg,.1rem)*18); --__4QUw: calc(var(----lgQg,.1rem)*16); --ZOMbtg: calc(var(----lgQg,.1rem)*14); --ylZqXQ: calc(var(----lgQg,.1rem)*12); --ggP9YA: calc(var(----lgQg,.1rem)*11); --Csadrg: 1.1; --3HwnTg: 1.1; --guGCJg: 1.1; --Pz31Ow: 1.1; --qKnIjA: 1.25; --a60EZw: 1.25; --KMUE6w: 1.25; --moczTQ: calc(var(----lgQg,.1rem)*26); --VbcScA: calc(var(----lgQg,.1rem)*24); --0LLpdQ: calc(var(----lgQg,.1rem)*20); ---eZrnA: calc(var(----lgQg,.1rem)*18); --Vr1mRA: 1.5; --HMj1Lg: 1.5; --lQwhPA: calc(var(----lgQg,.1rem)*24); --X8ysKw: calc(var(----lgQg,.1rem)*22); --RJKbrQ: calc(var(----lgQg,.1rem)*20); --xQU-mQ: calc(var(----lgQg,.1rem)*16);}
+@media (min-width: 600px){:root{--wczjwA: calc(var(----lgQg,.1rem)*56); --32-5Rg: calc(var(----lgQg,.1rem)*48); --q5aPlw: calc(var(----lgQg,.1rem)*48); --XAu0sw: calc(var(----lgQg,.1rem)*36); --OJy8Yg: calc(var(----lgQg,.1rem)*32); --Vf8OSg: calc(var(----lgQg,.1rem)*48); --A3YTsg: calc(var(----lgQg,.1rem)*32); --Dynksw: calc(var(----lgQg,.1rem)*24); --VrAiwg: calc(var(----lgQg,.1rem)*18); --m8t8Kw: calc(var(----lgQg,.1rem)*24); --ZYsOLQ: calc(var(----lgQg,.1rem)*21); --moczTQ: calc(var(----lgQg,.1rem)*32);}}
+@media (min-width: 900px){:root{--wczjwA: calc(var(----lgQg,.1rem)*72); --32-5Rg: calc(var(----lgQg,.1rem)*64); --q5aPlw: calc(var(----lgQg,.1rem)*56); --XAu0sw: calc(var(----lgQg,.1rem)*42); --OJy8Yg: calc(var(----lgQg,.1rem)*36);}}
+@media (min-width: 1200px){:root{--wczjwA: calc(var(----lgQg,.1rem)*96); --32-5Rg: calc(var(----lgQg,.1rem)*84); --q5aPlw: calc(var(----lgQg,.1rem)*64); --XAu0sw: calc(var(----lgQg,.1rem)*48); --OJy8Yg: calc(var(----lgQg,.1rem)*42); --qKnIjA: 1.1;}}
+@media (min-width: 1650px){:root{--wczjwA: calc(var(----lgQg,.1rem)*112); --32-5Rg: calc(var(----lgQg,.1rem)*96); --q5aPlw: calc(var(----lgQg,.1rem)*72); --XAu0sw: calc(var(----lgQg,.1rem)*56); --OJy8Yg: calc(var(----lgQg,.1rem)*48);}}
+._2UyCZQ{color: rgb(0, 0, 0); --H97cbQ: 16px; letter-spacing: 0px; --Xm-_8w: 0; text-align: left; text-transform: none; tab-size: 4; font-synthesis: none; font-kerning: none; font-feature-settings: "liga" var(--I1TtXQ,off), "clig" var(--rt6TaA,off), "calt" var(--o_YY6w,off); -webkit-font-smoothing: antialiased; word-break: normal; overflow-wrap: break-word; white-space: normal; text-size-adjust: none; contain: style; direction: ltr; height: auto; padding: 0px; font-family: unset; font-style: normal; font-weight: 400; line-height: 1.4; position: relative; overflow: visible;}
+.a_GcMg{opacity: calc(var(--kPI9Uw,1)*var(--q1eooA,1));}
+.e1_zQg{user-select: text; pointer-events: auto;}
+.SglrXg .jfNO9A{display: inline-flex; position: relative;}
+@supports ((-webkit-hyphens:none)) and (not ((-moz-appearance:none))){._28USrA:not(._2ENCSQ) .zV8YKg{white-space: pre-wrap;}}
+.Mb8E_A{text-wrap: nowrap; overflow-wrap: normal;}
+ ._28USrA{font-size: var(--H97cbQ); margin: 0px; position: relative;}
+.jfNO9A{padding-left: var(--ZurDLQ,0px); padding-right: var(--GCe_Bw,0px); padding-top: var(--nWK-aQ,0px); padding-bottom: var(--nWK-aQ,0px); margin-left: calc(var(--26G6TA,0px) + var(--ZurDLQ,0px)*-1); margin-right: calc(var(--GCe_Bw,0px)*-1); margin-top: calc(var(--nWK-aQ,0px)*-1); margin-bottom: calc(var(--nWK-aQ,0px)*-1);}
+._28USrA .xtSH_A{display: inline-block;}
+.vkN2Cw ._28USrA{top: calc(var(--UF50hQ,0)*1em);}
+.vkN2Cw ._28USrA{margin-top: calc(var(--gixK-A)*1em);}
+.vkN2Cw ._4N4NA{margin-top: 0px;}
+.XN6uKA{direction: ltr;}
+.naUDPA{direction: rtl;}
+._28USrA.XN6uKA.GEC0sA{text-align: left;}
+._28USrA.XN6uKA.AfeL7g, ._28USrA.naUDPA.AfeL7g{text-align: center;}
+._28USrA{margin-inline-start: var(--kJ5CrQ);}
+ ._28USrA:not(.hhtymQ){counter-reset: list-1 0 list-2 0 list-3 0 list-4 0 list-5 0 list-6 0 list-7 0 list-8 0;}
+.light{--iBIYpw: #f3f4f7; --Ypt7xQ: #fff; --LIE6Cw: #fff; --Ps9yUA: #fff; --a5p9-A: 0px 0px 0px .5px #404f6d0f,0px 1px 2px 0px #151e821f,0px 2px 4px 0px #151e820f; --galhog: 0px 0px 0px .5px #404f6d12,0px 2px 5px 0px #151e821f,0px 6px 12px 0px #151e820f; --JF44pw: 0px 0px 0px .5px #404f6d0f,0px 8px 16px 0px #151e821f,0px 24px 24px 0px #151e820f; --A2-tbg: 0px 24px 24px -18px inset #ffffff29,0px 1px .5px 0px inset #ffffff40,0px -1px .5px 0px inset #151e821f,0px 4px 8px 0px #151e8212,0px 8px 16px 0px #151e8208; --gISI6g: 0px 24px 24px -18px inset #ffffff29,0px 1px .5px 0px inset #ffffff40,0px -1px .5px 0px inset #151e821f,0px 1px 2px 0px #151e8212,0px 3px 4px 0px #151e8208;}
+@keyframes c2cyRQ { 
+  0% { opacity: 0.07; }
+  25% { opacity: 0.05; }
+  50% { opacity: 0.07; }
+  100% { opacity: 0.07; }
+}
+.light{--9v5PLg: linear-gradient(90deg, #00c4cc, #7d2ae8); --LsXbHQ: linear-gradient(135deg, #00c4cc, #7d2ae8); --U8pJuw: linear-gradient(135deg, #00c4cc, #7d2ae8); --0BpVqA: linear-gradient(135deg, #03a5ab, #7d2ae8); --dbTMCw: linear-gradient(180deg, #f9f5fe, #f5ffff);}
+.light{--Kd3K9A: #8b3dff; --DVEAGQ: #7630d7; --V0s6Og: #612dae; --PqRKXQ: #fff; --R-jrhg: #0f101500; --GXtk9g: #404f6d0f; --xGXQgA: #39466024; --oAdupw: #0f1015; --8-4niA: #35415a33; --wd-tZA: #0f101500; --ntzWpQ: #404f6d0f; --BorQ6g: #39466024; --O8dBuQ: #0f1015; --EvA8JQ: #13162099; --gIrJLw: #101219b2; --XxI4hg: #0f1015d9; --SvgSpA: #13162099; --N8Oz5g: #fff; --4zRigw: #ffffffb2; --wv7owA: #db142c; --m9I-bA: #b61629; --Hxdoag: #911826; --pxBf3A: #fff; --1sn2Sg: #a370fc26; --4HnQxA: #a370fc26; --NRjSsw: #a370fc33; --GviWcg: #4a2e7e; --kl47TA: #8b3dff; --gFgXSg: #404f6d0f; --wBWOJg: #1c213080; --BVrlVA: #39466024; --KwfPsg: #0f101500; --p5yS_g: #1c213080; --jz0LSw: #008009; --CJur3Q: #fff; --UfNqTg: #c3eac4; --QcueGQ: #133416; --bdtRFA: #1a62ff; --YrdGEw: #fff; --_bpjsw: #cce1ff; --x3uTOw: #182c59; --Am6Phw: #ad5a00; --X8oIbA: #fff; --G_qVww: #ffd9ad; --HfWZ1A: #3e2a14; --43wRQw: #db142c; --9luNoA: #fff; --qKGzFw: #ffd6d8; --CMMUiA: #501b21; --RzZG4Q: #8b3dff; --M8YsdQ: #fff; --xc412Q: #e7dbff; --XZIM8Q: #352459; --6Hmmng: #13162099; --SxhHZg: #fff; --3ifkTA: #fff; --W1_3nw: #404f6d0f; --igdHlg: #35415a33; --IzK8tQ: #1c213080; --_kLulA: #1c213080; --uHakiw: #8b3dff; --TCEPKw: #39466024; --BhjlKg: #db142c; --j6I-wg: #8b3dff; --I7Yc2g: #7630d7; --Mm01yw: #612dae; --4sJsqA: #39466024; --hBXVcA: #fff; --xcCO9w: #1c213080; --WcghmA: #8b3dff; --ezSU3w: #fff; --ooFCBA: #c1c5cd; --8jnd6g: #8b3dff; ---2QwGw: #7630d7; --KgLrHA: #612dae; --jDAtXQ: #1c213080; --FOH6ww: #db142c; --jyDisg: #b61629; --QclmLg: #911826; --VcZbvQ: #0f1015; --UpESEg: #0f1015d9; --PRQgyw: #101219b2; --TJtBjA: #13162099; --vCqPYw: #008009; --NRkSiw: #db142c; --gdRMVA: #1a62ff; --cVPmKw: #ad5a00; --enMi_w: #39466024; --4DkvNQ: #3d8bff; --xwa5zw: #39466024; --2yga1g: #404f6d0f; --0ypBAQ: #35415a33; --P1hAvA: #242c3d66; --1z_vxQ: #242c3d66;}
+.DF_utQ{cursor: auto; outline: none; position: absolute;}
+.DF_utQ:hover{cursor: unset;}
+._0xkaeQ{pointer-events: auto;}
+._3zDNwA{width: 100%; height: 100%; display: block; position: absolute; top: 0px; left: 0px;}
+@media print{.DF_utQ{contain: size;}}
+._KMJVg{width: 100%; height: 100%; display: block;}
+.Ms_IOA{position: absolute; inset: 0px;}
+@keyframes _5Wn9Ig { 
+  100% { opacity: 1; }
+}
+.CQVqQQ{color-scheme: initial; forced-color-adjust: initial; math-depth: initial; position: initial; position-anchor: initial; text-size-adjust: initial; appearance: initial; color: initial; font: initial; font-palette: initial; font-synthesis: initial; position-area: initial; text-orientation: initial; text-rendering: initial; text-spacing-trim: initial; -webkit-font-smoothing: initial; -webkit-locale: initial; -webkit-text-orientation: initial; -webkit-writing-mode: initial; writing-mode: initial; zoom: initial; accent-color: initial; place-content: initial; place-items: initial; place-self: initial; alignment-baseline: initial; anchor-name: initial; anchor-scope: initial; animation-composition: initial; animation: initial; animation-trigger: initial; app-region: initial; aspect-ratio: initial; backdrop-filter: initial; backface-visibility: initial; background: initial; background-blend-mode: initial; baseline-shift: initial; baseline-source: initial; block-size: initial; border-block: initial; border: initial; border-radius: initial; border-collapse: initial; border-end-end-radius: initial; border-end-start-radius: initial; border-inline: initial; border-shape: initial; border-start-end-radius: initial; border-start-start-radius: initial; inset: initial; box-decoration-break: initial; box-shadow: initial; box-sizing: initial; break-after: initial; break-before: initial; break-inside: initial; buffered-rendering: initial; caption-side: initial; caret-animation: initial; caret-color: initial; caret-shape: initial; clear: initial; clip: initial; clip-path: initial; clip-rule: initial; color-interpolation: initial; color-interpolation-filters: initial; color-rendering: initial; columns: initial; column-fill: initial; gap: initial; rule-break: initial; rule: initial; rule-inset: initial; rule-visibility-items: initial; column-span: initial; contain: initial; contain-intrinsic-block-size: initial; contain-intrinsic-size: initial; contain-intrinsic-inline-size: initial; container: initial; content: initial; content-visibility: initial; corner-shape: initial; corner-block-end-shape: initial; corner-block-start-shape: initial; counter-increment: initial; counter-reset: initial; counter-set: initial; cursor: initial; cx: initial; cy: initial; d: initial; display: initial; dominant-baseline: initial; dynamic-range-limit: initial; empty-cells: initial; field-sizing: initial; fill: initial; fill-opacity: initial; fill-rule: initial; filter: initial; flex: initial; flex-flow: initial; flex-line-count: initial; float: initial; flood-color: initial; flood-opacity: initial; frame-sizing: initial; grid: initial; grid-area: initial; height: initial; hyphenate-character: initial; hyphenate-limit-chars: initial; hyphens: initial; image-orientation: initial; image-rendering: initial; initial-letter: initial; inline-size: initial; inset-block: initial; inset-inline: initial; interactivity: initial; interest-delay: initial; interpolate-size: initial; isolation: initial; letter-spacing: initial; lighting-color: initial; line-break: initial; list-style: initial; margin-block: initial; margin: initial; margin-inline: initial; margin-trim: initial; marker: initial; mask: initial; mask-type: initial; math-shift: initial; math-style: initial; max-block-size: initial; max-height: initial; max-inline-size: initial; max-width: initial; min-block-size: initial; min-height: initial; min-inline-size: initial; min-width: initial; mix-blend-mode: initial; object-fit: initial; object-position: initial; object-view-box: initial; offset: initial; opacity: initial; order: initial; orphans: initial; outline: initial; outline-offset: initial; overflow-anchor: initial; overflow-block: initial; overflow-clip-margin: initial; overflow-inline: initial; overflow-wrap: initial; overflow: initial; overlay: initial; overscroll-behavior-block: initial; overscroll-behavior-inline: initial; overscroll-behavior: initial; padding-block: initial; padding: initial; padding-inline: initial; page: initial; page-margin-safety: initial; page-orientation: initial; paint-order: initial; perspective: initial; perspective-origin: initial; pointer-events: initial; position-try: initial; position-visibility: initial; quotes: initial; r: initial; reading-flow: initial; reading-order: initial; resize: initial; rotate: initial; ruby-align: initial; ruby-overhang: initial; ruby-position: initial; rule-overlap: initial; rx: initial; ry: initial; scale: initial; scroll-axis-lock: initial; scroll-behavior: initial; scroll-initial-target: initial; scroll-margin-block: initial; scroll-margin: initial; scroll-margin-inline: initial; scroll-marker-group: initial; scroll-padding-block: initial; scroll-padding: initial; scroll-padding-inline: initial; scroll-snap-align: initial; scroll-snap-stop: initial; scroll-snap-type: initial; scroll-target-group: initial; scroll-timeline: initial; scrollbar-color: initial; scrollbar-gutter: initial; scrollbar-width: initial; shape-image-threshold: initial; shape-margin: initial; shape-outside: initial; shape-rendering: initial; size: initial; speak: initial; stop-color: initial; stop-opacity: initial; stroke: initial; stroke-dasharray: initial; stroke-dashoffset: initial; stroke-linecap: initial; stroke-linejoin: initial; stroke-miterlimit: initial; stroke-opacity: initial; stroke-width: initial; tab-size: initial; table-layout: initial; text-align: initial; text-align-last: initial; text-anchor: initial; text-autospace: initial; text-box: initial; text-combine-upright: initial; text-decoration: initial; text-decoration-inset: initial; text-decoration-skip-ink: initial; text-emphasis: initial; text-emphasis-position: initial; text-fit: initial; text-indent: initial; text-justify: initial; text-overflow: initial; text-shadow: initial; text-transform: initial; text-underline-offset: initial; text-underline-position: initial; text-wrap: initial; timeline-scope: initial; timeline-trigger: initial; touch-action: initial; transform: initial; transform-box: initial; transform-origin: initial; transform-style: initial; transition: initial; translate: initial; trigger-scope: initial; user-select: initial; vector-effect: initial; vertical-align: initial; view-timeline: initial; view-transition-class: initial; view-transition-group: initial; view-transition-name: initial; view-transition-scope: initial; visibility: initial; border-spacing: initial; -webkit-box-align: initial; -webkit-box-decoration-break: initial; -webkit-box-direction: initial; -webkit-box-flex: initial; -webkit-box-ordinal-group: initial; -webkit-box-orient: initial; -webkit-box-pack: initial; -webkit-box-reflect: initial; -webkit-line-break: initial; -webkit-line-clamp: initial; -webkit-mask-box-image: initial; -webkit-rtl-ordering: initial; -webkit-ruby-position: initial; -webkit-tap-highlight-color: initial; -webkit-text-combine: initial; -webkit-text-decorations-in-effect: initial; -webkit-text-fill-color: initial; -webkit-text-security: initial; -webkit-text-stroke: initial; -webkit-user-drag: initial; white-space-collapse: initial; widows: initial; width: initial; will-change: initial; window-drag: initial; word-break: initial; word-spacing: initial; x: initial; y: initial; z-index: initial; print-color-adjust: exact;}
+.uzRrVg{box-sizing: border-box; cursor: inherit; font-size: 1rem; display: block;}
+.TRWryw{width: 100%; height: 100%;}
+.light{--mZd2dw: #00c4cc; --7dKt9A: #7630d7; --PfAhjQ: #0f101500; --qoG_LA: #242c3d66; --WIvwOg: #2b354a4d; --mu_GGA: #ffffffb2; --djTVRw: #fff;}
+.S3wQqg{opacity: 0; width: 100%; height: 100%;}
+._8YzbFQ{opacity: 1;}
+.uqhtBg{width: inherit; height: inherit;}
+.bFnJ2A{position: absolute; top: 0px; left: 0px; overflow: hidden;}
+._7KaXww{width: 0px; height: 0px; position: absolute;}
+.qhHTGg{pointer-events: none; position: relative;}
+._4c2rDg{width: 100%; height: 100%;}
+.GxUsfw{transition: transform 0.3s;}
+.a26Xuw{width: 100%; height: 100%;}
+.a26Xuw ::selection{user-select: none;}
+.fbzKiw{position: absolute; inset: 0px;}
+.PcHy7w{width: 100%; height: 100%;}
+.Izwocg{position: relative;}
+.uk_25A{width: 100%; height: 100%;}
+.H5qArQ{width: 100%; height: 100%; overflow: hidden;}
+.Ty61NA{transition: transform 0.3s;}
+._7_i_XA{pointer-events: none; object-fit: fill; width: 100%; height: 100%; display: block; position: absolute;}
+.dMHlHA{pointer-events: none; width: 100%; height: 100%; display: block; position: absolute;}
+.Dt3KRw{width: 100%; height: 100%; display: block; position: absolute;}
+.twbtjQ{direction: ltr; position: relative;}
+.GDnEHQ{overflow: hidden;}
+.o2Yl2g{transform-origin: 0px 0px;}
+.QhExXw{pointer-events: none; direction: ltr; position: absolute; bottom: 0px; left: 0px;}
+.QhExXw.pKfnlA{transform: translateZ(0px);}
+.onhyOQ{box-sizing: border-box; border-radius: inherit; justify-content: center; display: flex; position: relative; overflow: hidden;}
+._mXnjA{position: relative;}
+.WyoGFw{pointer-events: none;}
+._6t4CHA{pointer-events: auto; outline: none; position: absolute; inset: 0px; overflow: hidden;}
+.light{--M05zEQ: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024; --gzwI8Q: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024; --al4BcQ: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024; --5n3Uvg: 0 0 0 1px #404f6d0f, 0 0 8px 0 #39466024;}
+._0yZ6Qg{text-rendering: geometricprecision;}
+.aF9o6Q{height: 100%;}
+.Zp7NQw{width: 100%; height: 100%; position: relative; overflow: hidden;}
+.E8yZTA{position: relative;}
+.Pr6LEA{pointer-events: none; width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;}
+.hWv4NA{transform-origin: 0px 0px; position: relative;}
+@keyframes eT6GTQ { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.paNqSg{object-fit: fill; width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;}
+.jXCxjw{width: 100%; height: 100%;}
+._8jGYJw{contain: strict; z-index: 0; background: rgb(255, 255, 255); position: relative; overflow: hidden;}
+.fMSICA{width: 100%; height: 100%; display: none; position: absolute; top: 0px; left: 0px;}
+.h517IA{display: unset;}
+._5yhCRQ{width: 100%; height: 100%;}
+._1UF_UQ{min-height: 100%;}
+.uPOslw{justify-content: center; align-items: center; display: flex;}
+.rGeu6w{flex: 1 1 0%;}
+.rGeu6w ~ .rGeu6w{margin-top: -1px;}
+.KYQZFA{flex-direction: column; width: 100%; min-height: 100%; display: flex; overflow: hidden;}
+html, body{height: 100%;}
+body{touch-action: manipulation; overflow: hidden;}
+html{font-size: 62.5%;}
+html, body{width: 100%; margin: 0px; padding: 0px;}
+html.EHoceA, .EHoceA body{user-select: none;}
+body{}
+ button{-webkit-tap-highlight-color: transparent;}
+.wI2uWQ{width: inherit; height: inherit;}
+.s5Xvtg._0YWo_Q:not(.agLBbw):hover .p8DDOg:not(:active) + .l_S_Ng:not(.iGjddQ){box-shadow: inset 0 0 0 min(max(1px, calc(var(--V8rdkw)/36)), 3px) var(--3ZWdlg);}
+.s5Xvtg._0YWo_Q:not(.agLBbw):hover .p8DDOg:not(:active) + .l_S_Ng:not(.iGjddQ) ._8CNofA{color: var(--Cs3XTw); opacity: 1;}
+.s5Xvtg._0YWo_Q:not(.agLBbw):hover .p8DDOg:not(:active) + .l_S_Ng.iGjddQ{box-shadow: inset 0 0 0 calc(var(--V8rdkw)*.5) var(--pMrTCg);}
+.UB_yHg{width: 100%; height: 100%; position: relative;}
+.KYSIUA{width: 100%; height: 100%; position: absolute;}
+.light{--snAkZw: #ffffffb2;}
+@keyframes jghgtQ { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes UKPTSQ { 
+  0% { opacity: 1; }
+  100% { opacity: 0.25; }
+}
+.light{--gJAqkA: #ffffff80;}
+@keyframes BsPUfw { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes tkWxZg { 
+  0% { opacity: 0.5; transform: scale(0); }
+  100% { opacity: 0; transform: scale(3); }
+}
+.light{--s2EMVg: #fff6;}
+.light{--xhNO4Q: linear-gradient(to right, #ffffffb2 0%, 20%, transparent 100%); --V6yv2g: linear-gradient(to left, #ffffffb2 0%, 20%, transparent 100%); --NZqRRQ: #1c213080; --rHZB8Q: #fff; --BSTI8A: #2b354a4d;}
+@keyframes AMC4BQ { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes oQVnFA { 
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+@keyframes OGOkJg { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.fGuHgw:not(:hover):not(:active){background: var(--BorQ6g);}
+@keyframes Br9pCg { 
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+.light{--Gz-abA: #1c213080;}
+@keyframes _2TeOHg { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.light{--D_rk8Q: linear-gradient(to top, #ffffffb2 0%, transparent 100%);}
+.guWTXA{width: 100%; height: 100%;}
+@keyframes MRkCxg { 
+  0% { opacity: 0.15; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.15; }
+}
+@keyframes _21I6hA { 
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(9); }
+}
+@keyframes _Bk8qQ { 
+  0%, 100% { opacity: 0; background: rgb(125, 42, 232); }
+  50% { opacity: 0.4; background: rgb(15, 16, 21); }
+}
+@keyframes bynzDw { 
+  0% { opacity: 0.15; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.15; }
+}
+@keyframes oF_s9A { 
+  0% { background-size: 0% 0%; }
+  100% { background-size: 100% 100%; }
+}
+@keyframes QC9Ujw { 
+  0% { background-size: 100% 100%; }
+  100% { background-size: 0% 0%; }
+}
+@keyframes Nad2vQ { 
+  0% { color: rgba(0, 0, 0, 0); }
+  100% { color: rgb(255, 255, 255); }
+}
+@keyframes PXxj0g { 
+  0% { color: rgb(255, 255, 255); }
+  100% { color: rgba(0, 0, 0, 0); }
+}
+@keyframes tWmtUw { 
+  0% { opacity: 0; transform: scale(0.3) rotate(15deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes f8jRoA { 
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.6); }
+}
+@keyframes X1AFEg { 
+  0% { transform: translate(0px); }
+  18% { transform: translate(0px); }
+  32% { transform: translate(12.5px); }
+  46% { transform: translate(-12.5px); }
+  60% { transform: translate(12.5px); }
+  74% { transform: translate(-12.5px); }
+  86% { transform: translate(0px); }
+  100% { transform: translate(0px); }
+}
+@keyframes l9vWbg { 
+  0% { opacity: 1; }
+  11.5% { opacity: 1; }
+  12% { opacity: 0; }
+  93.5% { opacity: 0; }
+  94% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes TFF6tg { 
+  0% { opacity: 0; }
+  11.5% { opacity: 0; }
+  12% { opacity: 1; }
+  93.5% { opacity: 1; }
+  94% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes M0OD4A { 
+  0% { opacity: 1; }
+  25% { opacity: 0.36; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes iaFCqQ { 
+  30% { transform: none; }
+  100% { filter: none; transform: translateY(calc(-100% - 5vw)); }
+}
+@keyframes RwA6FA { 
+  0% { filter: none; transform: translateY(calc(-100% - 5vw)); }
+  70% { transform: none; }
+}
+@keyframes QXIBRw { 
+  100% { transform: translate(-150%) skew(-20deg) scale(0.5, 0.975); }
+}
+@keyframes _8rZznA { 
+  0% { transform: translate(-150%) skew(-20deg) scale(0.5, 0.975); }
+}
+@keyframes umVOEg { 
+  100% { transform: translate(150%) skew(20deg) scale(0.5, 0.975); }
+}
+@keyframes _0NZa1Q { 
+  0% { transform: translate(150%) skew(20deg) scale(0.5, 0.975); }
+}
+@keyframes x1g0pm36-B { 
+  0% { background-position: 100% 0px; }
+  75% { background-position: 0px 0px; }
+  100% { background-position: 0px 0px; }
+}
+@keyframes xhu7vme-B { 
+  0% { background-position: 100% 0px; }
+  75%, 100% { background-position: 0px 0px; }
+}
+@keyframes x1kd9uik-B { 
+  0% { background-position: 0px 0px; }
+  75% { background-position: 100% 0px; }
+  100% { background-position: 100% 0px; }
+}
+@keyframes xbvsqgp-B { 
+  0% { background-position: 0px 0px; }
+  75%, 100% { background-position: 100% 0px; }
+}
+@keyframes x1x35vq8-B { 
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+@keyframes x17rx7e9-B { 
+  0% { opacity: 0; transform: scale(0); }
+  15% { opacity: 1; transform: scale(0); }
+  60% { opacity: 0; transform: scale(2); }
+  100% { opacity: 0; transform: scale(0); }
+}
+@keyframes x18re5ia-B { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes xpsulm8-B { 
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes xnd5740-B { 
+  0% { opacity: 0; transform: scale(0.75); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes x8ht0xs-B { 
+  0% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  25% { opacity: var(--lightningcss-light,.025) var(--lightningcss-dark,.1); }
+  50% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  100% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+}
+@keyframes xty2yg8-B { 
+  0% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  25% { opacity: var(--lightningcss-light,.025) var(--lightningcss-dark,.1); }
+  50% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+  100% { opacity: var(--lightningcss-light,.07) var(--lightningcss-dark,.15); }
+}
+@keyframes x1wc8ddo-B { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes xrimgva-B { 
+  0% { transform: scale(0.85); }
+  20% { transform: scale(0.85); }
+  35% { transform: scale(1); }
+  80% { transform: scale(1); }
+  100% { transform: scale(0.85); }
+}
+:root{--x1blk3ao: transparent; --x32f7hi: transparent; --xwt6zy5: transparent; --x1o1059b: transparent; --xsseag9: initial; --x1q00yh5: initial; --x1mbvlc: initial; --x1paffo3: initial; --x1f7ufdn: initial; --x9v87em: initial; --xwbi4ry: initial; --x145r4f: initial;}
+:root, .x1yowkxt{--x1elj15z: 6px; --x4i95h9: 10px; --x1yrs1j7: 12px; --x148duef: 16px; --xy1thyd: 24px; --x1hwtkpd: 9999px; --xcz4mr0: 14px; --x14jesot: 16px; --x1mmspou: 20px; --x1ck8yvz: 24px; --xa8d127: 32px; --x1660u1e: initial; --x16hqakj: initial; --x3n0y69: initial; --xhg6az6: initial; --xh4m40x: initial; --xpvh4sr: initial; --x501k60: initial; --x1dsndmz: initial; --x1ir9kr0: initial; --xr554lp: initial; --x63a40r: initial; --xebw200: initial; --x1i8pmqk: initial; --x2ebo2r: initial; --x1q9iir0: initial; --xqnz2do: initial; --x18tj7p: initial; --xsdzku5: initial; --x19m57in: initial; --x1t1u828: initial; --x1p5og4y: initial; --x5ilee5: initial; --x4sjelh: initial; --xwkuh91: initial; --xgimmd3: initial; --x1lemt95: initial; --x1oqqnha: initial; --x1awq7qb: initial; --xl92dck: initial; --xe2ivut: initial; --x151354k: initial; --xjs6pkv: initial; --x1wktk2a: initial; --x120f3bx: initial; --xvimi7p: initial; --x1ddyelk: initial; --xo18w50: initial; --xy9f1if: initial; --xjvpt88: initial; --xkhl2ty: initial; --x18l31p8: initial; --xgwv5t7: initial; --xnemg5b: initial; --x19dd7i0: initial; --xfuzduc: initial; --xehadnz: initial; --x12ne0ft: initial; --x1w1o0vc: initial; --xeoo48q: initial; --xb0ss7s: initial; --x15t4y1o: initial; --x9qt2ij: initial; --xaf1imm: initial; --x1xrukdv: initial; --x4uufk8: initial; --x1vxkbn5: initial; --xv87jgu: initial; --x1astmcs: initial; --x1t1uism: initial; --xons9c3: initial; --x1ipaulr: initial; --x1df7mmp: initial; --xi1val4: initial; --x1h3470w: initial; --x7zbkm8: initial; --x16r6ouo: initial; --xkx7x6d: initial; --x6tqy5l: initial; --xboukqu: initial; --xxuhya4: initial; --x1gtpwm7: initial; --x9q6ch9: initial; --x1lvzpne: initial; --x1fbwvsx: initial; --xkvwjcq: initial; --xmy1rsr: initial; --x18ky53c: initial; --x9zeksj: initial; --x1bw7z3e: initial; --x1e0mmf0: initial; --xdqug6n: initial; --x14yqsw4: initial; --x1jm6d4o: initial; --x7qdu6k: initial; --x1cqhvjm: initial; --x7bg8nn: initial; --x1j1tewk: initial; --x24s82w: initial; --xnxrlhk: initial; --xj6tdmq: initial; --x1d72bzt: initial; --xh4btzm: initial; --x19mt2sw: initial; --xz780lh: initial; --x1ykqo7r: calc(42 * var(--pxInRem,.1rem)); --xxh0pty: calc(36 * var(--pxInRem,.1rem)); --x1rx4e74: calc(36 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(32 * var(--pxInRem,.1rem)); --xbupry8: calc(32 * var(--pxInRem,.1rem)); --x1w7k9mn: calc(36 * var(--pxInRem,.1rem)); --x1gj1jv6: calc(24 * var(--pxInRem,.1rem)); --x18kjbme: calc(21 * var(--pxInRem,.1rem)); --xaqhdfh: calc(16 * var(--pxInRem,.1rem)); --xzzy6bd: calc(14 * var(--pxInRem,.1rem)); --x1hshy65: calc(12 * var(--pxInRem,.1rem)); --xpnq4ll: calc(21 * var(--pxInRem,.1rem)); --x1vy0r3k: calc(18 * var(--pxInRem,.1rem)); --x13a330t: calc(16 * var(--pxInRem,.1rem)); --x19vlshh: calc(14 * var(--pxInRem,.1rem)); --xc0j5m4: calc(12 * var(--pxInRem,.1rem)); --xi2juu8: calc(11 * var(--pxInRem,.1rem)); --x16dy00y: 1.1; --x8jauk2: 1.1; --xrxyf3i: 1.1; --xe3pc16: 1.1; --xsee12u: 1.25; --x1vto1m6: 1.25; --xr3lmkt: 1.25; --xfgw0cl: calc(26 * var(--pxInRem,.1rem)); --xu0oeco: calc(24 * var(--pxInRem,.1rem)); --x5afm2p: calc(20 * var(--pxInRem,.1rem)); --x3mau8u: calc(18 * var(--pxInRem,.1rem)); --x1xni5qf: 1.5; --xxuojur: 1.5; --xr7moxs: calc(24 * var(--pxInRem,.1rem)); --x1c9628w: calc(22 * var(--pxInRem,.1rem)); --x7953bv: calc(20 * var(--pxInRem,.1rem)); --x917nj4: calc(16 * var(--pxInRem,.1rem)); --xdtx5m7: 400; --x1xhhelp: 400; --x2qrp50: 400; --xrp9e4e: 400; --x1dj2nnj: 400; --xx4c2nh: 500; --xwquawg: 600; --x128k5vu: 600; --x10bnwlg: 600; --x4z8d44: 700; --xgzoo92: 600; --x14c94s9: 400; --x19vrnhw: 400; --x1ns7jh6: 400; --xm1503g: 600; --x1ea7us5: 400; --x1uc9ba8: 600; --x1b4f7gc: 400; --x10rvc3u: 600; --x2q4gkm: 600; --xdbz0an: 700; --x12act6f: -.01em; --xz15bgx: -.01em; --x171usht: -.01em; --x1qu1dzr: -.01em; --x1fraq3l: -.01em; --x15r0110: 0em; --x1kr2whe: 0em; --x1daq42c: 0em; --xhihbju: 0em; --x1ut8ik5: 0em; --xz5swk: 0em; --x1dulin4: 0em; --x126rske: 0em; --x1njjyj5: 0em; --x1u4bvcj: 0em; --x7gypcq: 0em; --x2wncl3: .01em; --xhf5vib: initial; --xopx0hl: initial; --xafjxh: initial; --x1vocd1k: initial; --x64jd1c: initial; --x5ubs4o: initial; --xsdo7ii: initial; --x1k2an3g: initial; --x1lk3xck: initial; --xin2wzn: initial; --xgfqmhp: initial; --xk5icja: initial; --x4961oa: initial; --x1be2sc2: initial;}
+:root{--x1gi2out: initial;}
+:root{--x1lurnvl: auto;}
+:root{--x1pfu137: 0;}
+:root{--x1sgv1q3: calc(2.25 * 8px); --x1z12cec: calc(1.25 * 8px);}
+:root{--x9c5hy0: 1;}
+:root{--xhuwt7l: 0px; --x9v99d8: 0px; --x1lrcpzf: 0px;}
+:root{--xnoldoe: calc(calc(8 * var(--pxInRem,.1rem)) * 5); --x1f210dw: calc(calc(8 * var(--pxInRem,.1rem)) * 6); --x7isddy: 12px; --x1m1isvl: 16px;}
+:root{--xo6fwq9: .15s cubic-bezier(.35, 0, .58, 1); --x1ecmbga: .15s cubic-bezier(.35, 0, .58, 1);}
+:root{--xqvgnxq: 0;}
+:root{--xrzzatn: transparent; --x1tuug0r: transparent; --x1x01djy: 1; --xoq8ruw: transparent;}
+:root{--xup8402: 0px; --x8gp6zb: inset 0 0 0 0 transparent; --x3glq8o: transparent; --x1pmef4a: transparent; --xe1xq77: transparent;}
+@media (min-width: 600px){:root, .x1yowkxt{--x1w7k9mn: calc(48 * var(--pxInRem,.1rem)); --x1gj1jv6: calc(32 * var(--pxInRem,.1rem)); --x18kjbme: calc(24 * var(--pxInRem,.1rem)); --xaqhdfh: calc(18 * var(--pxInRem,.1rem)); --xpnq4ll: calc(24 * var(--pxInRem,.1rem)); --x1vy0r3k: calc(21 * var(--pxInRem,.1rem)); --xfgw0cl: calc(32 * var(--pxInRem,.1rem));}}
+@media (min-width: 1650px){:root, .x1yowkxt{--x1ykqo7r: calc(112 * var(--pxInRem,.1rem)); --xxh0pty: calc(96 * var(--pxInRem,.1rem)); --x1rx4e74: calc(72 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(56 * var(--pxInRem,.1rem)); --xbupry8: calc(48 * var(--pxInRem,.1rem));}}
+@media (min-width: 600px) and (max-width: 899.9px){:root, .x1yowkxt{--x1ykqo7r: calc(56 * var(--pxInRem,.1rem)); --xxh0pty: calc(48 * var(--pxInRem,.1rem)); --x1rx4e74: calc(48 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(36 * var(--pxInRem,.1rem)); --xbupry8: calc(32 * var(--pxInRem,.1rem));}}
+@media (min-width: 900px) and (max-width: 1199.9px){:root, .x1yowkxt{--x1ykqo7r: calc(72 * var(--pxInRem,.1rem)); --xxh0pty: calc(64 * var(--pxInRem,.1rem)); --x1rx4e74: calc(56 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(42 * var(--pxInRem,.1rem)); --xbupry8: calc(36 * var(--pxInRem,.1rem));}}
+@media (min-width: 1200px) and (max-width: 1649.9px){:root, .x1yowkxt{--x1ykqo7r: calc(96 * var(--pxInRem,.1rem)); --xxh0pty: calc(84 * var(--pxInRem,.1rem)); --x1rx4e74: calc(64 * var(--pxInRem,.1rem)); --x1pv9p3q: calc(48 * var(--pxInRem,.1rem)); --xbupry8: calc(42 * var(--pxInRem,.1rem));}}
+@media (min-width: 1200px){:root, .x1yowkxt{--xsee12u: 1.1;}}
+.x6brqfx.x6brqfx, .x6brqfx.x6brqfx:root{--xl92dck: #404f6d0f; --x151354k: #39466024; --x1t1u828: #db142c; --x1p5og4y: #b61629; --x5ilee5: #911826; --x4sjelh: #fff; --xe2ivut: #1c213080; --x2ebo2r: #13162099; --x18tj7p: #13162099; --x1q9iir0: #101219b2; --xqnz2do: #0f1015d9; --xsdzku5: #fff; --x19m57in: #ffffffb2; --x1660u1e: #8b3dff; --x16hqakj: #7630d7; --x3n0y69: #612dae; --xhg6az6: #fff; --xh4m40x: #0f101500; --xpvh4sr: #404f6d0f; --x501k60: #39466024; --x1ir9kr0: #35415a33; --x1dsndmz: #0f1015; --xwkuh91: #a370fc26; --xgimmd3: #a370fc26; --x1lemt95: #a370fc33; --x1awq7qb: #8b3dff; --x1oqqnha: #4a2e7e; --xjs6pkv: #0f101500; --x1wktk2a: #1c213080; --xr554lp: #0f101500; --x63a40r: #404f6d0f; --xebw200: #39466024; --x1i8pmqk: #0f1015; --x1cqhvjm: #db142c; --x1e0mmf0: #0f1015; --x7bg8nn: #1a62ff; --x1jm6d4o: #13162099; --x7qdu6k: #008009; --xdqug6n: #0f1015d9; --x14yqsw4: #101219b2; --x1j1tewk: #ad5a00; --x1vxkbn5: #fff; --xv87jgu: #404f6d0f; --x1astmcs: #35415a33; --x1df7mmp: #39466024; --x1ipaulr: #8b3dff; --xons9c3: #1c213080; --xi1val4: #db142c; --x1h3470w: #8b3dff; --xkx7x6d: #39466024; --x7zbkm8: #7630d7; --x16r6ouo: #612dae; --xxuhya4: #8b3dff; --x6tqy5l: #fff; --xboukqu: #1c213080; --x1t1uism: #1c213080; --xehadnz: #db142c; --x12ne0ft: #fff; --x1w1o0vc: #ffd6d8; --xeoo48q: #501b21; --xb0ss7s: #8b3dff; --x15t4y1o: #fff; --x9qt2ij: #e7dbff; --xaf1imm: #352459; --xy9f1if: #1a62ff; --xjvpt88: #fff; --xkhl2ty: #cce1ff; --x18l31p8: #182c59; --x1xrukdv: #13162099; --x4uufk8: #fff; --x120f3bx: #008009; --xvimi7p: #fff; --x1ddyelk: #c3eac4; --xo18w50: #133416; --xgwv5t7: #ad5a00; --xnemg5b: #fff; --x19dd7i0: #ffd9ad; --xfuzduc: #3e2a14; --x1gtpwm7: #fff; --x9q6ch9: #c1c5cd; --x18ky53c: #db142c; --x9zeksj: #b61629; --x1bw7z3e: #911826; --x1lvzpne: #8b3dff; --xmy1rsr: #1c213080; --x1fbwvsx: #7630d7; --xkvwjcq: #612dae; --x24s82w: #39466024; --xnxrlhk: #3d8bff; --xj6tdmq: #39466024; --xh4btzm: #35415a33; --x19mt2sw: #242c3d66; --x1d72bzt: #404f6d0f; --xz780lh: #242c3d66; --x4961oa: 0px 24px 24px -18px inset #ffffff29, 0px 1px .5px 0px inset #ffffff40, 0px -1px .5px 0px inset #151e821f, 0px 4px 8px 0px #151e8212, 0px 8px 16px 0px #151e8208; --x1be2sc2: 0px 24px 24px -18px inset #ffffff29, 0px 1px .5px 0px inset #ffffff40, 0px -1px .5px 0px inset #151e821f, 0px 1px 2px 0px #151e8212, 0px 3px 4px 0px #151e8208; --xsdo7ii: #fff; --x1lk3xck: #fff; --xk5icja: 0px 0px 0px .5px #404f6d0f, 0px 8px 16px 0px #151e821f, 0px 24px 24px 0px #151e820f; --x1k2an3g: #fff; --xgfqmhp: 0px 0px 0px .5px #404f6d12, 0px 2px 5px 0px #151e821f, 0px 6px 12px 0px #151e820f; --xin2wzn: 0px 0px 0px .5px #404f6d0f, 0px 1px 2px 0px #151e821f, 0px 2px 4px 0px #151e820f; --x5ubs4o: #f3f4f7; --xopx0hl: linear-gradient(135deg, #00c4cc 0%, #7d2ae8 100%); --xafjxh: linear-gradient(135deg, #00c4cc 0%, #7d2ae8 100%); --x1vocd1k: linear-gradient(135deg, #03a5ab 0%, #7d2ae8 100%); --xhf5vib: linear-gradient(90deg, #00c4cc 0%, #7d2ae8 100%); --x64jd1c: linear-gradient(180deg, #f9f5fe 0%, #f5ffff 100%);}
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 900; src: url("../assets/fonts/free/e7d7067aaf811fc432ef1d1d532ea8f5.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 900; src: url("../assets/fonts/free/c026733dc20c14742056cd3d076a7221.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 800; src: url("../assets/fonts/free/e7d7067aaf811fc432ef1d1d532ea8f5.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 800; src: url("../assets/fonts/free/c026733dc20c14742056cd3d076a7221.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 600; src: url("../assets/fonts/free/e7d7067aaf811fc432ef1d1d532ea8f5.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 600; src: url("../assets/fonts/free/c026733dc20c14742056cd3d076a7221.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 500; src: url("../assets/fonts/free/818cdbfa3f86184a75336273d702457a.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 500; src: url("../assets/fonts/free/864215ecd5165c9707b82b2710049121.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 300; src: url("../assets/fonts/free/818cdbfa3f86184a75336273d702457a.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 300; src: url("../assets/fonts/free/864215ecd5165c9707b82b2710049121.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 200; src: url("../assets/fonts/free/818cdbfa3f86184a75336273d702457a.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 200; src: url("../assets/fonts/free/864215ecd5165c9707b82b2710049121.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 100; src: url("../assets/fonts/free/818cdbfa3f86184a75336273d702457a.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 100; src: url("../assets/fonts/free/864215ecd5165c9707b82b2710049121.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 900; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 900; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 800; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 800; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 600; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 600; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 500; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 500; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 300; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 300; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 200; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 200; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 100; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 100; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 700; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 700; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: italic; font-weight: 400; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 900; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 900; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 800; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 800; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 600; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 600; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 500; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 500; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 300; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 300; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 200; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 200; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 100; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 100; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 700; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 700; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: italic; font-weight: 400; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 900; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 900; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 800; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 800; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 600; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 600; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 500; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 500; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 300; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 300; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 200; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 200; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 100; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 100; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 700; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 700; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: italic; font-weight: 400; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 700; src: url("../assets/fonts/free/e7d7067aaf811fc432ef1d1d532ea8f5.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 400; src: url("../assets/fonts/free/864215ecd5165c9707b82b2710049121.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: italic; font-weight: 400; src: url("../assets/fonts/free/818cdbfa3f86184a75336273d702457a.woff") format("woff"); }
+@font-face { font-family: YACgEXvxf8Q_0; font-style: normal; font-weight: 700; src: url("../assets/fonts/free/c026733dc20c14742056cd3d076a7221.woff") format("woff"); }
+@font-face { font-family: YAD1aFjegN8_0; font-style: normal; font-weight: 400; src: url("../assets/fonts/free/50b4aaeb07e1eaa9d7acc3a7b649d0a6.woff") format("woff"); }
+@font-face { font-family: YAFdJhX-538_0; font-style: normal; font-weight: 400; src: url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAFdJoex804_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/Afrah.woff2") format("woff2"), url("../assets/fonts/Afrah.woff") format("woff"), url("../assets/fonts/Afrah.otf") format("opentype"), url("../assets/fonts/Afrah.ttf") format("truetype"), url("../assets/fonts/free/77fbf36c56a33ec9d32065083bba3023.woff") format("woff"); }
+@font-face { font-family: YAGXhJ7-dYY_0; font-style: normal; font-weight: 400; src: url("../assets/fonts/free/42812fad9c9d466308032689ff361106.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 900; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 900; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 800; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 800; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 600; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 600; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 500; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 500; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 300; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 300; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 200; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 200; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 100; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 100; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 700; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 700; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: italic; font-weight: 400; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 900; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 900; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 800; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 800; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 600; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 600; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 500; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 500; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 300; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 300; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 200; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 200; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 100; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 100; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 700; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 700; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 900; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 900; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 800; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 800; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 600; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 200; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 200; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YAGL3qRU9qw_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/Amoresa.woff2") format("woff2"), url("../assets/fonts/Amoresa.woff") format("woff"), url("../assets/fonts/Amoresa.otf") format("opentype"), url("../assets/fonts/Amoresa.ttf") format("truetype"), url("../assets/fonts/fallback/GreatVibes-400.woff2") format("woff2"); }
+@font-face { font-family: YAFdJhmxbVQ_1; font-style: normal; font-weight: 400; src: url("../assets/fonts/free/b18b3e65f9a611362fbf422749975527.woff") format("woff"); }
+@font-face { font-family: YAEp0lIMl0I_0; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/AdlerySwash.woff2") format("woff2"), url("../assets/fonts/AdlerySwash.woff") format("woff"), url("../assets/fonts/AdlerySwash.otf") format("opentype"), url("../assets/fonts/AdlerySwash.ttf") format("truetype"), url("../assets/fonts/fallback/PinyonScript-400.woff2") format("woff2"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: italic; font-weight: 400; src: url("../assets/fonts/free/655397442723d12475be6bdb1a9ce31c.woff") format("woff"); }
+@font-face { font-family: YACkoGIT9qo_0; font-style: normal; font-weight: 400; src: url("../assets/fonts/free/b95aa1fdcb09e09615227815961b914b.woff") format("woff"); }
+@font-face { font-family: YAFdJg8m-kQ_0; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/29LTZaridSerif.woff2") format("woff2"), url("../assets/fonts/29LTZaridSerif.woff") format("woff"), url("../assets/fonts/29LTZaridSerif.otf") format("opentype"), url("../assets/fonts/29LTZaridSerif.ttf") format("truetype"), url("../assets/fonts/fallback/Amiri-400.woff2") format("woff2"); }
+@keyframes spin { 
+  0% { transform: rotate(0turn); }
+  100% { transform: rotate(1turn); }
+}
