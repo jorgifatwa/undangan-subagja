@@ -5,7 +5,6 @@ import { createPortal } from "react-dom";
 import { useToast } from "./Toast";
 import { CheckinPassDialog } from "./CheckinPass";
 import { ATTENDANCE_OPTIONS, MESSAGE_MAX, NAME_MAX, attendanceLabel, validateWish, type Attendance } from "@/lib/wishValidation";
-import { googleCalendarUrl } from "@/lib/weddingEvent";
 
 // RSVP & ucapan di kartu renda (menggantikan widget RSVP template). Logikanya sama dengan WishesSection di
 // undangan-jorgi-estetik: link personal ?g=<id> mengunci nama, ucapan tersimpan lewat /api/wishes, dan tamu yang
@@ -175,13 +174,6 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
     }
   };
 
-  // iPhone/iPad/Mac membuka .ics di aplikasi Kalender; lainnya ke Google Calendar
-  const openCalendar = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)) return;
-    event.currentTarget.href = "/kalender.ics";
-    event.currentTarget.removeAttribute("target");
-  };
-
   const presentCount = wishes.filter((w) => w.attendance === "hadir").length;
   const absentCount = wishes.filter((w) => w.attendance === "tidak_hadir").length;
 
@@ -207,10 +199,6 @@ export const RsvpWidget: React.FC<{ title: string; dateText: string }> = ({ titl
         <button type="button" onClick={() => setPass({})}>
           QR Check-in
         </button>
-        <span aria-hidden="true">·</span>
-        <a href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" onClick={openCalendar}>
-          Simpan ke Kalender
-        </a>
       </div>
       <p className="wall-title">
         <span className="rule" />

@@ -518,10 +518,10 @@ export function initInvitation(W, hooks) {
   });
 
   // RSVP: isi slot dirender oleh React (ucapan, kehadiran, QR check-in)
-  $$('[data-widget="rsvp"]').forEach((slot) => {
-    slot.innerHTML = '<div class="w-rsvp-root"></div>';
-    hooks.mountRsvp(slot.firstChild);
-  });
+  // RSVP dirender React ke wadah sendiri; wadah dipindah ke kartu RSVP baru saat undangan dibuka (buildRsvpSection)
+  const rsvpHost = document.createElement("div");
+  rsvpHost.className = "w-rsvp-root";
+  hooks.mountRsvp(rsvpHost);
 
   // Slot embed ada di dalam wrapper Canva yang diskalakan (transform: scale s).
   // Ukuran yang tersimpan di slot = ukuran VISUAL iframe asli (px desain 430):
@@ -596,6 +596,7 @@ export function initInvitation(W, hooks) {
     buildIntroSection();
     buildCoupleCard();
     addGiftSparkles();
+    buildRsvpSection();
     hideUnusedBanks();
     fitWidgets();
     if (io) revealEls.forEach((el) => io.observe(el));
@@ -606,6 +607,7 @@ export function initInvitation(W, hooks) {
     firstScreen.forEach((el) => el.classList.remove("reveal"));
     introEls.filter((el) => !firstScreen.includes(el))
       .forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
+    rsvpEls.forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
     // Section 2: animasi masuk berurutan saat kartu mempelai terlihat
     const coupleSec = $(".couple-section");
     if (coupleSec) {
@@ -658,7 +660,7 @@ export function initInvitation(W, hooks) {
       });
     });
     $$(".intro-bouquet, .intro-anthurium, .cc-flower--tr, .cc-flower--l").forEach((el) => mark(el, true));
-    $$(".cc-lily").forEach((el) => mark(el, false));
+    $$(".cc-lily, .rsvp-lily").forEach((el) => mark(el, false));
   }
 
   // Kilau berkedip di sekitar kotak hadiah Wedding Gift (animasi Lottie yang sama dengan undangan-jorgi-estetik)
@@ -686,6 +688,33 @@ export function initInvitation(W, hooks) {
         setTimeout(() => anim.play(), i * 700);
       });
     });
+  }
+
+  // ============ Section RSVP: judul + kartu renda tipis hampir selebar layar ============
+  const RSVP = { h: 760, card: { l: 26, t: 132, w: 378, h: 596 } };
+  let rsvpEls = [];
+  function buildRsvpSection() {
+    const slot = $('[data-widget="rsvp"]');
+    const section = slot && slot.closest("section");
+    const box = section && $("._mXnjA", section);
+    if (!box || box.querySelector(".rsvp-card2")) return;
+    $$(":scope > .DF_utQ", box).forEach((el) => { el.style.display = "none"; });
+    setSectionHeight(section, RSVP.h);
+    section.classList.add("rsvp-section");
+    const add = (html) => {
+      const w = document.createElement("div");
+      w.innerHTML = html;
+      const el = w.firstElementChild;
+      box.appendChild(el);
+      rsvpEls.push(el);
+      return el;
+    };
+    add('<h2 class="rsvp-title">Konfirmasi Kehadiran</h2>');
+    add('<p class="rsvp-sub">Kehadiran dan doa restu Anda merupakan kebahagiaan bagi kami</p>');
+    const c = RSVP.card;
+    const card = add('<div class="rsvp-card2" style="left:' + c.l + "px;top:" + c.t + "px;width:" + c.w + "px;height:" + c.h + 'px"></div>');
+    card.appendChild(rsvpHost);
+    add('<img class="cc-flower rsvp-lily" src="' + TPL + '021c7d4f4f83e191f99f39b52e279810.png" alt="">');
   }
 
   let opened = false;

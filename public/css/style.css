@@ -14,6 +14,8 @@
 html, body { margin: 0; padding: 0; }
 /* template.css (Canva) mengunci html/body: height 100% + overflow hidden. Batalkan di sini. */
 html, html body { height: auto !important; min-height: 100%; overflow-y: auto !important; overflow-x: hidden !important; }
+/* warna kanvas halaman: area di luar konten (overscroll, toolbar Safari) tidak putih */
+html { background: #04170a !important; }
 body {
   background: var(--green-deep);
   -webkit-font-smoothing: antialiased;
@@ -503,3 +505,41 @@ body.locked .music { display: none; }
 /* cover: satu latar daun utuh setinggi layar (latar di dalam konten 430x764 disembunyikan agar tidak ada garis sambungan) */
 .pg--cover img[src*="ded4bbababdabc4d2c1f4096fe48b9e9"] { visibility: hidden; }
 .pg--cover ._8jGYJw { background: transparent !important; }
+
+/* Cover di HP menempel ke tepi layar (bukan 100svh): toolbar Safari/WhatsApp membuat svh lebih pendek
+   dari area yang terlihat dan menyisakan ruang kosong di bawah. Sama seperti undangan-jorgi-estetik. */
+@media (max-width: 479px) {
+  .pg--cover { position: fixed !important; inset: 0; height: auto !important; z-index: 5; }
+}
+
+/* ========== Section RSVP baru. px desain 430 ========== */
+.rsvp-section [style*="background"]:not(.rsvp-card2):not(.rsvp-card2 *) { background-color: #04170a !important; }
+.rsvp-title { position: absolute; left: 0; width: 430px; top: 34px; margin: 0; text-align: center;
+  font: 400 36px/1.2 YAGL3qRU9qw_0, 'Great Vibes', cursive; color: #f6efe4; white-space: nowrap; }
+.rsvp-sub { position: absolute; left: 30px; width: 370px; top: 88px; margin: 0; text-align: center;
+  font: italic 400 12px/1.5 YACgEXvxf8Q_0, Lora, Georgia, serif; color: rgba(246, 239, 228, .85); }
+.rsvp-card2 { position: absolute; z-index: 3; box-sizing: border-box;
+  border: 30px solid transparent;
+  border-image: url("/assets/template/ef905905cd3d5b3b46ebd1cebd113abe.png") 112 fill / 30px round;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .45)); }
+.rsvp-card2 .w-rsvp-root { position: absolute; inset: 4px; }
+.rsvp-card2 .w-rsvp { padding: 16px 16px 10px; background: transparent; }
+.rsvp-card2 .w-rsvp h3 { font-size: 36px; }
+.rsvp-card2 .w-rsvp .date { font-size: 12.5px; margin-top: 2px; }
+.rsvp-card2 .w-rsvp .ornament { font-size: 13px; gap: 8px; margin: 8px 0 6px; }
+.rsvp-card2 .w-rsvp .ornament span { width: 80px; }
+.rsvp-card2 .w-rsvp .ask { font-size: 12px; margin-bottom: 10px; }
+.rsvp-card2 .w-rsvp .choice { gap: 10px; margin-bottom: 10px; }
+.rsvp-card2 .w-rsvp .choice button { padding: 10px 6px; font-size: 13.5px; gap: 6px; }
+.rsvp-card2 .w-rsvp .choice svg { width: 14px; height: 14px; }
+.rsvp-card2 .w-rsvp .extra { gap: 8px; margin-bottom: 8px; font-size: 11px; }
+.rsvp-card2 .w-rsvp .extra button, .rsvp-card2 .w-rsvp .extra a { font-size: 12px; }
+.rsvp-card2 .w-rsvp .wall-title { gap: 10px; font-size: 19px; margin-top: 4px; }
+.rsvp-card2 .w-rsvp .wall-count { font-size: 10px; margin: 2px 0 6px; }
+.rsvp-card2 .w-rsvp .msg { padding: 8px 0; }
+.rsvp-card2 .w-rsvp .msg b { font-size: 12.5px; gap: 6px; }
+.rsvp-card2 .w-rsvp .msg em { font-size: 9px; padding: 1px 7px; }
+.rsvp-card2 .w-rsvp .msg .text { font-size: 12.5px; margin-top: 3px; }
+.rsvp-card2 .w-rsvp .msg time { font-size: 9.5px; margin-top: 2px; }
+.rsvp-card2 .w-rsvp .empty { font-size: 12.5px; margin-top: 18px; }
+.rsvp-lily { left: 330px; top: 92px; width: 100px; transform: rotate(18deg); z-index: 5; }
