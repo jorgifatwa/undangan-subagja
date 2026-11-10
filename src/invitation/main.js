@@ -261,7 +261,7 @@ export function initInvitation(W, hooks) {
     add('<img class="intro intro-pearls" src="' + TPL + '6bdbbb03529f3e7d294c0ab232845faa.png" alt="">');
     add('<div class="intro intro-frame">' + scallopFrameSvg(366, 680) +
       '<p class="intro-bismillah" lang="ar">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>' +
-      '<p class="intro-ayat" lang="ar">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا<br>لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ<br>ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>' +
+      '<p class="intro-ayat" lang="ar"><span class="ln">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا</span><span class="ln">لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ</span><span class="ln">ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</span></p>' +
       '<p class="intro-arti">Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.</p>' +
       '<p class="intro-ref">Q.S. Ar Rum : 21</p></div>');
     add('<img class="intro intro-bouquet" src="' + TPL + 'df6a476e3100a3687f7317b0a7add0d5.png" alt="">');
@@ -497,31 +497,72 @@ export function initInvitation(W, hooks) {
     ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.1 })
     : null;
 
-  // ============ 11. Buka undangan ============
+  // ============ 11. Buka undangan: cover terbelah & terbuka seperti pintu ============
+  // Section 1 disiapkan di belakang cover lebih dulu (tidak ada layar kosong), lalu dua daun pintu
+  // (salinan cover yang dipotong kiri/kanan) berputar membuka. Elemen Section 1 masuk berurutan (CSS .intro-enter).
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DOOR_MS = 1100;
+
+  function makeDoors() {
+    const r = cover.getBoundingClientRect();
+    const doors = document.createElement("div");
+    doors.className = "doors";
+    Object.assign(doors.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px" });
+    ["left", "right"].forEach((side) => {
+      const door = document.createElement("div");
+      door.className = "door door--" + side;
+      const face = cover.cloneNode(true);
+      face.removeAttribute("id");
+      face.classList.remove("is-leaving");
+      face.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+      face.style.height = r.height + "px";
+      door.appendChild(face);
+      doors.appendChild(door);
+    });
+    document.body.appendChild(doors);
+    return doors;
+  }
+
+  function showDetails() {
+    cover.hidden = true; // cover disembunyikan
+    details.hidden = false;
+    document.body.classList.remove("locked");
+    phone.scrollTop = 0;
+    window.scrollTo(0, 0);
+    layout();
+    moveHighlight();
+    buildIntroSection();
+    buildCoupleCard();
+    hideUnusedBanks();
+    fitWidgets();
+    if (io) revealEls.forEach((el) => io.observe(el));
+    else revealEls.forEach((el) => el.classList.add("in"));
+    // elemen layar pertama (ayat) punya animasi masuk sendiri; sisanya muncul saat discroll
+    const introSection = $(".intro-section");
+    const firstScreen = introEls.filter((el) => introSection && introSection.contains(el));
+    firstScreen.forEach((el) => el.classList.remove("reveal"));
+    introEls.filter((el) => !firstScreen.includes(el)).concat(coupleEls)
+      .forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
+    return introSection;
+  }
+
   let opened = false;
-  const open = () => {
+  const open = (instant) => {
     if (opened) return;
     opened = true;
     if (W.music) audio.play().then(() => setPlaying(true)).catch(() => {});
-    cover.classList.add("is-leaving");
-    setTimeout(() => {
-      cover.hidden = true; // cover disembunyikan
-      details.hidden = false;
-      document.body.classList.remove("locked");
-      phone.scrollTop = 0;
-      window.scrollTo(0, 0);
-      layout();
-      moveHighlight();
-      buildIntroSection();
-      buildCoupleCard();
-      hideUnusedBanks();
-      fitWidgets();
-      if (io) revealEls.forEach((el) => io.observe(el));
-      else revealEls.forEach((el) => el.classList.add("in"));
-      introEls.concat(coupleEls).forEach((el) => { el.classList.add("reveal"); if (io) io.observe(el); else el.classList.add("in"); });
-    }, 700);
+    if (instant || reduceMotion) {
+      showDetails();
+      return;
+    }
+    const doors = makeDoors();
+    const introSection = showDetails();
+    if (introSection) introSection.classList.add("intro-enter");
+    // dua frame agar posisi awal pintu tergambar sebelum transisi dimulai
+    requestAnimationFrame(() => requestAnimationFrame(() => doors.classList.add("is-open")));
+    setTimeout(() => doors.remove(), DOOR_MS + 150);
   };
   $$('#cover a[href^="#page"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); open(); }));
-  // /details langsung membuka isi undangan
-  if (location.pathname.replace(/\/+$/, "") === "/details") open();
+  // /details langsung membuka isi undangan (tanpa animasi pintu)
+  if (location.pathname.replace(/\/+$/, "") === "/details") open(true);
 }
