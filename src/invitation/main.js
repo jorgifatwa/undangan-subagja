@@ -310,7 +310,7 @@ export function initInvitation(W, hooks) {
   let coupleEls = [];
 
   // ============ 6b. Kartu acara: kalender + Akad/Resepsi + lokasi (dirapikan, rata tengah) ============
-  const EV = { bandTop: 850, card: { l: 38, t: 900, w: 354, h: 336 }, sectionH: 1282 };
+  const EV = { bandTop: 850, card: { l: 38, t: 944, w: 354, h: 336 }, sectionH: 1326 };
   function buildEventCard(texture) {
     if (!coupleBox || coupleBox.querySelector(".ev-card")) return;
     const HARI = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
@@ -405,7 +405,7 @@ export function initInvitation(W, hooks) {
       "</div>"
     );
     if (W.photos.strip && W.photos.strip.length) {
-      add('<div class="photo-strip" style="left:284px;top:604px">' +
+      add('<div class="photo-strip" style="left:262px;top:646px">' +
         W.photos.strip.map((src) => '<div class="photo-strip__img"><img src="' + src + '" alt="" loading="lazy"></div>').join("") +
         "</div>");
     }

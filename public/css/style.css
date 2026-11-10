@@ -276,7 +276,7 @@ html body.locked { overflow: hidden !important; }
 .cc-flower { position: absolute; z-index: 5; pointer-events: none; height: auto; }
 .cc-flower--tr { left: 300px; top: -36px; width: 136px; transform: scaleX(-1) rotate(-8deg); }
 .cc-flower--l { left: -8px; top: 448px; width: 146px; }
-.cc-lily { left: 338px; top: 772px; width: 104px; transform: rotate(-14deg); }
+.cc-lily { left: 344px; top: 862px; width: 88px; transform: rotate(-14deg); }
 
 /* ========== Floating ========== */
 .music {
