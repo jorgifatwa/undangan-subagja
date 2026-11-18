@@ -396,8 +396,8 @@ const Pagination: React.FC<ReturnType<typeof usePagination<unknown>>> = ({ page,
   const to = Math.min(page * pageSize, total);
   const navButton = "flex h-8 min-w-8 items-center justify-center rounded-lg px-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40";
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-[#efe9de] bg-[#faf8f4] px-4 py-2.5 text-sm text-[#5c6158]">
-      <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-[#efe9de] bg-[#faf8f4] px-4 py-2.5 text-sm text-[#5c6158]">
+      <div className="flex flex-wrap items-center gap-3">
         <span>
           Menampilkan <span className="font-medium text-[#1f2a22]">{from}–{to}</span> dari {total}
         </span>
@@ -460,9 +460,9 @@ const StatCard: React.FC<{ label: string; value: number; loading?: boolean; tone
   loading = false,
   tone = "text-[#24412f]",
 }) => (
-  <div className="rounded-xl border border-[#e5dfd3] bg-white px-5 py-4">
-    <div className="text-xs font-medium uppercase tracking-wider text-[#8a8374]">{label}</div>
-    {loading ? <SkeletonBar className="mt-2.5 h-7 w-14" /> : <div className={`mt-1 text-3xl font-semibold ${tone}`}>{value}</div>}
+  <div className="rounded-xl border border-[#e5dfd3] bg-white px-4 py-3 md:px-5 md:py-4">
+    <div className="text-[11px] font-medium uppercase tracking-wider text-[#8a8374] md:text-xs">{label}</div>
+    {loading ? <SkeletonBar className="mt-2.5 h-7 w-14" /> : <div className={`mt-1 text-2xl font-semibold md:text-3xl ${tone}`}>{value}</div>}
   </div>
 );
 
@@ -531,7 +531,7 @@ const ConfirmProvider: React.FC<{ children: React.ReactNode }> = ({ children }) 
             aria-labelledby="confirm-title"
             aria-describedby="confirm-message"
             onClick={(e) => e.stopPropagation()}
-            className="admin-modal-card w-[420px] rounded-2xl bg-white p-6 shadow-[0_24px_60px_rgba(31,42,34,0.25)]"
+            className="admin-modal-card w-[min(420px,calc(100vw-32px))] rounded-2xl bg-white p-5 md:p-6 shadow-[0_24px_60px_rgba(31,42,34,0.25)]"
           >
             <div className="flex items-start gap-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#fdecec] text-[#9b1c1c]">
@@ -591,7 +591,7 @@ const LoginScreen: React.FC<{ configured: boolean; onLoggedIn: () => void }> = (
 
   return (
     <div className="admin-root flex min-h-screen items-center justify-center bg-[#f6f3ee] font-sans text-[#1f2a22]">
-      <form onSubmit={submit} className="w-[380px] rounded-2xl border border-[#e5dfd3] bg-white p-8 shadow-sm">
+      <form onSubmit={submit} className="w-[min(380px,calc(100vw-32px))] rounded-2xl border border-[#e5dfd3] bg-white p-6 shadow-sm md:p-8">
         <div className="text-xs font-medium uppercase tracking-[0.2em] text-[#8a8374]">Admin Undangan</div>
         <h1 className="mt-1 text-2xl font-semibold text-[#1f2a22]">Annisa &amp; Rizki</h1>
         {!configured ? (
@@ -711,7 +711,7 @@ const WishesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
         <StatCard label="Total Ucapan" value={wishes.length} loading={!loaded} />
         <StatCard label="Hadir" value={wishes.filter((w) => w.attendance === "hadir").length} loading={!loaded} tone="text-[#1f8f4e]" />
         <StatCard
@@ -722,7 +722,7 @@ const WishesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
         />
       </div>
 
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-5 flex flex-wrap items-center gap-2 md:mt-6 md:gap-3">
         <input
           value={query}
           onChange={(e) => {
@@ -730,7 +730,7 @@ const WishesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
             pagination.setPage(1);
           }}
           placeholder="Cari nama atau isi ucapan..."
-          className="w-80 rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]"
+          className="w-full rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-80"
         />
         <select
           value={filter}
@@ -744,7 +744,7 @@ const WishesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
           <option value="hadir">Hadir</option>
           <option value="tidak_hadir">Tidak Hadir</option>
         </select>
-        <div className="ml-auto flex gap-2">
+        <div className="flex flex-wrap gap-2 sm:ml-auto">
           <Button onClick={load} disabled={loading}>
             {loading && <Spinner />}
             {loading ? "Memuat..." : "Muat Ulang"}
@@ -758,9 +758,10 @@ const WishesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
       {error && <p className="mt-4 rounded-lg bg-[#fdf1f1] p-3 text-sm text-[#9b1c1c]">{error}</p>}
 
       <div className="mt-4 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
+        <div className="overflow-x-auto">
         {/* Fixed layout: a long message (even one unbroken word) wraps inside its column instead of pushing the
             delete button out of view */}
-        <table className={`w-full table-fixed text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
+        <table className={`w-full min-w-[880px] table-fixed text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
           {loading && loaded && <LoadingCaption />}
           <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
             <tr>
@@ -807,6 +808,7 @@ const WishesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
             )}
           </tbody>
         </table>
+        </div>
         {loaded && <Pagination {...pagination} />}
       </div>
     </div>
@@ -887,7 +889,7 @@ const TemplateDrawer: React.FC<{
         onClick={(e) => e.stopPropagation()}
         className="admin-drawer flex h-full w-[min(940px,100vw)] flex-col bg-[#f6f3ee] text-[#1f2a22] shadow-[-24px_0_60px_rgba(31,42,34,0.25)]"
       >
-        <header className="flex items-center gap-3 border-b border-[#e5dfd3] bg-white px-6 py-4">
+        <header className="flex flex-wrap items-center gap-3 border-b border-[#e5dfd3] bg-white px-4 py-3 md:px-6 md:py-4">
           <div className="min-w-0 flex-1">
             <h2 id="template-drawer-title" className="text-base font-semibold text-[#1f2a22]">
               Template Pesan WhatsApp
@@ -904,10 +906,10 @@ const TemplateDrawer: React.FC<{
           </button>
         </header>
 
-        <div className="grid min-h-0 flex-1 grid-cols-2 gap-5 overflow-y-auto p-6">
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-y-auto p-4 md:gap-5 md:p-6 lg:grid-cols-2">
           {/* Editor */}
           <section className="flex min-h-0 flex-col rounded-xl border border-[#e5dfd3] bg-white p-5">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="text-sm font-semibold text-[#1f2a22]">Isi pesan</h3>
               <div className="flex gap-1.5">
                 {["{nama}", "{link}"].map((token) => (
@@ -931,7 +933,7 @@ const TemplateDrawer: React.FC<{
               ref={textareaRef}
               value={template}
               onChange={(e) => onTemplateChange(e.target.value)}
-              className="mt-3 min-h-[360px] w-full flex-1 resize-none rounded-lg border border-[#d9d2c5] px-3 py-2.5 text-sm leading-relaxed outline-none focus:border-[#24412f]"
+              className="mt-3 min-h-[260px] w-full flex-1 resize-none md:min-h-[360px] rounded-lg border border-[#d9d2c5] px-3 py-2.5 text-sm leading-relaxed outline-none focus:border-[#24412f]"
             />
             {saveError && <p className="mt-2 rounded-lg bg-[#fdf1f1] px-3 py-2 text-xs text-[#9b1c1c]">Gagal menyimpan: {saveError}</p>}
             {missing.length > 0 && (
@@ -940,7 +942,7 @@ const TemplateDrawer: React.FC<{
                 {missing.includes("{link}") ? ": tamu tidak akan mendapat link undangannya." : "."}
               </p>
             )}
-            <div className="mt-3 flex gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               <Button variant="primary" onClick={save} disabled={!dirty || saving}>
                 {saving && <Spinner />}
                 {saving ? "Menyimpan..." : "Simpan Template"}
@@ -1187,7 +1189,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
         <StatCard label="Total Tamu" value={guests.length} loading={!loaded} />
         <StatCard label="Sudah Dikirim" value={sentCount} loading={!loaded} tone="text-[#1f8f4e]" />
         <StatCard label="Belum Dikirim" value={guests.length - sentCount} loading={!loaded} tone="text-[#a06a12]" />
@@ -1209,7 +1211,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
       <div className="mt-6">
         {/* Guest list (full width; the message template opens in a side panel) */}
         <div>
-          <div className="rounded-xl border border-[#e5dfd3] bg-white p-5">
+          <div className="rounded-xl border border-[#e5dfd3] bg-white p-4 md:p-5">
             <h2 className="text-base font-semibold text-[#1f2a22]">Tambah Tamu</h2>
             <form
               onSubmit={(e) => {
@@ -1219,7 +1221,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                   setPhone("");
                 });
               }}
-              className="mt-3 flex gap-3"
+              className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-3"
             >
               <input
                 value={name}
@@ -1231,9 +1233,9 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="No. WhatsApp (opsional)"
-                className="w-56 rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f]"
+                className="rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-56"
               />
-              <Button type="submit" variant="primary" disabled={name.trim().length < 2 || saving !== null} className="w-[136px]">
+              <Button type="submit" variant="primary" disabled={name.trim().length < 2 || saving !== null} className="sm:w-[136px]">
                 {saving === "single" && <Spinner />}
                 {saving === "single" ? "Menambah..." : "Tambah"}
               </Button>
@@ -1262,7 +1264,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
             </details>
           </div>
 
-          <div className="mt-4 flex items-center gap-3">
+          <div className="mt-4 flex flex-wrap items-center gap-2 md:gap-3">
             <input
               value={query}
               onChange={(e) => {
@@ -1270,7 +1272,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 pagination.setPage(1);
               }}
               placeholder="Cari nama atau nomor..."
-              className="w-72 rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]"
+              className="w-full rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-72"
             />
             <select
               value={statusFilter}
@@ -1284,7 +1286,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               <option value="unsent">Belum dikirim</option>
               <option value="sent">Sudah dikirim</option>
             </select>
-            <Button onClick={() => openTemplate()} disabled={!loaded} className="ml-auto">
+            <Button onClick={() => openTemplate()} disabled={!loaded} className="sm:ml-auto">
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
               </svg>
@@ -1301,7 +1303,8 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
           </div>
 
           <div className="mt-3 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
-            <table className={`w-full text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
+            <div className="overflow-x-auto">
+            <table className={`w-full min-w-[900px] text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
               {loading && loaded && <LoadingCaption />}
               <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
                 <tr>
@@ -1386,6 +1389,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 )}
               </tbody>
             </table>
+            </div>
             {loaded && <Pagination {...pagination} />}
           </div>
         </div>
@@ -1714,14 +1718,14 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
         <StatCard label="Total Tamu" value={people.length} loading={!loaded} />
         <StatCard label="Undangan Grup" value={rows.length - people.length} loading={!loaded} tone="text-[#3d5a80]" />
         <StatCard label="Konfirmasi Hadir" value={people.filter((r) => r.attendance === "hadir").length} loading={!loaded} tone="text-[#1f8f4e]" />
         <StatCard label="Tidak Hadir" value={people.filter((r) => r.attendance === "tidak_hadir").length} loading={!loaded} tone="text-[#9b1c1c]" />
       </div>
 
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-5 flex flex-wrap items-center gap-2 md:mt-6 md:gap-3">
         <input
           value={query}
           onChange={(e) => {
@@ -1729,7 +1733,7 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
             pagination.setPage(1);
           }}
           placeholder="Cari nama, grup, atau nomor..."
-          className="w-72 rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]"
+          className="w-full rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-72"
         />
         <select
           value={kind}
@@ -1761,7 +1765,7 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
             </option>
           ))}
         </select>
-        <div className="ml-auto flex gap-2">
+        <div className="flex flex-wrap gap-2 sm:ml-auto">
           <Button variant="primary" onClick={() => setForm({ mode: "add" })} disabled={!loaded}>
             + Tambah Tamu
           </Button>
@@ -1778,7 +1782,8 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
       {error && <p className="mt-4 rounded-lg bg-[#fdf1f1] p-3 text-sm text-[#9b1c1c]">{error}</p>}
 
       <div className="mt-4 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
-        <table className={`w-full table-fixed text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
+        <div className="overflow-x-auto">
+        <table className={`w-full min-w-[880px] table-fixed text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
           {loading && loaded && <LoadingCaption />}
           <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
             <tr>
@@ -1807,6 +1812,7 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
             )}
           </tbody>
         </table>
+        </div>
         {loaded && <Pagination {...pagination} />}
       </div>
 
@@ -1909,7 +1915,7 @@ const GuestFormModal: React.FC<{
           e.preventDefault();
           save(!editing);
         }}
-        className="admin-modal-card w-[460px] rounded-2xl bg-white p-6 shadow-[0_24px_60px_rgba(31,42,34,0.25)]"
+        className="admin-modal-card w-[min(460px,calc(100vw-32px))] max-h-[calc(100dvh-32px)] overflow-y-auto rounded-2xl bg-white p-5 md:p-6 shadow-[0_24px_60px_rgba(31,42,34,0.25)]"
       >
         <h2 id="guest-form-title" className="text-base font-semibold text-[#1f2a22]">
           {title}
@@ -2034,7 +2040,7 @@ export default function AdminPage() {
   if (sessionError && !session) {
     return (
       <div className="admin-root flex min-h-screen items-center justify-center bg-[#f6f3ee] font-sans text-[#1f2a22]">
-        <div className="w-[420px] rounded-2xl border border-[#f0c9c9] bg-white p-8 text-sm shadow-sm">
+        <div className="w-[min(420px,calc(100vw-32px))] rounded-2xl border border-[#f0c9c9] bg-white p-6 text-sm shadow-sm md:p-8">
           <p className="font-semibold text-[#9b1c1c]">Server admin tidak dapat dihubungi</p>
           <p className="mt-2 text-[#3d463f]">{sessionError}</p>
           <Button className="mt-5" onClick={checkSession}>
@@ -2056,14 +2062,14 @@ export default function AdminPage() {
   if (!session.authenticated) return <LoginScreen configured={session.configured} onLoggedIn={checkSession} />;
 
   return (
-    <div className="admin-root min-h-screen min-w-[1100px] bg-[#f6f3ee] font-sans text-[#1f2a22]">
+    <div className="admin-root min-h-screen bg-[#f6f3ee] font-sans text-[#1f2a22]">
       <header className="border-b border-[#e5dfd3] bg-white">
-        <div className="mx-auto flex max-w-7xl items-center gap-8 px-8 py-4">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-8 gap-y-3 px-4 py-3 md:flex-nowrap md:px-8 md:py-4">
           <div>
             <div className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8a8374]">Admin Undangan</div>
             <div className="text-lg font-semibold">Annisa &amp; Rizki</div>
           </div>
-          <nav className="flex gap-1">
+          <nav className="order-last -mx-1 flex w-full gap-1 overflow-x-auto px-1 md:order-none md:mx-0 md:w-auto md:px-0">
             {(
               [
                 ["wishes", "Ucapan"],
@@ -2074,7 +2080,7 @@ export default function AdminPage() {
               <button
                 key={value}
                 onClick={() => setTab(value)}
-                className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                className={`shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors md:px-4 ${
                   tab === value ? "bg-[#24412f] text-white" : "text-[#3d463f] hover:bg-[#f3efe7]"
                 }`}
               >
@@ -2090,7 +2096,7 @@ export default function AdminPage() {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-8 py-8">
+      <main className="mx-auto max-w-7xl px-4 py-5 md:px-8 md:py-8">
         {session.storage === "missing" && (
           <div className="mb-6 rounded-xl border border-[#f0c9c9] bg-[#fdf1f1] p-4 text-sm text-[#9b1c1c]">
             <strong>Database belum terhubung.</strong> Ucapan, daftar tamu, dan template tidak bisa disimpan. Di Vercel buka
