@@ -1,6 +1,6 @@
 import { isAdminRequest, unauthorized } from "@/lib/adminAuth";
 import { addGuests, addPersonIfNameFree, deleteGuest, getGuest, isGroupInvite, listGuests, nameKey, resetAllSent, updateGuest, type Guest } from "@/lib/guestsStore";
-import { normalizePhone } from "@/lib/phone";
+import { formatPhone, normalizePhone } from "@/lib/phone";
 import { cleanText } from "@/lib/wishValidation";
 import { withErrors } from "@/lib/apiHandler";
 
@@ -53,7 +53,11 @@ export const GET = withErrors(async () => {
 
 export const POST = withErrors(async (request: Request) => {
   if (!(await isAdminRequest())) return unauthorized();
-  const { guests, person } = ((await request.json().catch(() => ({}))) ?? {}) as { guests?: unknown; person?: unknown };
+  const { guests, person, allowDuplicates } = ((await request.json().catch(() => ({}))) ?? {}) as {
+    guests?: unknown;
+    person?: unknown;
+    allowDuplicates?: unknown;
+  };
 
   // One paper-invitation guest from the guest list, optionally filed under a group (existing or new)
   if (person && typeof person === "object") {
@@ -75,7 +79,22 @@ export const POST = withErrors(async (request: Request) => {
   const entries = guests.map(parseEntry);
   const errors = entries.map((entry, idx) => (typeof entry === "string" ? `Baris ${idx + 1}: ${entry}` : null)).filter(Boolean);
   if (errors.length) return Response.json({ error: errors.join("\n") }, { status: 400 });
-  const added = await addGuests(entries as { name: string; phone: string | null }[]);
+  const valid = entries as { name: string; phone: string | null }[];
+  // A number already on the list is refused unless the admin chose "Tetap tambah" after seeing the warning. The admin
+  // warns from its own copy of the list; this catches numbers someone else added meanwhile (e.g. from another phone).
+  if (allowDuplicates !== true) {
+    const owners = new Map((await listGuests()).filter((guest) => guest.phone).map((guest) => [guest.phone, guest.name]));
+    const duplicates = valid.filter((entry) => entry.phone && owners.has(entry.phone)).map((entry) => ({ phone: entry.phone, name: owners.get(entry.phone) }));
+    if (duplicates.length) {
+      const [first] = duplicates;
+      const more = duplicates.length > 1 ? ` (dan ${duplicates.length - 1} nomor lain)` : "";
+      return Response.json(
+        { error: `Nomor ${formatPhone(first.phone as string)} sudah tercatat atas nama "${first.name}"${more}. Daftar dimuat ulang, periksa lagi sebelum menambah.`, duplicates },
+        { status: 409 },
+      );
+    }
+  }
+  const added = await addGuests(valid);
   return Response.json({ guests: added }, { status: 201 });
 });
 

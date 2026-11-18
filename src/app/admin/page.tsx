@@ -99,6 +99,12 @@ const contactsApi = (): ContactsApi | null =>
     ? (navigator as unknown as { contacts: ContactsApi }).contacts
     : null;
 
+const DuplicateWarning: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div role="status" className="mt-2 rounded-lg border border-[#f0dcb4] bg-[#fdf6e7] px-3 py-2 text-xs leading-relaxed text-[#7a5410]">
+    {children}
+  </div>
+);
+
 const Button: React.FC<
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "danger" | "whatsapp";
@@ -1023,6 +1029,19 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   // Which save is running (the single "Tambah" form, the bulk import, the message template): spinner on its button,
   // and no second click while it runs
   const [saving, setSaving] = useState<"single" | "bulk" | "contacts" | "template" | null>(null);
+  // Number already on the list -> that guest's name, for the "nomor ganda" warning while adding
+  const phoneOwners = useMemo(() => new Map(guests.filter((g) => g.phone).map((g) => [g.phone as string, g.name])), [guests]);
+  const ownerOf = (raw: string) => {
+    const normalized = normalizePhone(raw);
+    return normalized ? phoneOwners.get(normalized) : undefined;
+  };
+  const pickedDuplicate = (list: { name: string; phone: string }[], i: number): string | null => {
+    const owner = ownerOf(list[i].phone);
+    if (owner) return `Sudah tercatat atas nama ${owner}`;
+    const normalized = normalizePhone(list[i].phone);
+    const earlier = normalized ? list.findIndex((o, j) => j < i && normalizePhone(o.phone) === normalized) : -1;
+    return earlier >= 0 ? `Nomor sama dengan ${list[earlier].name || "baris di atas"}` : null;
+  };
   const [canPickContacts, setCanPickContacts] = useState(false);
   // Contacts chosen from the phone, shown for review/editing before they are saved
   const [picked, setPicked] = useState<{ name: string; phone: string }[] | null>(null);
@@ -1092,7 +1111,12 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
     return () => clearTimeout(initial);
   }, [load]);
 
-  const addEntries = async (entries: { name: string; phone: string }[], kind: "single" | "bulk" | "contacts", onDone: () => void) => {
+  const addEntries = async (
+    entries: { name: string; phone: string }[],
+    kind: "single" | "bulk" | "contacts",
+    onDone: () => void,
+    allowDuplicates = false,
+  ) => {
     if (saving) return;
     const invalid = entries.find((entry) => entry.phone && !normalizePhone(entry.phone));
     if (invalid) {
@@ -1102,13 +1126,15 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
     setSaving(kind);
     setNotice(null);
     try {
-      const data = await api<{ guests: Guest[] }>("/api/admin/guests", { method: "POST", body: JSON.stringify({ guests: entries }) });
+      const data = await api<{ guests: Guest[] }>("/api/admin/guests", { method: "POST", body: JSON.stringify({ guests: entries, allowDuplicates }) });
       setGuests((prev) => [...prev, ...data.guests]);
       pagination.setPage(1); // the new guests are on top
       setNotice({ kind: "success", text: `${data.guests.length} tamu ditambahkan.` });
       onDone();
     } catch (err) {
       handleError(err);
+      // Someone else added this number meanwhile: fetch the list so the warnings show who
+      if ((err as { status?: number }).status === 409) await load();
     } finally {
       setSaving(null);
     }
@@ -1255,10 +1281,15 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                addEntries([{ name, phone }], "single", () => {
-                  setName("");
-                  setPhone("");
-                });
+                addEntries(
+                  [{ name, phone }],
+                  "single",
+                  () => {
+                    setName("");
+                    setPhone("");
+                  },
+                  Boolean(ownerOf(phone)),
+                );
               }}
               className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-3"
             >
@@ -1277,9 +1308,15 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               />
               <Button type="submit" variant="primary" disabled={name.trim().length < 2 || saving !== null} className="sm:w-[136px]">
                 {saving === "single" && <Spinner />}
-                {saving === "single" ? "Menambah..." : "Tambah"}
+                {saving === "single" ? "Menambah..." : ownerOf(phone) ? "Tetap Tambah" : "Tambah"}
               </Button>
             </form>
+            {ownerOf(phone) && (
+              <DuplicateWarning>
+                Nomor ini sudah tercatat atas nama <b>{ownerOf(phone)}</b>. Kosongkan nomornya, atau tekan Tetap Tambah bila memang
+                sengaja.
+              </DuplicateWarning>
+            )}
             {canPickContacts && !picked && (
               <Button className="mt-3 w-full sm:w-auto" onClick={pickContacts} disabled={saving !== null}>
                 📇 Pilih dari Kontak
@@ -1297,6 +1334,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 <ul className="mt-3 space-y-2">
                   {picked.map((c, i) => {
                     const badPhone = c.phone !== "" && !normalizePhone(c.phone);
+                    const dup = pickedDuplicate(picked, i);
                     const update = (patch: Partial<{ name: string; phone: string }>) =>
                       setPicked((prev) => prev && prev.map((o, j) => (j === i ? { ...o, ...patch } : o)));
                     return (
@@ -1317,6 +1355,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                             className={`w-full rounded-md border px-2.5 py-1.5 text-sm outline-none focus:border-[#24412f] ${badPhone ? "border-[#e0a3a3] text-[#9b1c1c]" : "border-[#d9d2c5]"}`}
                           />
                           {badPhone && <p className="text-xs text-[#9b1c1c]">Nomor tidak valid</p>}
+                          {dup && <p className="text-xs text-[#a06a12]">⚠ {dup}</p>}
                         </div>
                         <button
                           type="button"
@@ -1331,14 +1370,29 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                   })}
                 </ul>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <Button
-                    variant="primary"
-                    disabled={saving !== null || picked.some((c) => c.name.trim().length < 2)}
-                    onClick={() => addEntries(picked.map((c) => ({ name: c.name.trim(), phone: c.phone })), "contacts", () => setPicked(null))}
-                  >
-                    {saving === "contacts" && <Spinner />}
-                    {saving === "contacts" ? "Menyimpan..." : `Simpan ${picked.length} Tamu`}
-                  </Button>
+                  {(() => {
+                    const fresh = picked.filter((_, i) => !pickedDuplicate(picked, i));
+                    const dupCount = picked.length - fresh.length;
+                    const blocked = saving !== null || picked.some((c) => c.name.trim().length < 2);
+                    const save = (list: typeof picked, allow: boolean) =>
+                      addEntries(list.map((c) => ({ name: c.name.trim(), phone: c.phone })), "contacts", () => setPicked(null), allow);
+                    return dupCount === 0 ? (
+                      <Button variant="primary" disabled={blocked} onClick={() => save(picked, false)}>
+                        {saving === "contacts" && <Spinner />}
+                        {saving === "contacts" ? "Menyimpan..." : `Simpan ${picked.length} Tamu`}
+                      </Button>
+                    ) : (
+                      <>
+                        <Button variant="primary" disabled={blocked || fresh.length === 0} onClick={() => save(fresh, false)}>
+                          {saving === "contacts" && <Spinner />}
+                          {saving === "contacts" ? "Menyimpan..." : `Simpan ${fresh.length} Tamu Baru`}
+                        </Button>
+                        <Button disabled={blocked} onClick={() => save(picked, true)}>
+                          Simpan Semua ({picked.length})
+                        </Button>
+                      </>
+                    );
+                  })()}
                   <Button onClick={() => setPicked(null)} disabled={saving !== null}>
                     Batal
                   </Button>
@@ -1357,15 +1411,48 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 placeholder={"Bapak Ahmad & Keluarga, 081234567890\nSiti Aminah, 0857-1111-2222\nRekan Kantor"}
                 className="mt-2 w-full rounded-lg border border-[#d9d2c5] px-3 py-2 font-mono text-sm outline-none focus:border-[#24412f]"
               />
-              <Button
-                className="mt-2"
-                variant="primary"
-                disabled={!bulk.trim() || saving !== null}
-                onClick={() => addEntries(parseBulk(bulk), "bulk", () => setBulk(""))}
-              >
-                {saving === "bulk" && <Spinner />}
-                {saving === "bulk" ? `Mengimpor ${parseBulk(bulk).length} tamu...` : `Impor ${parseBulk(bulk).length || ""} Tamu`}
-              </Button>
+              {(() => {
+                const rows = parseBulk(bulk);
+                const dups = rows.map((_, i) => pickedDuplicate(rows, i));
+                const fresh = rows.filter((_, i) => !dups[i]);
+                const dupRows = rows.map((r, i) => ({ r, d: dups[i] })).filter((x) => x.d);
+                const blocked = !bulk.trim() || saving !== null;
+                return (
+                  <>
+                    {dupRows.length > 0 && (
+                      <DuplicateWarning>
+                        {dupRows.length} nomor sudah ada:
+                        <ul className="mt-1 list-disc pl-5">
+                          {dupRows.slice(0, 5).map(({ r, d }, i) => (
+                            <li key={i}>
+                              <b>{r.name}</b>: {d}
+                            </li>
+                          ))}
+                          {dupRows.length > 5 && <li>dan {dupRows.length - 5} lainnya</li>}
+                        </ul>
+                      </DuplicateWarning>
+                    )}
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {dupRows.length === 0 ? (
+                        <Button variant="primary" disabled={blocked} onClick={() => addEntries(rows, "bulk", () => setBulk(""))}>
+                          {saving === "bulk" && <Spinner />}
+                          {saving === "bulk" ? `Mengimpor ${rows.length} tamu...` : `Impor ${rows.length || ""} Tamu`}
+                        </Button>
+                      ) : (
+                        <>
+                          <Button variant="primary" disabled={blocked || fresh.length === 0} onClick={() => addEntries(fresh, "bulk", () => setBulk(""))}>
+                            {saving === "bulk" && <Spinner />}
+                            {saving === "bulk" ? "Mengimpor..." : `Impor ${fresh.length} Tamu Baru`}
+                          </Button>
+                          <Button disabled={blocked} onClick={() => addEntries(rows, "bulk", () => setBulk(""), true)}>
+                            Impor Semua ({rows.length})
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </>
+                );
+              })()}
             </details>
           </div>
 
