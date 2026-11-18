@@ -1304,7 +1304,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
 
           <div className="mt-3 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
             <div className="overflow-x-auto">
-            <table className={`w-full min-w-[900px] text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
+            <table className={`w-full min-w-[1000px] text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
               {loading && loaded && <LoadingCaption />}
               <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
                 <tr>
@@ -1783,7 +1783,7 @@ const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) =>
 
       <div className="mt-4 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
         <div className="overflow-x-auto">
-        <table className={`w-full min-w-[880px] table-fixed text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
+        <table className={`w-full min-w-[1100px] table-fixed text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
           {loading && loaded && <LoadingCaption />}
           <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
             <tr>
