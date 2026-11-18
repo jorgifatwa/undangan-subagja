@@ -10,19 +10,22 @@ import { googleCalendarUrl } from "@/lib/weddingEvent";
 
 const BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-// Menjalankan runtime undangan (src/invitation/main.js) di atas markup template yang dirender server,
+// Menjalankan runtime undangan (src/invitation/main.js) di atas markup template (dimuat dari file statis),
 // lalu memasang widget RSVP (React) ke slot RSVP di kartu renda dan lightbox galeri.
-const Runtime: React.FC = () => {
+const Runtime: React.FC<{ markupUrl: string }> = ({ markupUrl }) => {
   const [rsvpEl, setRsvpEl] = useState<HTMLElement | null>(null);
   const [photoIndex, setPhotoIndex] = useState<number | null>(null);
   const { showToast } = useToast();
 
   useEffect(() => {
-    const root = document.getElementById("phone");
-    if (!root || root.dataset.ready) return; // sekali saja (StrictMode menjalankan efek dua kali di dev)
-    root.dataset.ready = "1";
-    import("./main").then(({ initInvitation }) => initInvitation(WEDDING, { mountRsvp: setRsvpEl, showToast, openGallery: setPhotoIndex, calendarUrl: googleCalendarUrl() }));
-  }, [showToast]);
+    const host = document.getElementById("invitation-root");
+    if (!host || host.dataset.ready) return; // sekali saja (StrictMode menjalankan efek dua kali di dev)
+    host.dataset.ready = "1";
+    Promise.all([fetch(markupUrl, { mode: "cors", credentials: "omit" }).then((r) => r.text()), import("./main")]).then(([markup, { initInvitation }]) => {
+      host.innerHTML = markup;
+      initInvitation(WEDDING, { mountRsvp: setRsvpEl, showToast, openGallery: setPhotoIndex, calendarUrl: googleCalendarUrl() });
+    });
+  }, [showToast, markupUrl]);
 
   const last = WEDDING.events[WEDDING.events.length - 1];
   const [y, m, d] = last.date.split("-").map(Number);
@@ -41,8 +44,8 @@ const Runtime: React.FC = () => {
   );
 };
 
-export const InvitationRuntime: React.FC = () => (
+export const InvitationRuntime: React.FC<{ markupUrl: string }> = ({ markupUrl }) => (
   <ToastProvider>
-    <Runtime />
+    <Runtime markupUrl={markupUrl} />
   </ToastProvider>
 );

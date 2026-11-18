@@ -544,3 +544,6 @@ body.locked .music { display: none; }
 .cl-seal { position: absolute; left: 175px; top: 372px; width: 80px; z-index: 5; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .45)); }
 .cl-bouquet { position: absolute; left: -44px; top: 372px; width: 112px; z-index: 6; }
 .close-section { background: #04170a !important; }
+
+/* sebelum markup undangan selesai dimuat: layar hijau gelap seperti cover (tanpa kedip putih) */
+.invitation-root:empty { min-height: 100vh; min-height: 100svh; background: #1d3f24; }
