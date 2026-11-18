@@ -72,8 +72,9 @@ const inviteLink = (guest: { name: string; id?: string }) =>
 const renderMessage = (template: string, guest: { name: string; id?: string }) =>
   template.replaceAll("{nama}", guest.name).replaceAll("{link}", inviteLink(guest));
 
+// api.whatsapp.com/send, not wa.me: the wa.me redirect replaces emoji in the text with "�" (U+FFFD)
 const whatsappUrl = (phone: string | null, text: string) =>
-  `https://wa.me/${phone ?? ""}?text=${encodeURIComponent(text)}`;
+  `https://api.whatsapp.com/send?${phone ? `phone=${phone}&` : ""}text=${encodeURIComponent(text)}`;
 
 // Bulk import: one guest per line, "Nama, 0812..." (the number is optional; tab or semicolon also work)
 const parseBulk = (text: string) =>
