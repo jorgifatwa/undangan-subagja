@@ -87,6 +87,18 @@ const parseBulk = (text: string) =>
       return match ? { name: match[1].trim(), phone: match[2].trim() } : { name: line, phone: "" };
     });
 
+// Contact Picker API: only Chrome / Samsung Internet on Android (not iPhone, not desktop), so the button is shown
+// only where it works
+interface PickedContact {
+  name?: string[];
+  tel?: string[];
+}
+type ContactsApi = { select: (props: string[], opts: { multiple: boolean }) => Promise<PickedContact[]> };
+const contactsApi = (): ContactsApi | null =>
+  typeof navigator !== "undefined" && "contacts" in navigator && "ContactsManager" in window
+    ? (navigator as unknown as { contacts: ContactsApi }).contacts
+    : null;
+
 const Button: React.FC<
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "danger" | "whatsapp";
@@ -1010,7 +1022,34 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   const [bulk, setBulk] = useState("");
   // Which save is running (the single "Tambah" form, the bulk import, the message template): spinner on its button,
   // and no second click while it runs
-  const [saving, setSaving] = useState<"single" | "bulk" | "template" | null>(null);
+  const [saving, setSaving] = useState<"single" | "bulk" | "contacts" | "template" | null>(null);
+  const [canPickContacts, setCanPickContacts] = useState(false);
+  // Contacts chosen from the phone, shown for review/editing before they are saved
+  const [picked, setPicked] = useState<{ name: string; phone: string }[] | null>(null);
+  useEffect(() => {
+    const t = setTimeout(() => setCanPickContacts(contactsApi() !== null), 0);
+    return () => clearTimeout(t);
+  }, []);
+
+  const pickContacts = async () => {
+    const contacts = contactsApi();
+    if (!contacts) return;
+    try {
+      const chosen = await contacts.select(["name", "tel"], { multiple: true });
+      const entries = chosen
+        .map((c) => ({ name: (c.name?.find((n) => n.trim()) ?? "").trim(), phone: (c.tel?.find((t) => t.trim()) ?? "").trim() }))
+        .filter((c) => c.name || c.phone)
+        .map((c) => ({ name: c.name || c.phone, phone: c.phone }));
+      if (!entries.length) return;
+      setPicked((prev) => {
+        const all = [...(prev ?? []), ...entries];
+        // the same contact picked twice is listed once
+        return all.filter((c, i) => all.findIndex((o) => o.name === c.name && o.phone === c.phone) === i);
+      });
+    } catch {
+      setNotice({ kind: "error", text: "Gagal membuka kontak. Pastikan izin akses kontak diberikan." });
+    }
+  };
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "sent" | "unsent">("all");
   const [previewId, setPreviewId] = useState<string | null>(null);
@@ -1053,7 +1092,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
     return () => clearTimeout(initial);
   }, [load]);
 
-  const addEntries = async (entries: { name: string; phone: string }[], kind: "single" | "bulk", onDone: () => void) => {
+  const addEntries = async (entries: { name: string; phone: string }[], kind: "single" | "bulk" | "contacts", onDone: () => void) => {
     if (saving) return;
     const invalid = entries.find((entry) => entry.phone && !normalizePhone(entry.phone));
     if (invalid) {
@@ -1232,6 +1271,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               <input
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                inputMode="tel"
                 placeholder="No. WhatsApp (opsional)"
                 className="rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-56"
               />
@@ -1240,6 +1280,71 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 {saving === "single" ? "Menambah..." : "Tambah"}
               </Button>
             </form>
+            {canPickContacts && !picked && (
+              <Button className="mt-3 w-full sm:w-auto" onClick={pickContacts} disabled={saving !== null}>
+                📇 Pilih dari Kontak
+              </Button>
+            )}
+            {picked && (
+              <div className="mt-4 rounded-lg border border-[#e5dfd3] bg-[#faf8f4] p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold text-[#1f2a22]">Kontak dipilih ({picked.length})</h3>
+                  <button type="button" onClick={pickContacts} className="text-sm font-medium text-[#24412f] underline underline-offset-2">
+                    + Pilih lagi
+                  </button>
+                </div>
+                <p className="mt-1 text-xs text-[#8a8374]">Periksa dan ubah nama sesuai sapaan undangan sebelum disimpan.</p>
+                <ul className="mt-3 space-y-2">
+                  {picked.map((c, i) => {
+                    const badPhone = c.phone !== "" && !normalizePhone(c.phone);
+                    const update = (patch: Partial<{ name: string; phone: string }>) =>
+                      setPicked((prev) => prev && prev.map((o, j) => (j === i ? { ...o, ...patch } : o)));
+                    return (
+                      <li key={i} className="flex gap-2 rounded-lg border border-[#e5dfd3] bg-white p-2">
+                        <div className="min-w-0 flex-1 space-y-1.5">
+                          <input
+                            value={c.name}
+                            onChange={(e) => update({ name: e.target.value })}
+                            aria-label="Nama tamu"
+                            className="w-full rounded-md border border-[#d9d2c5] px-2.5 py-1.5 text-sm outline-none focus:border-[#24412f]"
+                          />
+                          <input
+                            value={c.phone}
+                            onChange={(e) => update({ phone: e.target.value })}
+                            inputMode="tel"
+                            aria-label="No. WhatsApp"
+                            placeholder="No. WhatsApp (opsional)"
+                            className={`w-full rounded-md border px-2.5 py-1.5 text-sm outline-none focus:border-[#24412f] ${badPhone ? "border-[#e0a3a3] text-[#9b1c1c]" : "border-[#d9d2c5]"}`}
+                          />
+                          {badPhone && <p className="text-xs text-[#9b1c1c]">Nomor tidak valid</p>}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setPicked((prev) => (prev && prev.length > 1 ? prev.filter((_, j) => j !== i) : null))}
+                          aria-label={`Hapus ${c.name} dari pilihan`}
+                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-lg text-[#8a8374] hover:bg-[#f3efe7]"
+                        >
+                          ×
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Button
+                    variant="primary"
+                    disabled={saving !== null || picked.some((c) => c.name.trim().length < 2)}
+                    onClick={() => addEntries(picked.map((c) => ({ name: c.name.trim(), phone: c.phone })), "contacts", () => setPicked(null))}
+                  >
+                    {saving === "contacts" && <Spinner />}
+                    {saving === "contacts" ? "Menyimpan..." : `Simpan ${picked.length} Tamu`}
+                  </Button>
+                  <Button onClick={() => setPicked(null)} disabled={saving !== null}>
+                    Batal
+                  </Button>
+                </div>
+              </div>
+            )}
             <details className="mt-4">
               <summary className="cursor-pointer text-sm font-medium text-[#24412f]">Impor banyak tamu sekaligus</summary>
               <p className="mt-2 text-xs text-[#8a8374]">
