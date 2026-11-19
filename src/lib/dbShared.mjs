@@ -30,6 +30,9 @@ alter table guests add column if not exists source text not null default 'admin'
 alter table guests add column if not exists checked_in_at timestamptz;
 -- For 'self' and 'paper' guests: the group invitation (an admin guest without a WhatsApp number) whose link they opened
 alter table guests add column if not exists group_id text;
+-- Admin entries: 'pribadi' (personal invitation) or 'grup' (link shared in a WhatsApp group). Null on entries saved
+-- before this column existed: those count as a group invitation when they have no WhatsApp number
+alter table guests add column if not exists invite_type text;
 
 create table if not exists settings (
   key text primary key,

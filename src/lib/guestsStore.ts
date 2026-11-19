@@ -13,7 +13,12 @@ import type { Attendance } from "./wishValidation";
 // in a WhatsApp group), not a person: each member who opens it takes a QR under their own name.
 export type GuestSource = "admin" | "self" | "desk" | "paper";
 
-export const isGroupInvite = (guest: Pick<Guest, "phone" | "source">) => (guest.source ?? "admin") === "admin" && !guest.phone;
+export type InviteType = "pribadi" | "grup";
+
+// Admin entries are marked personal or group when added; older entries without the mark count as a group invitation
+// when they have no WhatsApp number
+export const isGroupInvite = (guest: Pick<Guest, "phone" | "source" | "inviteType">) =>
+  (guest.source ?? "admin") === "admin" && (guest.inviteType ? guest.inviteType === "grup" : !guest.phone);
 
 // Name of the WhatsApp group behind each guest id that wishes can come from: a group invitation itself, and the
 // people who took a QR from it (their QR opens the invitation as them). Wishes show it before the name.
@@ -42,6 +47,8 @@ export interface Guest {
   // "self" guests: the group invitation they came from (none for the general link); "paper" guests: the group they
   // were filed under, if any
   groupId?: string | null;
+  // Admin entries: personal or group invitation (missing on older entries, see isGroupInvite)
+  inviteType?: InviteType | null;
 }
 
 export interface InviteSettings {
@@ -88,6 +95,7 @@ interface GuestRow {
   source: GuestSource;
   checked_in_at: Date | null;
   group_id: string | null;
+  invite_type: InviteType | null;
 }
 
 const fromRow = (row: GuestRow): Guest => ({
@@ -101,6 +109,7 @@ const fromRow = (row: GuestRow): Guest => ({
   source: row.source,
   checkedInAt: toIso(row.checked_in_at),
   groupId: row.group_id,
+  inviteType: row.invite_type,
 });
 
 export const listGuests = async (): Promise<Guest[]> => {
@@ -157,7 +166,7 @@ export const addPersonIfNameFree = async (
 };
 
 // Guests added in the admin (personal invitations, and group invitations: those without a number)
-export const addGuests = async (entries: { name: string; phone: string | null }[]): Promise<Guest[]> => {
+export const addGuests = async (entries: { name: string; phone: string | null; inviteType?: InviteType }[]): Promise<Guest[]> => {
   const now = new Date().toISOString();
   const added: Guest[] = entries.map((entry) => ({
     id: randomUUID(),
@@ -168,13 +177,20 @@ export const addGuests = async (entries: { name: string; phone: string | null }[
     source: "admin",
     checkedInAt: null,
     groupId: null,
+    inviteType: entry.inviteType ?? (entry.phone ? "pribadi" : "grup"),
   }));
   const sql = await getDb();
   if (sql) {
     if (added.length === 0) return [];
     // One multi-row insert; the identity column keeps the list order (source etc. take their column defaults)
     const rows = await sql<GuestRow[]>`
-      insert into guests ${sql(added.map(({ id, name, phone }) => ({ id, name, phone })), "id", "name", "phone")}
+      insert into guests ${sql(
+        added.map(({ id, name, phone, inviteType }) => ({ id, name, phone, invite_type: inviteType ?? null })),
+        "id",
+        "name",
+        "phone",
+        "invite_type",
+      )}
       returning *
     `;
     return rows.map(fromRow);
@@ -182,7 +198,7 @@ export const addGuests = async (entries: { name: string; phone: string | null }[
   return updateJson<Guest[], Guest[]>(GUESTS, [], (guests) => ({ data: [...guests, ...added], result: added }));
 };
 
-type GuestChanges = Partial<Pick<Guest, "name" | "phone" | "sentAt" | "attendance" | "respondedAt" | "checkedInAt" | "groupId">>;
+type GuestChanges = Partial<Pick<Guest, "name" | "phone" | "sentAt" | "attendance" | "respondedAt" | "checkedInAt" | "groupId" | "inviteType">>;
 
 const COLUMNS: Record<keyof GuestChanges, string> = {
   name: "name",
@@ -192,6 +208,7 @@ const COLUMNS: Record<keyof GuestChanges, string> = {
   respondedAt: "responded_at",
   checkedInAt: "checked_in_at",
   groupId: "group_id",
+  inviteType: "invite_type",
 };
 
 export const updateGuest = async (id: string, changes: GuestChanges): Promise<Guest | null> => {

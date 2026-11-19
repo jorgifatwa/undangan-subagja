@@ -39,7 +39,7 @@ export const POST = withErrors(async (request: Request) => {
   if (typeof guestId === "string" && guestId && !guest) {
     return Response.json({ error: "Link undangan tidak valid, silakan buka kembali link dari pesan WhatsApp." }, { status: 400 });
   }
-  const lockedName = guest?.phone ? guest.name : null;
+  const lockedName = guest && (guest.source ?? "admin") === "admin" && !isGroupInvite(guest) ? guest.name : null;
   const name = lockedName ?? (body as Record<string, unknown>)?.name;
   if (typeof name !== "string" || typeof message !== "string") {
     return Response.json({ error: "Nama dan ucapan wajib diisi." }, { status: 400 });

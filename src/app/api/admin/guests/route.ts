@@ -1,19 +1,37 @@
 import { isAdminRequest, unauthorized } from "@/lib/adminAuth";
-import { addGuests, addPersonIfNameFree, deleteGuest, getGuest, isGroupInvite, listGuests, nameKey, resetAllSent, updateGuest, type Guest } from "@/lib/guestsStore";
+import {
+  addGuests,
+  addPersonIfNameFree,
+  deleteGuest,
+  getGuest,
+  isGroupInvite,
+  listGuests,
+  nameKey,
+  resetAllSent,
+  updateGuest,
+  type Guest,
+  type InviteType,
+} from "@/lib/guestsStore";
 import { formatPhone, normalizePhone } from "@/lib/phone";
 import { cleanText } from "@/lib/wishValidation";
 import { withErrors } from "@/lib/apiHandler";
 
 const NAME_MAX = 80;
 
-// Validates one {name, phone} entry; phone is optional (the WhatsApp contact can then be picked when sending)
-const parseEntry = (raw: unknown): { name: string; phone: string | null } | string => {
-  const { name, phone } = (raw ?? {}) as { name?: unknown; phone?: unknown };
+const parseInviteType = (raw: unknown): InviteType | undefined => (raw === "pribadi" || raw === "grup" ? raw : undefined);
+
+// Validates one {name, phone, inviteType} entry; phone is optional (the WhatsApp contact can then be picked when
+// sending). Without an inviteType, an entry with a number is personal and one without is a group invitation.
+const parseEntry = (raw: unknown): { name: string; phone: string | null; inviteType: InviteType } | string => {
+  const { name, phone, inviteType } = (raw ?? {}) as { name?: unknown; phone?: unknown; inviteType?: unknown };
   const cleanName = typeof name === "string" ? cleanText(name) : "";
   if (cleanName.length < 2 || cleanName.length > NAME_MAX) return `Nama tamu harus 2-${NAME_MAX} karakter.`;
-  if (typeof phone !== "string" || phone.trim() === "") return { name: cleanName, phone: null };
-  const normalized = normalizePhone(phone);
-  return normalized ? { name: cleanName, phone: normalized } : `Nomor WhatsApp "${phone}" tidak valid.`;
+  let normalized: string | null = null;
+  if (typeof phone === "string" && phone.trim() !== "") {
+    normalized = normalizePhone(phone);
+    if (!normalized) return `Nomor WhatsApp "${phone}" tidak valid.`;
+  }
+  return { name: cleanName, phone: normalized, inviteType: parseInviteType(inviteType) ?? (normalized ? "pribadi" : "grup") };
 };
 
 const cleanName = (raw: unknown, what: string): string | { error: string } => {
@@ -79,7 +97,7 @@ export const POST = withErrors(async (request: Request) => {
   const entries = guests.map(parseEntry);
   const errors = entries.map((entry, idx) => (typeof entry === "string" ? `Baris ${idx + 1}: ${entry}` : null)).filter(Boolean);
   if (errors.length) return Response.json({ error: errors.join("\n") }, { status: 400 });
-  const valid = entries as { name: string; phone: string | null }[];
+  const valid = entries as { name: string; phone: string | null; inviteType: InviteType }[];
   // A number already on the list is refused unless the admin chose "Tetap tambah" after seeing the warning. The admin
   // warns from its own copy of the list; this catches numbers someone else added meanwhile (e.g. from another phone).
   if (allowDuplicates !== true) {
@@ -104,6 +122,7 @@ export const PATCH = withErrors(async (request: Request) => {
     id?: unknown;
     name?: unknown;
     phone?: unknown;
+    inviteType?: unknown;
     sent?: unknown;
     groupId?: unknown;
     newGroup?: unknown;
@@ -116,12 +135,29 @@ export const PATCH = withErrors(async (request: Request) => {
   const current = await getGuest(body.id);
   if (!current) return Response.json({ error: "Tamu tidak ditemukan." }, { status: 404 });
 
-  const changes: { name?: string; phone?: string | null; sentAt?: string | null; groupId?: string | null } = {};
+  const changes: { name?: string; phone?: string | null; sentAt?: string | null; groupId?: string | null; inviteType?: InviteType } = {};
   if (body.name !== undefined || body.phone !== undefined) {
     // Fields left out keep their current value
     const entry = parseEntry({ name: body.name ?? current.name, phone: body.phone !== undefined ? body.phone : (current.phone ?? "") });
     if (typeof entry === "string") return Response.json({ error: entry }, { status: 400 });
-    Object.assign(changes, entry);
+    changes.name = entry.name;
+    changes.phone = entry.phone;
+  }
+  // Personal / group: only for invitations added in the admin
+  if (body.inviteType !== undefined && (current.source ?? "admin") === "admin") {
+    const inviteType = parseInviteType(body.inviteType);
+    if (!inviteType) return Response.json({ error: "Jenis undangan harus pribadi atau grup." }, { status: 400 });
+    // A group with people filed under it can't become a personal invitation: they would lose their group
+    if (inviteType === "pribadi" && isGroupInvite(current)) {
+      const members = (await listGuests()).filter((guest) => guest.groupId === current.id).length;
+      if (members > 0) {
+        return Response.json(
+          { error: `Grup "${current.name}" punya ${members} anggota. Pindahkan atau hapus anggotanya dulu di Daftar Tamu.` },
+          { status: 409 },
+        );
+      }
+    }
+    changes.inviteType = inviteType;
   }
   if (typeof body.sent === "boolean") changes.sentAt = body.sent ? new Date().toISOString() : null;
 

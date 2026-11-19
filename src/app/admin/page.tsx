@@ -38,7 +38,11 @@ interface Guest {
   // older data from the removed QR check-in.)
   source?: "admin" | "self" | "desk" | "paper";
   groupId?: string | null;
+  // Admin entries: personal or group invitation (missing on older entries: no number = group)
+  inviteType?: InviteType | null;
 }
+
+type InviteType = "pribadi" | "grup";
 
 interface InviteSettings {
   template: string;
@@ -98,6 +102,39 @@ const contactsApi = (): ContactsApi | null =>
   typeof navigator !== "undefined" && "contacts" in navigator && "ContactsManager" in window
     ? (navigator as unknown as { contacts: ContactsApi }).contacts
     : null;
+
+const InviteTypeToggle: React.FC<{ value: InviteType; onChange: (value: InviteType) => void; className?: string }> = ({
+  value,
+  onChange,
+  className = "",
+}) => (
+  <div role="radiogroup" aria-label="Jenis undangan" className={`inline-flex rounded-lg border border-[#d9d2c5] bg-[#faf8f4] p-0.5 ${className}`}>
+    {(
+      [
+        ["pribadi", "Pribadi"],
+        ["grup", "Grup"],
+      ] as const
+    ).map(([key, label]) => (
+      <button
+        key={key}
+        type="button"
+        role="radio"
+        aria-checked={value === key}
+        onClick={() => onChange(key)}
+        className={`rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors ${
+          value === key ? "bg-[#24412f] text-white shadow-sm" : "text-[#5c645d] hover:text-[#1f2a22]"
+        }`}
+      >
+        {label}
+      </button>
+    ))}
+  </div>
+);
+
+const INVITE_TYPE_HINT: Record<InviteType, string> = {
+  pribadi: "Untuk satu tamu/keluarga. Nama di undangan sudah terisi sesuai nama ini.",
+  grup: "Link dibagikan di grup WhatsApp. Tiap anggota yang membuka mengisi namanya sendiri.",
+};
 
 const DuplicateWarning: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div role="status" className="mt-2 rounded-lg border border-[#f0dcb4] bg-[#fdf6e7] px-3 py-2 text-xs leading-relaxed text-[#7a5410]">
@@ -1026,6 +1063,9 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [bulk, setBulk] = useState("");
+  const [inviteType, setInviteType] = useState<InviteType>("pribadi");
+  const [bulkType, setBulkType] = useState<InviteType>("pribadi");
+  const [editingInvite, setEditingInvite] = useState<Guest | null>(null);
   // Which save is running (the single "Tambah" form, the bulk import, the message template): spinner on its button,
   // and no second click while it runs
   const [saving, setSaving] = useState<"single" | "bulk" | "contacts" | "template" | null>(null);
@@ -1112,7 +1152,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   }, [load]);
 
   const addEntries = async (
-    entries: { name: string; phone: string }[],
+    entries: { name: string; phone: string; inviteType?: InviteType }[],
     kind: "single" | "bulk" | "contacts",
     onDone: () => void,
     allowDuplicates = false,
@@ -1278,11 +1318,15 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
         <div>
           <div className="rounded-xl border border-[#e5dfd3] bg-white p-4 md:p-5">
             <h2 className="text-base font-semibold text-[#1f2a22]">Tambah Tamu</h2>
+            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <InviteTypeToggle value={inviteType} onChange={setInviteType} />
+              <p className="text-xs text-[#8a8374]">{INVITE_TYPE_HINT[inviteType]}</p>
+            </div>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 addEntries(
-                  [{ name, phone }],
+                  [{ name, phone, inviteType }],
                   "single",
                   () => {
                     setName("");
@@ -1296,7 +1340,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Nama tamu (mis. Bapak Ahmad & Keluarga)"
+                placeholder={inviteType === "grup" ? "Nama grup (mis. Grup Alumni SMA)" : "Nama tamu (mis. Bapak Ahmad & Keluarga)"}
                 className="flex-1 rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f]"
               />
               <input
@@ -1375,7 +1419,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                     const dupCount = picked.length - fresh.length;
                     const blocked = saving !== null || picked.some((c) => c.name.trim().length < 2);
                     const save = (list: typeof picked, allow: boolean) =>
-                      addEntries(list.map((c) => ({ name: c.name.trim(), phone: c.phone })), "contacts", () => setPicked(null), allow);
+                      addEntries(list.map((c) => ({ name: c.name.trim(), phone: c.phone, inviteType: "pribadi" as const })), "contacts", () => setPicked(null), allow);
                     return dupCount === 0 ? (
                       <Button variant="primary" disabled={blocked} onClick={() => save(picked, false)}>
                         {saving === "contacts" && <Spinner />}
@@ -1404,6 +1448,10 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               <p className="mt-2 text-xs text-[#8a8374]">
                 Satu tamu per baris, format <code className="font-mono">Nama, 08123456789</code>. Nomor boleh dikosongkan.
               </p>
+              <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[#5c645d]">
+                Semua baris sebagai undangan
+                <InviteTypeToggle value={bulkType} onChange={setBulkType} />
+              </div>
               <textarea
                 value={bulk}
                 onChange={(e) => setBulk(e.target.value)}
@@ -1412,7 +1460,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 className="mt-2 w-full rounded-lg border border-[#d9d2c5] px-3 py-2 font-mono text-sm outline-none focus:border-[#24412f]"
               />
               {(() => {
-                const rows = parseBulk(bulk);
+                const rows = parseBulk(bulk).map((row) => ({ ...row, inviteType: bulkType }));
                 const dups = rows.map((_, i) => pickedDuplicate(rows, i));
                 const fresh = rows.filter((_, i) => !dups[i]);
                 const dupRows = rows.map((r, i) => ({ r, d: dups[i] })).filter((x) => x.d);
@@ -1496,21 +1544,26 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
 
           <div className="mt-3 overflow-hidden rounded-xl border border-[#e5dfd3] bg-white">
             <div className="overflow-x-auto">
-            <table className={`w-full min-w-[1000px] text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
+            <table className={`w-full min-w-[1060px] text-left text-sm transition-opacity ${loading && loaded ? "opacity-50" : ""}`} aria-busy={loading}>
               {loading && loaded && <LoadingCaption />}
               <thead className="bg-[#faf8f4] text-xs uppercase tracking-wider text-[#8a8374]">
                 <tr>
                   <th className="px-4 py-3 font-medium">Nama</th>
                   <th className="w-44 px-4 py-3 font-medium">WhatsApp</th>
                   <th className="w-40 px-4 py-3 font-medium">Status</th>
-                  <th className="w-[430px] px-4 py-3" />
+                  <th className="w-[490px] px-4 py-3" />
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#efe9de] text-[#1f2a22]">
                 {!loaded && <SkeletonRows columns={["w-36", "w-28", "w-24", "ml-auto w-80"]} />}
                 {pagination.pageItems.map((guest) => (
                   <tr key={guest.id} className={templateOpen && previewGuest?.id === guest.id ? "bg-[#f5f1e8]" : "hover:bg-[#fcfbf8]"}>
-                    <td className="px-4 py-3 font-medium [overflow-wrap:anywhere]">{guest.name}</td>
+                    <td className="px-4 py-3 font-medium [overflow-wrap:anywhere]">
+                      {guest.name}
+                      {isGroupInvite(guest) && (
+                        <span className="ml-2 inline-block rounded-full bg-[#e8eef6] px-2 py-0.5 align-middle text-[11px] font-medium text-[#3d5a80]">Grup</span>
+                      )}
+                    </td>
                     <td className="whitespace-nowrap px-4 py-3 text-[#3d463f]">{guest.phone ? formatPhone(guest.phone) : <span className="text-[#b3ab9c]">Pilih saat kirim</span>}</td>
                     <td className="px-4 py-3">
                       {guest.sentAt ? (
@@ -1565,6 +1618,9 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                           onShared={() => !guest.sentAt && setSent(guest, true)}
                           className="w-[86px] px-2 py-1.5 text-xs"
                         />
+                        <Button onClick={() => setEditingInvite(guest)} className="px-2 py-1.5 text-xs">
+                          Edit
+                        </Button>
                         <Button variant="danger" onClick={() => remove(guest)} className="px-2 py-1.5 text-xs">
                           Hapus
                         </Button>
@@ -1586,6 +1642,19 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
           </div>
         </div>
       </div>
+
+      {editingInvite && (
+        <InviteEditModal
+          guest={editingInvite}
+          phoneOwners={phoneOwners}
+          onSaved={(updated) => {
+            setGuests((prev) => prev.map((g) => (g.id === updated.id ? updated : g)));
+            setNotice({ kind: "success", text: `Data "${updated.name}" disimpan.` });
+          }}
+          onClose={() => setEditingInvite(null)}
+          onAuthError={onAuthError}
+        />
+      )}
 
       {templateOpen && (
         <TemplateDrawer
@@ -1613,8 +1682,10 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   );
 };
 
-// An admin entry without a WhatsApp number is a group invitation (shared in a WhatsApp group), not a person
-const isGroupInvite = (guest: Guest) => (guest.source ?? "admin") === "admin" && !guest.phone;
+// A group invitation (link shared in a WhatsApp group) rather than a person. Older entries without the personal/group
+// mark: one without a WhatsApp number is a group.
+const isGroupInvite = (guest: Guest) =>
+  (guest.source ?? "admin") === "admin" && (guest.inviteType ? guest.inviteType === "grup" : !guest.phone);
 
 const sourceLabel = (guest: Guest, groupNames: Map<string, string>) => {
   if (guest.source === "self") {
@@ -1721,6 +1792,116 @@ const matchesStatus = (row: GuestListRow, status: (typeof STATUS_FILTERS)[number
     case "belum_dikirim":
       return (row.kind === "pribadi" || row.kind === "grup") && !row.guest.sentAt;
   }
+};
+
+// Edits an invitation from "Kirim Undangan": name, WhatsApp number and personal / group
+const InviteEditModal: React.FC<{
+  guest: Guest;
+  phoneOwners: Map<string, string>;
+  onSaved: (guest: Guest) => void;
+  onClose: () => void;
+  onAuthError: () => void;
+}> = ({ guest, phoneOwners, onSaved, onClose, onAuthError }) => {
+  const [name, setName] = useState(guest.name);
+  const [phone, setPhone] = useState(guest.phone ? formatPhone(guest.phone) : "");
+  const [type, setType] = useState<InviteType>(isGroupInvite(guest) ? "grup" : "pribadi");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => e.key === "Escape" && !busy && onClose();
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose, busy]);
+
+  const normalized = phone.trim() ? normalizePhone(phone) : null;
+  const badPhone = phone.trim() !== "" && !normalized;
+  const owner = normalized && normalized !== guest.phone ? phoneOwners.get(normalized) : undefined;
+  const valid = name.trim().length >= 2 && !badPhone;
+
+  const save = async () => {
+    if (!valid || busy) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const { guest: updated } = await api<{ guest: Guest }>("/api/admin/guests", {
+        method: "PATCH",
+        body: JSON.stringify({ id: guest.id, name: name.trim(), phone: phone.trim(), inviteType: type }),
+      });
+      onSaved(updated);
+      onClose();
+    } catch (err) {
+      if ((err as { status?: number }).status === 401) onAuthError();
+      else setError((err as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const fieldClass = "mt-1.5 w-full rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]";
+  return (
+    <div className="admin-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-[#1f2a22]/45 backdrop-blur-[2px]" onClick={() => !busy && onClose()}>
+      <form
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="invite-edit-title"
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          save();
+        }}
+        className="admin-modal-card w-[min(460px,calc(100vw-32px))] max-h-[calc(100dvh-32px)] overflow-y-auto rounded-2xl bg-white p-5 shadow-[0_24px_60px_rgba(31,42,34,0.25)] md:p-6"
+      >
+        <h2 id="invite-edit-title" className="text-base font-semibold text-[#1f2a22]">
+          Edit Undangan
+        </h2>
+
+        <div className="mt-5 text-sm font-medium text-[#1f2a22]">Jenis undangan</div>
+        <InviteTypeToggle value={type} onChange={setType} className="mt-1.5" />
+        <p className="mt-1.5 text-xs text-[#8a8374]">{INVITE_TYPE_HINT[type]}</p>
+
+        <label className="mt-4 block text-sm font-medium text-[#1f2a22]">
+          {type === "grup" ? "Nama grup" : "Nama tamu"}
+          <input value={name} onChange={(e) => setName(e.target.value)} maxLength={80} autoFocus className={fieldClass} />
+        </label>
+
+        <label className="mt-4 block text-sm font-medium text-[#1f2a22]">
+          No. WhatsApp <span className="font-normal text-[#8a8374]">(opsional)</span>
+          <input
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            inputMode="tel"
+            placeholder={type === "grup" ? "Kosongkan, pilih grup saat kirim" : "08123456789"}
+            className={`${fieldClass} ${badPhone ? "border-[#e0a3a3] text-[#9b1c1c]" : ""}`}
+          />
+        </label>
+        {badPhone && <p className="mt-1 text-xs text-[#9b1c1c]">Nomor tidak valid</p>}
+        {owner && (
+          <DuplicateWarning>
+            Nomor ini sudah tercatat atas nama <b>{owner}</b>.
+          </DuplicateWarning>
+        )}
+        {guest.sentAt && name.trim() !== guest.name && (
+          <DuplicateWarning>
+            Undangan ini sudah terkirim. Nama ada di dalam link, jadi link yang sudah dikirim tetap menampilkan nama lama. Kirim ulang
+            bila perlu.
+          </DuplicateWarning>
+        )}
+
+        {error && <p className="mt-4 whitespace-pre-line rounded-lg bg-[#fdf1f1] p-3 text-sm text-[#9b1c1c]">{error}</p>}
+
+        <div className="mt-6 flex items-center justify-end gap-2">
+          <Button type="button" onClick={onClose} disabled={busy}>
+            Batal
+          </Button>
+          <Button type="submit" variant="primary" disabled={!valid || busy}>
+            {busy && <Spinner />}
+            {busy ? "Menyimpan..." : "Simpan"}
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 const GuestListTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {

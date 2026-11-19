@@ -14,5 +14,5 @@ export const GET = withErrors(async (request: Request) => {
   }
   const id = new URL(request.url).searchParams.get("g");
   const guest = id ? await getGuest(id) : null;
-  return guest ? Response.json({ name: guest.name, locked: Boolean(guest.phone), group: isGroupInvite(guest) }) : Response.json({ error: "Tamu tidak ditemukan." }, { status: 404 });
+  return guest ? Response.json({ name: guest.name, locked: (guest.source ?? "admin") === "admin" && !isGroupInvite(guest), group: isGroupInvite(guest) }) : Response.json({ error: "Tamu tidak ditemukan." }, { status: 404 });
 });
