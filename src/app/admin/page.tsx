@@ -1114,6 +1114,7 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   };
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "sent" | "unsent">("all");
+  const [typeFilter, setTypeFilter] = useState<"all" | InviteType>("all");
   const [previewId, setPreviewId] = useState<string | null>(null);
   // The message template and its preview live in a side panel, so the guest list gets the full width
   const [templateOpen, setTemplateOpen] = useState(false);
@@ -1288,8 +1289,11 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
     const q = query.trim().toLowerCase();
     const digits = q.replace(/\D/g, "");
     const matchesQuery = (g: Guest) => !q || g.name.toLowerCase().includes(q) || (digits !== "" && (g.phone ?? "").includes(digits));
-    return newestFirst(guests).filter((g) => (statusFilter === "all" || (statusFilter === "sent" ? g.sentAt : !g.sentAt)) && matchesQuery(g));
-  }, [guests, query, statusFilter]);
+    const matchesType = (g: Guest) => typeFilter === "all" || (typeFilter === "grup") === isGroupInvite(g);
+    return newestFirst(guests).filter(
+      (g) => (statusFilter === "all" || (statusFilter === "sent" ? g.sentAt : !g.sentAt)) && matchesType(g) && matchesQuery(g),
+    );
+  }, [guests, query, statusFilter, typeFilter]);
   const pagination = usePagination(visible);
 
   const previewGuest = guests.find((g) => g.id === previewId) ?? guests[0];
@@ -1538,6 +1542,19 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               <option value="all">Semua status</option>
               <option value="unsent">Belum dikirim</option>
               <option value="sent">Sudah dikirim</option>
+            </select>
+            <select
+              value={typeFilter}
+              onChange={(e) => {
+                setTypeFilter(e.target.value as typeof typeFilter);
+                pagination.setPage(1);
+              }}
+              aria-label="Jenis undangan"
+              className="rounded-lg border border-[#d9d2c5] bg-white px-3 py-2 text-sm outline-none focus:border-[#24412f]"
+            >
+              <option value="all">Semua jenis</option>
+              <option value="pribadi">Pribadi</option>
+              <option value="grup">Grup</option>
             </select>
             <Button onClick={() => openTemplate()} disabled={!loaded} className="sm:ml-auto">
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
