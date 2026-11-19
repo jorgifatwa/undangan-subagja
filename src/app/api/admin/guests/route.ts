@@ -21,17 +21,19 @@ const NAME_MAX = 80;
 const parseInviteType = (raw: unknown): InviteType | undefined => (raw === "pribadi" || raw === "grup" ? raw : undefined);
 
 // Validates one {name, phone, inviteType} entry; phone is optional (the WhatsApp contact can then be picked when
-// sending). Without an inviteType, an entry with a number is personal and one without is a group invitation.
+// sending). Without an inviteType, an entry with a number is personal and one without is a group invitation. A group
+// invitation never keeps a number: it is shared in a WhatsApp group, picked when sending.
 const parseEntry = (raw: unknown): { name: string; phone: string | null; inviteType: InviteType } | string => {
   const { name, phone, inviteType } = (raw ?? {}) as { name?: unknown; phone?: unknown; inviteType?: unknown };
   const cleanName = typeof name === "string" ? cleanText(name) : "";
   if (cleanName.length < 2 || cleanName.length > NAME_MAX) return `Nama tamu harus 2-${NAME_MAX} karakter.`;
+  const type = parseInviteType(inviteType);
   let normalized: string | null = null;
-  if (typeof phone === "string" && phone.trim() !== "") {
+  if (type !== "grup" && typeof phone === "string" && phone.trim() !== "") {
     normalized = normalizePhone(phone);
     if (!normalized) return `Nomor WhatsApp "${phone}" tidak valid.`;
   }
-  return { name: cleanName, phone: normalized, inviteType: parseInviteType(inviteType) ?? (normalized ? "pribadi" : "grup") };
+  return { name: cleanName, phone: normalized, inviteType: type ?? (normalized ? "pribadi" : "grup") };
 };
 
 const cleanName = (raw: unknown, what: string): string | { error: string } => {
@@ -158,6 +160,7 @@ export const PATCH = withErrors(async (request: Request) => {
       }
     }
     changes.inviteType = inviteType;
+    if (inviteType === "grup") changes.phone = null;
   }
   if (typeof body.sent === "boolean") changes.sentAt = body.sent ? new Date().toISOString() : null;
 

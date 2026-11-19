@@ -1066,6 +1066,9 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
   const [inviteType, setInviteType] = useState<InviteType>("pribadi");
   const [bulkType, setBulkType] = useState<InviteType>("pribadi");
   const [editingInvite, setEditingInvite] = useState<Guest | null>(null);
+  // A group invitation has no number (the WhatsApp group is picked when sending); a number typed before switching to
+  // "Grup" is kept in the field but not used
+  const singlePhone = inviteType === "grup" ? "" : phone;
   // Which save is running (the single "Tambah" form, the bulk import, the message template): spinner on its button,
   // and no second click while it runs
   const [saving, setSaving] = useState<"single" | "bulk" | "contacts" | "template" | null>(null);
@@ -1326,13 +1329,13 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
               onSubmit={(e) => {
                 e.preventDefault();
                 addEntries(
-                  [{ name, phone, inviteType }],
+                  [{ name, phone: singlePhone, inviteType }],
                   "single",
                   () => {
                     setName("");
                     setPhone("");
                   },
-                  Boolean(ownerOf(phone)),
+                  Boolean(ownerOf(singlePhone)),
                 );
               }}
               className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-3"
@@ -1343,21 +1346,23 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 placeholder={inviteType === "grup" ? "Nama grup (mis. Grup Alumni SMA)" : "Nama tamu (mis. Bapak Ahmad & Keluarga)"}
                 className="flex-1 rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f]"
               />
-              <input
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                inputMode="tel"
-                placeholder="No. WhatsApp (opsional)"
-                className="rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-56"
-              />
+              {inviteType === "pribadi" && (
+                <input
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  inputMode="tel"
+                  placeholder="No. WhatsApp (opsional)"
+                  className="rounded-lg border border-[#d9d2c5] px-3 py-2 text-sm outline-none focus:border-[#24412f] sm:w-56"
+                />
+              )}
               <Button type="submit" variant="primary" disabled={name.trim().length < 2 || saving !== null} className="sm:w-[136px]">
                 {saving === "single" && <Spinner />}
-                {saving === "single" ? "Menambah..." : ownerOf(phone) ? "Tetap Tambah" : "Tambah"}
+                {saving === "single" ? "Menambah..." : ownerOf(singlePhone) ? "Tetap Tambah" : "Tambah"}
               </Button>
             </form>
-            {ownerOf(phone) && (
+            {ownerOf(singlePhone) && (
               <DuplicateWarning>
-                Nomor ini sudah tercatat atas nama <b>{ownerOf(phone)}</b>. Kosongkan nomornya, atau tekan Tetap Tambah bila memang
+                Nomor ini sudah tercatat atas nama <b>{ownerOf(singlePhone)}</b>. Kosongkan nomornya, atau tekan Tetap Tambah bila memang
                 sengaja.
               </DuplicateWarning>
             )}
@@ -1446,7 +1451,13 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
             <details className="mt-4">
               <summary className="cursor-pointer text-sm font-medium text-[#24412f]">Impor banyak tamu sekaligus</summary>
               <p className="mt-2 text-xs text-[#8a8374]">
-                Satu tamu per baris, format <code className="font-mono">Nama, 08123456789</code>. Nomor boleh dikosongkan.
+                {bulkType === "grup" ? (
+                  <>Satu nama grup per baris, tanpa nomor.</>
+                ) : (
+                  <>
+                    Satu tamu per baris, format <code className="font-mono">Nama, 08123456789</code>. Nomor boleh dikosongkan.
+                  </>
+                )}
               </p>
               <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[#5c645d]">
                 Semua baris sebagai undangan
@@ -1456,11 +1467,13 @@ const InvitesTab: React.FC<{ onAuthError: () => void }> = ({ onAuthError }) => {
                 value={bulk}
                 onChange={(e) => setBulk(e.target.value)}
                 rows={5}
-                placeholder={"Bapak Ahmad & Keluarga, 081234567890\nSiti Aminah, 0857-1111-2222\nRekan Kantor"}
+                placeholder={
+                  bulkType === "grup" ? "Grup Alumni SMA\nRekan Kantor\nKeluarga Besar Bandung" : "Bapak Ahmad & Keluarga, 081234567890\nSiti Aminah, 0857-1111-2222\nRekan Kantor"
+                }
                 className="mt-2 w-full rounded-lg border border-[#d9d2c5] px-3 py-2 font-mono text-sm outline-none focus:border-[#24412f]"
               />
               {(() => {
-                const rows = parseBulk(bulk).map((row) => ({ ...row, inviteType: bulkType }));
+                const rows = parseBulk(bulk).map((row) => ({ ...row, phone: bulkType === "grup" ? "" : row.phone, inviteType: bulkType }));
                 const dups = rows.map((_, i) => pickedDuplicate(rows, i));
                 const fresh = rows.filter((_, i) => !dups[i]);
                 const dupRows = rows.map((r, i) => ({ r, d: dups[i] })).filter((x) => x.d);
@@ -1814,8 +1827,10 @@ const InviteEditModal: React.FC<{
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose, busy]);
 
-  const normalized = phone.trim() ? normalizePhone(phone) : null;
-  const badPhone = phone.trim() !== "" && !normalized;
+  // A group has no number: the field is hidden and the number cleared on save
+  const usedPhone = type === "grup" ? "" : phone.trim();
+  const normalized = usedPhone ? normalizePhone(usedPhone) : null;
+  const badPhone = usedPhone !== "" && !normalized;
   const owner = normalized && normalized !== guest.phone ? phoneOwners.get(normalized) : undefined;
   const valid = name.trim().length >= 2 && !badPhone;
 
@@ -1826,7 +1841,7 @@ const InviteEditModal: React.FC<{
     try {
       const { guest: updated } = await api<{ guest: Guest }>("/api/admin/guests", {
         method: "PATCH",
-        body: JSON.stringify({ id: guest.id, name: name.trim(), phone: phone.trim(), inviteType: type }),
+        body: JSON.stringify({ id: guest.id, name: name.trim(), phone: usedPhone, inviteType: type }),
       });
       onSaved(updated);
       onClose();
@@ -1865,16 +1880,18 @@ const InviteEditModal: React.FC<{
           <input value={name} onChange={(e) => setName(e.target.value)} maxLength={80} autoFocus className={fieldClass} />
         </label>
 
-        <label className="mt-4 block text-sm font-medium text-[#1f2a22]">
-          No. WhatsApp <span className="font-normal text-[#8a8374]">(opsional)</span>
-          <input
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            inputMode="tel"
-            placeholder={type === "grup" ? "Kosongkan, pilih grup saat kirim" : "08123456789"}
-            className={`${fieldClass} ${badPhone ? "border-[#e0a3a3] text-[#9b1c1c]" : ""}`}
-          />
-        </label>
+        {type === "pribadi" && (
+          <label className="mt-4 block text-sm font-medium text-[#1f2a22]">
+            No. WhatsApp <span className="font-normal text-[#8a8374]">(opsional)</span>
+            <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              inputMode="tel"
+              placeholder="08123456789"
+              className={`${fieldClass} ${badPhone ? "border-[#e0a3a3] text-[#9b1c1c]" : ""}`}
+            />
+          </label>
+        )}
         {badPhone && <p className="mt-1 text-xs text-[#9b1c1c]">Nomor tidak valid</p>}
         {owner && (
           <DuplicateWarning>
